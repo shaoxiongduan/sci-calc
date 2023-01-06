@@ -8,6 +8,7 @@
 #include <cmath>
 
 const int MAXOP = 25;
+const long double EPSILON = 1e-8;
 const int MAXNODES = 1000;
 
 int lastNode = -1;
@@ -26,6 +27,11 @@ bool strIsOperator(std::string str) {
     for (int i = 0; i < MAXOP; i++) {
         if (str == tokenStr[i]) return true;
     }
+    return false;
+}
+
+bool cmpLongDouble(long double a, long double b) {
+    if (fabsl(a - b) <= EPSILON) return true;
     return false;
 }
 
@@ -176,6 +182,11 @@ class Node {
             this -> rightChild = rightChild;
         }
 
+        void setChild(Node* target, Node* child) {
+            if (this -> leftChild == target) setLeftChild(child);
+            if (this -> rightChild == target) setRightChild(child);
+        }
+
         bool isOperator() {
             switch (this -> token) {
                 case NUM: case VAR: case LPARA: case RPARA:
@@ -215,6 +226,7 @@ class Node {
         void printNode() {
             std::cout << "Node " << this << std::endl;
             std::cout << "Token: " << convertToString(this -> token) << std::endl;
+            std::cout << "Precedence: " << this -> precedence << std::endl;
             std::cout << "Value: " << this -> value << std::endl;
             std::cout << "name: " << this -> name << std::endl;
             std::cout << "leftChild: ";
@@ -253,6 +265,15 @@ Node* copyExpression(Node* target) { //Copies the expression with the root targe
     Node* res = &nodeList[index];
     if (target -> getLeftChild() != nullptr) nodeList[index].setLeftChild(copyExpression(target -> getLeftChild()));
     if (target -> getRightChild() != nullptr) nodeList[index].setRightChild(copyExpression(target -> getRightChild()));
+    return res;
+}
+
+Node* printExpressionDebug(Node* target) {
+    int index = lastNode;
+    Node* res = &nodeList[index];
+    target -> printNode();
+    if (target -> getLeftChild() != nullptr) printExpressionDebug(target -> getLeftChild());
+    if (target -> getRightChild() != nullptr) printExpressionDebug(target -> getRightChild());
     return res;
 }
 
@@ -322,7 +343,7 @@ class Expression {
             int prev = 0;
             for (int i = 0; i < str.size(); i++) {
                 if (strIsOperator(str.substr(prev, i - prev + 1))) {
-                    if ((convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes.size() == 0) || (convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes[nodes.size() - 1].getToken() != NUM && nodes[nodes.size() - 1].getToken() != RPARA)) {
+                    if ((convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes.size() == 0) || (convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes[nodes.size() - 1].getToken() != NUM && nodes[nodes.size() - 1].getToken() != VAR && nodes[nodes.size() - 1].getToken() != RPARA)) {
                         nodes.push_back(Node(NEGATIVE, 0));
                     }
                     else {
@@ -352,8 +373,8 @@ class Expression {
                     prev = i + 1;
                 }
             }
-
-            printNodeVector(nodes);
+            //printNodeVector(nodes);
+            //std::cout << std::endl;
             return nodes;
         }
 
@@ -362,14 +383,19 @@ class Expression {
             std::stack <Node> operators;
             for (int i = 0; i < nodes.size(); i++) {
                 if (nodes[i].getToken() == NUM || nodes[i].getToken() == VAR) {
+                    //std::cout << "NUM or VAR: " << i << std::endl;
                     output.push(nodes[i]);
                 }
                 if (nodes[i].isOperator()) {
+                    //std::cout << "OPERATOR: " << i << std::endl;
                     if (nodes[i].isUnary()) {
+                        //std::cout << "UNARY PUSH: " << i << std::endl;
                         operators.push(nodes[i]);
                     }
                     if (nodes[i].isBinary()) {
-                        while (!operators.empty() && (operators.top().isUnary() || operators.top().getPrecedence() > nodes[i].getPrecedence() || (operators.top().getPrecedence() == nodes[i].getPrecedence() && operators.top().isLeftAssociative())) && operators.top().getToken() != LPARA) {
+                        //std::cout << "BINARY PUSH" << std::endl;
+                        while (!operators.empty() && (operators.top().isUnary() || operators.top().getPrecedence() > nodes[i].getPrecedence() || (operators.top().getPrecedence() == nodes[i].getPrecedence() && nodes[i].isLeftAssociative())) && operators.top().getToken() != LPARA) {
+                            //std::cout << "FFR" << std::endl;
                             output.push(operators.top());
                             operators.pop();
                         }
@@ -387,9 +413,10 @@ class Expression {
                     operators.pop(); 
                 }
             }
-
+            std::cout << "SHUNTINGYARD: \n";
             while (!operators.empty()) {
                 output.push(operators.top());
+                
                 operators.pop();
             }
             return output;
@@ -401,6 +428,7 @@ class Expression {
             while (!rpn.empty()) {
                 Node cur = rpn.front();
                 rpn.pop();
+                //cur.printNode();
                 if (cur.getToken() == NUM || cur.getToken() == VAR) {
                     addNode(cur);
                     stk.push(&nodeList[lastNode]);
@@ -426,7 +454,8 @@ class Expression {
                     stk.push(&nodeList[lastNode]);
                 }
             }
-
+            std::cout << "BUILDTREE: \n";
+            //printExpressionDebug(stk.top());
             return stk.top();
         }
 
@@ -466,6 +495,128 @@ class Expression {
 
         std::string getExpressionString() {
             return getExpressionStringPointer(this -> root);
+        }
+
+        bool simplifyPointer(Node* node) { //WARNING!!! THIS FUNCTION WOULD MODIFY NODES THAT MIGHT BE LINKED TO PREVIOUS EXPRESSIONS!! IT IS ALWAYS RECOMMENDED TO DO COPYEXPRESSION FIRST, THEN SIMPLIFY ON THAT. true: has variable, false: no variables must do non variable first
+            bool lson = false, rson = false;
+            if (node -> getLeftChild() != nullptr) lson = simplifyPointer(node -> getLeftChild());
+            if (node -> getRightChild() != nullptr) rson = simplifyPointer(node -> getRightChild());
+
+            if (node -> getToken() == NUM) {
+                return false;
+            }
+            else if (node -> getToken() == VAR) {
+                return true;
+            }
+            else { // an operator
+                
+                if ((node -> isUnary() && lson == false) || (node -> isBinary() && lson == false && rson == false)) { // all numbers
+                    std::cout << "ALL NUMS" << std::endl;
+                    node -> printNode();
+                    long double res = 0;
+                    switch (node -> getToken()) {
+                        case NEGATIVE: res = -(node -> getLeftChild() -> getValue()); break;
+                        case ADD: res = (node -> getLeftChild() -> getValue()) + (node -> getRightChild() -> getValue()); break;
+                        case SUB: res = (node -> getLeftChild() -> getValue()) - (node -> getRightChild() -> getValue()); break;
+                        case MUL: res = (node -> getLeftChild() -> getValue()) * (node -> getRightChild() -> getValue()); break;
+                        case DIV: res = (node -> getLeftChild() -> getValue()) / (node -> getRightChild() -> getValue()); break;
+                        case POW: res = pow(node -> getLeftChild() -> getValue(), (node -> getRightChild() -> getValue())); break;
+                        case SQRT: res = sqrtl(node -> getLeftChild() -> getValue()); break;
+                        case LN: res = logl(node -> getLeftChild() -> getValue()); break;
+                        case EXP: res = expl(node -> getLeftChild() -> getValue()); break;
+                        case SIN: res = sinl(node -> getLeftChild() -> getValue()); break;
+                        case COS: res = cosl(node -> getLeftChild() -> getValue()); break;
+                        case TAN: res = tanl(node -> getLeftChild() -> getValue()); break;
+                        case SEC: res = 1.0 / cosl(node -> getLeftChild() -> getValue()); break;
+                        case CSC: res = 1.0 / sinl(node -> getLeftChild() -> getValue()); break;
+                        case COT: res = 1.0 / tanl(node -> getLeftChild() -> getValue()); break;
+                        case ASIN: res = asinl(node -> getLeftChild() -> getValue()); break;
+                        case ACOS: res = acosl(node -> getLeftChild() -> getValue()); break;
+                        case ATAN: res = atanl(node -> getLeftChild() -> getValue()); break;
+                        default: res = 0;
+                    }
+                    *node = Node(NUM, res);
+                    return false;
+                }
+                else if (node -> isUnary()) { // unary operator
+                    //node -> setLeftChild(addNode(Node(NUM, res)));
+                    return true;
+                }
+                else { // binary operator
+                    //std::cout << "binary with x" << convertToString(node -> getToken()) << " " << lson.first << " " << lson.second << " " << rson.first << " " << rson.second << std::endl;
+                    if (node -> getToken() == ADD) {
+                        if (lson == false && cmpLongDouble(node -> getLeftChild() -> getValue(), 0)) {
+                            //std::cout << "binary with x" << convertToString(node -> getToken()) << " " << lson.first << " " << lson.second << " " << rson.first << " " << rson.second << std::endl;
+                            //std::cout << 1 << std::endl;
+                            *node = *(node -> getRightChild());
+                            return true;
+                        }
+                        else if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 0)) {
+                            //std::cout << 2 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return true;
+                        }
+                    }
+                    if (node -> getToken() == SUB) {
+                        if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 0)) {
+                            //std::cout << 3 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return true;
+                        }
+                    }
+                    if (node -> getToken() == MUL) {
+                        if (lson == false && cmpLongDouble(node -> getLeftChild() -> getValue(), 0)) {
+                            //std::cout << "binary with x" << convertToString(node -> getToken()) << " " << lson.first << " " << lson.second << " " << rson.first << " " << rson.second << std::endl;
+                    
+                            //std::cout << 4 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return false;
+                        }
+                        else if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 0)) {
+                            //std::cout << 5 << std::endl;
+                            *node = *(node -> getRightChild());
+                            return false;
+                        }
+                        else if (lson == false && cmpLongDouble(node -> getLeftChild() -> getValue(), 1)) {
+                            //std::cout << 6 << std::endl;
+                            *node = *(node -> getRightChild());
+                            return true;
+                        }
+                        else if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 1)) {
+                            //std::cout << 7 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return true;
+                        }
+                    }
+                    if (node -> getToken() == DIV) {
+                        if (lson == false && cmpLongDouble(node -> getLeftChild() -> getValue(), 0)) {
+                            //std::cout << 4 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return false;
+                        }
+                    }
+                    if (node -> getToken() == POW) {
+                        if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 0)) {
+                            //std::cout << 5 << std::endl;
+                            *node = *(node -> getRightChild());
+                            node -> setValue(1);
+                            return false;
+                        }
+                        else if (rson == false && cmpLongDouble(node -> getRightChild() -> getValue(), 1)) {
+                            //std::cout << 7 << std::endl;
+                            *node = *(node -> getLeftChild());
+                            return true; 
+                        }
+                    }
+                    return true;
+                }
+
+            }
+
+        }
+        
+        void simplify() {
+            simplifyPointer(this -> root);
         }
 
         long double evaluateExpressionPointer(Node* node) {
@@ -558,12 +709,23 @@ int main() {
     //std::cout << d.evaluateExpression() << std::endl;
 
     //std::cout << d.evaluateExpression() << std::endl;
+    std::cout << cmpLongDouble(1, 1) << std::endl;
     while (1) {
         std::cout << "input: ";
         std::string s;
         std::cin >> s;
         Expression e(s);
-        std::cout << "= " << e.evaluateExpression() << std::endl;
+        //std::cout << "= " << e.evaluateExpression() << std::endl;
+        Expression de = e.derivative();
+        std::cout << "dx= " << de.getExpressionString() << std::endl;
+        de.simplify();
+        std::cout << "simplified dx: " << de.getExpressionString() << std::endl;
+        e.simplify();
+        std::cout << "simplified e: " << e.getExpressionString() << std::endl;
+        
+        for (int i = 0; i <= lastNode; i++) {
+            //nodeList[i].printNode();
+        } 
     }
     return 0;
 }
