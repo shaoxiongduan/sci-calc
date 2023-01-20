@@ -115,6 +115,7 @@ std::string getKeyString(uint8_t x) {
         case KEY_F22: return "F22";
         case KEY_F23: return "F23";
         case KEY_F24: return "F24";
+        case KEY_LAYER_SWITCH: return "LAYER SWITCH";
         default:
             std::string res(1, char(x));
         return res;

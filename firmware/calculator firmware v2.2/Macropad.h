@@ -45,7 +45,7 @@ class MacroPad {
 
     private:
         std::vector <Layout> layouts;
-        int curLayout;
+        int curLayout, nxtLayout, prevLayout;
         float prevtime;
         std::pair <byte, byte> curPressed;
 };

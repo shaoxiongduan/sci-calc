@@ -12,13 +12,15 @@ class Key {
 
         Key(int id);
 
-        void modifyKey(float pressTime, float startPress, float endPress, bool isPressed, KeyStatus status);
+        void modifyKey(float statusTime, float startPress, float endPress, bool isPressed, KeyStatus status, int clickCnt);
 
         void updateKey(bool curState, float curtime);
 
         bool getIsPressed();
 
-        float getPressTime();
+        int getClickCnt();
+
+        float getStatusTime();
 
         KeyStatus getStatus();
 
@@ -28,7 +30,8 @@ class Key {
 
     private:
         int id;
-        float pressTime, startPress, endPress;
+        float statusTime, startPress, endPress;
+        int clickCnt;
         bool isPressed;
         KeyStatus status;
 };
@@ -41,7 +44,11 @@ class Keyboard {
 
         void update();
 
-        std::pair <int, int> getCurKey();
+        std::pair <int, int> getRisingEdgeKey();
+        
+        std::pair <int, int> getFallingEdgeKey();
+
+        std::pair <int, int> getChangedKey();
 
         Key getKey(int row, int col);
 

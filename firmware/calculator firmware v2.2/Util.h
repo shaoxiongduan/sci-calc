@@ -24,23 +24,33 @@
 #define SPI_DC 16
 #define SPI_RESET 17
 
+
+
 extern U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2;
 
-const int REFRESH_DURATION = 10; // in miliseconds
+const int REFRESH_DURATION = 10; // in milliseconds
+const float DELTA_TIME = 100; // in milliseconds
 extern bool sample;
 const int MAXOP = 25;
 const long double EPSILON = 1e-8;
 const int MAXNODES = 1000;
+const uint8_t KEY_LAYER_SWITCH = 0xFC;
+
 const byte ROWCNT = 5;
 const byte COLCNT = 6;
 extern byte ROW_MISO[ROWCNT];
 extern byte COL_MOSI[COLCNT];
+
 
 extern char keys[ROWCNT][COLCNT];
 //extern Keypad keypad;
 
 enum KeyStatus {
     NOT_PRESSED, PRESSED, RISING_EDGE, FALLING_EDGE
+};
+
+enum Element {
+    MENU, TEXT
 };
 //void printKeys();
 
