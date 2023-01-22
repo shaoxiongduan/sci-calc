@@ -73,7 +73,7 @@ void MacroPad::update() {
             
             u8g2.drawStr(80, 24, "Key");
             u8g2.drawStr(100, 24, (this -> layouts[this -> curLayout].getName() + "pressed.").c_str());
-            Serial.printf("Key [%d][%d] from layout %s pressed.\n", curPressed.first, curPressed.second, this -> layouts[this -> curLayout].getName().c_str());
+            //Serial.printf("Key [%d][%d] from layout %s pressed.\n", curPressed.first, curPressed.second, this -> layouts[this -> curLayout].getName().c_str());
             if (this -> layouts[this -> curLayout].getMacro(this -> curPressed.first, this -> curPressed.second).getMacroString() == "LAYER SWITCH") {
                 if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt() == 1) {
                     if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) { // toggle layer switch
@@ -89,7 +89,7 @@ void MacroPad::update() {
                         this -> curLayout = (this -> curLayout + 1) % this -> layouts.size();
                         this -> prevLayout = this -> curLayout;
                         this -> nxtLayout = (this -> curLayout + 1) % this -> layouts.size();
-                        Serial.printf("curlayout: %d\n", curLayout);
+                        //Serial.printf("curlayout: %d\n", curLayout);
                     }
                 }
             }

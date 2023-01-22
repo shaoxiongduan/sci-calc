@@ -10,6 +10,7 @@
 #include <vector>
 #include <queue>
 #include <stack>
+#include <list>
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -32,6 +33,7 @@ const int REFRESH_DURATION = 10; // in milliseconds
 const float DELTA_TIME = 100; // in milliseconds
 extern bool sample;
 const int MAXOP = 25;
+const int MAXANI = 100;
 const long double EPSILON = 1e-8;
 const int MAXNODES = 1000;
 const uint8_t KEY_LAYER_SWITCH = 0xFC;
@@ -51,6 +53,10 @@ enum KeyStatus {
 
 enum Element {
     MENU, TEXT
+};
+
+enum AnimationType {
+    SMOOTH, INDENT
 };
 //void printKeys();
 

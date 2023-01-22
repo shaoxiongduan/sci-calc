@@ -7,7 +7,8 @@
 #include "Expression.h"
 #include "Keyboard.h"
 #include "Macropad.h"
-#include "UIElement.h"
+#include "UIMain.h"
+
 
 Keyboard kb;
 BleKeyboard bleKeyboard("SCI-CALC", "SHAP", 100);
@@ -50,7 +51,7 @@ Menu menu(0, 0, 200, 64, 4, {&text1, &text2, &text3, &text4, &text5, &text6, &te
 
 void init() {
     u8g2.begin();
-    
+    menu.initMenu();
     u8g2.setFontMode(0);
     Serial.begin(115200);
     u8g2.setFont(u8g2_font_profont10_mf);
@@ -64,19 +65,19 @@ void init() {
 
 void setup() {
     init();
+    u8g2.clearBuffer();
     kb.init();
     bleKeyboard.begin();
-
-    u8g2.sendBuffer();
+    insertAnimation(new Animation(&menu, SMOOTH, -100, 0, 0, 0, 500));
 }
 
 void loop() { 
     //Serial.flush();
+    animateAll();
     u8g2.clearBuffer();
     kb.update();
     //kb.printKeys();
     //macroPad.update();
-
     menu.update();
     //Serial.println("hello");
     u8g2.sendBuffer();
