@@ -6,9 +6,14 @@
 
 class Animation {
     public:
-        Animation(UIElement* targetUI, AnimationType aniType, int startX, int startY, int endX, int endY, int totalTime);
+        //Animation(UIElement* targetUI, AnimationType aniType, int startX, int startY, int endX, int endY, int totalTime);
         
         Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int totalTime);
+
+        //Animation(UIElement* targetUI, AnimationType aniType, int startX, int startY, int endX, int endY, int startWidth, int startHeight, int endWidth, int endHeight, int totalTime);
+        
+        Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int endWidth, int endHeight, int totalTime);
+        
 
         void init();
 
@@ -31,6 +36,7 @@ class Animation {
     protected:
         UIElement* targetUI;
         int startX, startY, endX, endY;
+        int startWidth, startHeight, endWidth, endHeight;
         AnimationType aniType;
         int prevTime;
         int startTime;

@@ -2,13 +2,17 @@
 #define MENU_H
 
 #include "Animation.h"
+#include "Cursor.h"
+#include "Box.h"
 
 class Menu : public UIElement {
     public:
         
-        Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements);
+        Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
         
-        void initMenu();
+        void init();
+        void activate();
+        void deactivate();
 
         bool moveCursorUp();
         bool moveCursorDown();
@@ -24,9 +28,11 @@ class Menu : public UIElement {
 
         void drawScrollBar();
 
+        void enter();
+
         void draw();
 
-        void showMenu(uint8_t dir); // 0 up 1 right 2 down 3 left
+        //void showMenu(uint8_t dir); // 0 up 1 right 2 down 3 left
 
 
         void update();
@@ -34,7 +40,10 @@ class Menu : public UIElement {
     private:
         int cursorPos, menuPos;
         int menuSize;
-
+        Cursor cursor;
+        Box scrollBar;
+        std::vector <UIElement*> linkElements;
+        
 };
 
 #endif

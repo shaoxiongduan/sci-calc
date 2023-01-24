@@ -36,22 +36,12 @@ MacroPad macroPad({
 });
 
 
-Text text1("Hello world");
-Text text2("i like cats"); 
-Text text3("kitcats are delicious");
-Text text4("i love undy");
-Text text5("pp is god");
-Text text6("idk what to write now");
-Text text7("idk what to write now");
-Text text8("lol this is a prototype");
-Text text9("sci-calc by SHAO");
 
-Menu menu(0, 0, 200, 64, 4, {&text1, &text2, &text3, &text4, &text5, &text6, &text7, &text8, &text9});
+
 
 
 void init() {
     u8g2.begin();
-    menu.initMenu();
     u8g2.setFontMode(0);
     Serial.begin(115200);
     u8g2.setFont(u8g2_font_profont10_mf);
@@ -65,22 +55,22 @@ void init() {
 
 void setup() {
     init();
-    u8g2.clearBuffer();
     kb.init();
     bleKeyboard.begin();
-    insertAnimation(new Animation(&menu, SMOOTH, -100, 0, 0, 0, 500));
+    currentElement -> init();
+    u8g2.clearBuffer();
 }
 
 void loop() { 
     //Serial.flush();
-    animateAll();
     u8g2.clearBuffer();
     kb.update();
     //kb.printKeys();
     //macroPad.update();
-    menu.update();
+    currentElement -> update();
     //Serial.println("hello");
     u8g2.sendBuffer();
+    animateAll();
     //delay(100);
     //u8g2.drawBox(30, 40, 10, 10);
 }

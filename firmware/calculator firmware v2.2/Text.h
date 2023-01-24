@@ -9,6 +9,8 @@ class Text : public UIElement {
         Text(int x, int y, std::string text);
         Text(int x, int y, int width, int height, std::string text);
 
+        void init();
+
         void draw();
         
         void drawHighlight();
