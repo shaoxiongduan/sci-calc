@@ -3,9 +3,10 @@
 
 #include "Util.h"
 #include "Keyboard.h"
+#include "Macropad.h"
 
 extern Keyboard kb;
-
+extern MacroPad calcLayout;
 
 
 class UIElement {
@@ -66,13 +67,9 @@ class UIElement {
 
         virtual void draw();
 
-        virtual void drawHighlight();
-
         virtual bool drawCondition();
 
         virtual bool moveCondition();
-
-        virtual void drawRecursive();
 
         virtual void goBack();
 

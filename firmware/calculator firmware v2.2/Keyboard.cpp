@@ -78,7 +78,7 @@ Keyboard::Keyboard() {
 
 void Keyboard::init() {
     for (int i = 0; i < ROWCNT; i++) {
-        pinMode(ROW_MISO[i], INPUT_PULLDOWN);
+        pinMode(ROW_MISO[i], INPUT);
     }
     for (int i = 0; i < COLCNT; i++) {
         pinMode(COL_MOSI[i], OUTPUT);

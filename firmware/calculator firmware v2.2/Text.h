@@ -13,7 +13,6 @@ class Text : public UIElement {
 
         void draw();
         
-        void drawHighlight();
 
     private:
         std::string text;

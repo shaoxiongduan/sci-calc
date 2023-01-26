@@ -126,7 +126,7 @@ void Menu::enter() {
 }
 
 void Menu::draw() {
-    this -> cursor.draw();
+    
     u8g2.drawRFrame(this -> x, this -> y, this -> width, this -> height, 3);
     for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize, int(this -> subElements.size())); i++, cnt++) {
         //Serial.print("Hello");
@@ -137,7 +137,9 @@ void Menu::draw() {
 }
 
 
+
 void Menu::update() {
+    this -> cursor.draw();
     //Serial.printf("cursorPos: %d, menuPos: %d/n", this -> cursorPos, this -> menuPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
     if (kb.getRisingEdgeKey() == std::make_pair(1, 1)) {

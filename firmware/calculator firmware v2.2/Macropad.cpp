@@ -116,6 +116,45 @@ void MacroPad::update() {
 
 }
 
+std::string MacroPad::updateString() {
+    float curtime = millis();
+    if (sample) {
+        //u8g2.drawBox(30, 40, 10, 10);
+        std::pair <int, int> curPos = kb.getChangedKey();
+        if (!(curPos.first == -1 || curPos.second == -1)) {
+            this -> curPressed = std::make_pair(curPos.first, curPos.second);
+            
+            //Serial.printf("Key [%d][%d] from layout %s pressed.\n", curPressed.first, curPressed.second, this -> layouts[this -> curLayout].getName().c_str());
+            if (this -> layouts[this -> curLayout].getMacro(this -> curPressed.first, this -> curPressed.second).getMacroString() == "LAYER SWITCH") {
+                if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt() == 1) {
+                    if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) { // toggle layer switch
+                        this -> curLayout = this -> nxtLayout;
+                    }
+                    else {
+                        this -> curLayout = this -> prevLayout;
+                    }
+                }
+                if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt() == 2) { // switch between layers (locked)
+                    if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) { // toggle layer switch
+
+                        this -> curLayout = (this -> curLayout + 1) % this -> layouts.size();
+                        this -> prevLayout = this -> curLayout;
+                        this -> nxtLayout = (this -> curLayout + 1) % this -> layouts.size();
+                        //Serial.printf("curlayout: %d\n", curLayout);
+                    }
+                }
+            }
+            else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) {
+                return this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).getMacroString();
+            }
+        }
+        this -> prevtime = curtime;
+        sample = false;
+    }
+    std::string tmp = "";
+    return tmp;
+}
+
 void MacroPad::draw() {
 
 }

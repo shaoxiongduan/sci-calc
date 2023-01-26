@@ -8,7 +8,7 @@ class Box : public UIElement {
         Box();
 
         void draw();
-
+        
     private:
 
 };

@@ -39,6 +39,8 @@ class MacroPad {
 
         void update();
 
+        std::string updateString();
+
         bool curIsHeld();
 
         void draw();

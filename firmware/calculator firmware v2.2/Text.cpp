@@ -25,10 +25,3 @@ void Text::init() {
 void Text::draw() {
     u8g2.drawStr(this -> x, this -> y, this -> text.c_str());
 }
-
-void Text::drawHighlight() {
-    u8g2.setDrawColor(0);
-    this -> draw();
-    u8g2.setDrawColor(1);
-}
-

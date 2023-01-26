@@ -13,6 +13,9 @@ class Cursor : public UIElement {
 
         void changeTarget(UIElement* target, int time);
 
+        void changeTarget(int x, int y, int width, int height, int time);
+
+
         void draw();
 
     private:

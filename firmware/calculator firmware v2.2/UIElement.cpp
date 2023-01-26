@@ -129,25 +129,12 @@ void UIElement::draw() {
 
 }
 
-void UIElement::drawHighlight() {
-
-}
-
 bool UIElement::drawCondition() {
 
 }
 
 bool UIElement::moveCondition() {
 
-}
-
-void UIElement::drawRecursive() {
-    this -> draw();
-    for (UIElement* subElement : this -> subElements) {
-        if (subElement -> drawCondition()) {
-            subElement -> drawRecursive();
-        }
-    }
 }
 
 void UIElement::goBack() {

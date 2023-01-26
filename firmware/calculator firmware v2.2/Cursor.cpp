@@ -18,6 +18,10 @@ void Cursor::changeTarget(UIElement* target, int time) {
     insertAnimation(new Animation(this, SMOOTH, this -> target -> getTargetX(), this -> target -> getTargetY(), this -> target -> getTargetWidth(), this -> target -> getTargetHeight(), time));
 }
 
+void Cursor::changeTarget(int x, int y, int width, int height, int time) {
+    insertAnimation(new Animation(this, SMOOTH, x, y, width, height, time));
+}
+
 void Cursor::draw() {
     u8g2.drawRFrame(this -> x - 1, this -> y - 1 - 6, this -> width + 2, this -> height + 2, 2);
 }
