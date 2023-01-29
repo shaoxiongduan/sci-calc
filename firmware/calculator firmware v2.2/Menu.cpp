@@ -1,6 +1,26 @@
 #include "Menu.h"
 
+Menu::Menu() : UIElement() {
+    this -> menuPos = 0;
+    this -> cursorPos = 0;
+}
 
+Menu::Menu(int x, int y, int width, int height, int menuSize) : UIElement(x, y, width, height) {
+    this -> menuSize = menuSize;
+    this -> menuPos = 0;
+    this -> cursorPos = 0;
+    this -> scrollBar.setX(this -> x + this -> width - 6);
+    if (this -> getSize() == 0) {
+        this -> scrollBar.setY(this -> y + 5);
+        this -> scrollBar.setHeight(0);
+        this -> cursor.setX(this -> x);
+        this -> cursor.setY(this -> y + 12);
+    }
+    else {
+        this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
+        this -> scrollBar.setHeight(((this -> height - 10) / this -> getSize()));
+    }
+}
 
 Menu::Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements) : UIElement(x, y, width, height, subElements) {
     this -> menuSize = menuSize;
@@ -48,6 +68,22 @@ void Menu::deactivate() {
     //insertAnimation(new Animation(this, SMOOTH, 0, -100, 500));
 }
 
+
+void Menu::insertElement(UIElement* targetElement, UIElement* linkElement) {
+    targetElement -> setX(this -> targetX + 5);
+    targetElement -> setY(70);
+    insertAnimation(new Animation(targetElement, SMOOTH, targetElement -> getX(), min(this -> menuSize, int(this -> subElements.size())) * 12 + 12, 100));
+        
+    this -> subElements.push_back(targetElement);
+    this -> linkElements.push_back(linkElement);
+    targetElement -> init();
+    this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
+    this -> scrollBar.setHeight(((this -> height - 10) / this -> getSize()));
+    if (linkElement != nullptr) {
+        linkElement -> setParent(this);
+    }
+    this -> cursor.changeTarget(subElements[this -> cursorPos + this -> menuPos], 100);
+}
 
 
 bool Menu::moveCursorUp() {
@@ -139,7 +175,6 @@ void Menu::draw() {
 
 
 void Menu::update() {
-    this -> cursor.draw();
     //Serial.printf("cursorPos: %d, menuPos: %d/n", this -> cursorPos, this -> menuPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
     if (kb.getRisingEdgeKey() == std::make_pair(1, 1)) {
@@ -157,4 +192,5 @@ void Menu::update() {
         this -> goBack();
     }
     draw();
+    this -> cursor.draw();
 }

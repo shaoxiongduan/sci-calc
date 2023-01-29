@@ -7,6 +7,8 @@
 
 class Expression {
     public:
+        Expression();
+
         Expression(Node* root);
 
         Expression(std::string str);

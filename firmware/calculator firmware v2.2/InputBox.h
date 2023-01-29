@@ -8,12 +8,19 @@
 class InputBox : public UIElement {
     public:
         
+        InputBox();
+        
+
         InputBox(int x, int y, int width, int height, int maxChar);
         
         void init();
         void activate();
         void deactivate();
 
+        std::string getStr();
+        void setStr(std::string str);
+        void clearStr();
+        
         void insertStr(std::string insertStr);
         void deleteStr();
 

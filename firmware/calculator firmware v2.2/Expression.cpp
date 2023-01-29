@@ -2,6 +2,9 @@
 #include "Expression.h"
 #include "Node.h"
 
+Expression::Expression() {
+    this -> root = nullptr;
+}
 
 Expression::Expression(Node* root) {
     this -> root = root;

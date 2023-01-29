@@ -7,7 +7,7 @@
 
 extern Keyboard kb;
 extern MacroPad calcLayout;
-
+extern std::string clipboard;
 
 class UIElement {
     public:

@@ -143,6 +143,7 @@ std::string MacroPad::updateString() {
                         //Serial.printf("curlayout: %d\n", curLayout);
                     }
                 }
+                return this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).getMacroString();
             }
             else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) {
                 return this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).getMacroString();
@@ -156,5 +157,14 @@ std::string MacroPad::updateString() {
 }
 
 void MacroPad::draw() {
+    u8g2.drawRFrame(223, 0, 33, 64, 2);
+    u8g2.drawStr(225, 12, ("Cur:" + this -> layouts[this -> curLayout].getName()).c_str());
+    std::string str = updateString();
+    Serial.println(str.c_str());
+    if (kb.getKey(3, 5).getIsPressed()) {
+        u8g2.setDrawColor(0);
+        u8g2.drawStr(225, 24, "SW");
+        u8g2.setDrawColor(1);
+    }
 
 }

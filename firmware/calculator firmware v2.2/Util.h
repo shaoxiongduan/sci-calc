@@ -36,7 +36,11 @@ const int MAXOP = 25;
 const int MAXANI = 100;
 const long double EPSILON = 1e-8;
 const int MAXNODES = 1000;
+
 const uint8_t KEY_LAYER_SWITCH = 0xFC;
+const uint8_t KEY_EXP = 0xFD;
+const uint8_t KEY_LN = 0xFE;
+const uint8_t KEY_TRIG = 0xFF;
 
 const byte ROWCNT = 5;
 const byte COLCNT = 6;

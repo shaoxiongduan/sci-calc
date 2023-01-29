@@ -7,7 +7,7 @@
 #include "Expression.h"
 #include "Keyboard.h"
 #include "Macropad.h"
-//#include "UIMain.h"
+#include "UIMain.h"
 
 
 Keyboard kb;
@@ -51,7 +51,7 @@ void setup() {
     init();
     kb.init();
     bleKeyboard.begin();
-    //currentElement -> init();
+    currentElement -> init();
     u8g2.clearBuffer();
     //pinMode()
 }
@@ -60,13 +60,12 @@ void loop() {
     //Serial.flush();
     u8g2.clearBuffer();
     kb.update();
-    kb.printKeys();
-    macroPad.update();
-    //currentElement -> update();
-    Serial.println(digitalRead(36));
+    //kb.printKeys();
+    //macroPad.update();
+    currentElement -> update();
     //Serial.println("hello");
     u8g2.sendBuffer();
-    //animateAll();
+    animateAll();
     //delay(100);
     //u8g2.drawBox(30, 40, 10, 10);
 }

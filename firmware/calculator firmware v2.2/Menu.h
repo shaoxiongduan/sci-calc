@@ -7,12 +7,18 @@
 
 class Menu : public UIElement {
     public:
+        Menu();
+
+        Menu(int x, int y, int width, int height, int menuSize);
         
+
         Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
         
         void init();
         void activate();
         void deactivate();
+
+        void insertElement(UIElement* targetElement, UIElement* linkElement);
 
         bool moveCursorUp();
         bool moveCursorDown();
