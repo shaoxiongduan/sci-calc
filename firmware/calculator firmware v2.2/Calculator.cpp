@@ -26,6 +26,7 @@ void Calculator::enter() {
     UIElement* ptr = new ExpressionBlock(0, 0, 206, 12, Expression(this -> expressionInput -> getStr()));
     this -> calcMenu -> insertElement(ptr, ptr);
     this -> expressionInput -> clearStr();
+    this -> calcMenu -> scrollDown();
 }
 
 void Calculator::draw() {
@@ -53,7 +54,7 @@ void Calculator::update() {
     else if (clipboard != "") {
         insertExpression();
     }
-    else if (str == "ENTER" && this -> expressionInput -> getStr() != "") {
+    else if (str == "ENTER" && this -> expressionInput -> getStr() != "" && this -> mode == 0) {
         enter();
     }
     else if (str == "ESC") {

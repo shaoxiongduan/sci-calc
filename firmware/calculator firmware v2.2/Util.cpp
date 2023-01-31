@@ -201,3 +201,12 @@ std::string convertToString(Token t) {
     if (t == NEGATIVE) return "NEGATIVE";
     return "VAR";
 }
+
+std::string numToStr(long double x) {
+    float tmp = float(x);
+    std::ostringstream ss;
+    ss.precision(6);
+    ss << tmp;
+
+    return ss.str();
+}

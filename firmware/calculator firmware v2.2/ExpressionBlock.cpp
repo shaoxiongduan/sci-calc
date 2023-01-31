@@ -3,7 +3,7 @@
 ExpressionBlock::ExpressionBlock(int x, int y, int width, int height, Expression expression) : UIElement(x, y, width, height) {
     this -> expression = expression;
     this -> inputText.setText(this -> expression.getExpressionString());
-    this -> ans.setText(std::to_string(this -> expression.evaluateExpression()));
+    this -> ans.setText(numToStr(this -> expression.evaluateExpression()));
 }
 
 void ExpressionBlock::activate() {
@@ -14,7 +14,7 @@ void ExpressionBlock::draw() {
     this -> inputText.setX(this -> x);
     this -> inputText.setY(this -> y);
 
-    this -> ans.setX(this -> x + 150);
+    this -> ans.setX(this -> x + 205 - ans.getStr().size() * 5);
     this -> ans.setY(this -> y);
 
     this -> inputText.draw();

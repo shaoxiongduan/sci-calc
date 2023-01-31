@@ -7,7 +7,11 @@ class Cursor : public UIElement {
     public:
         Cursor();
 
-        Cursor(UIElement* target);
+        Cursor(bool mode);
+
+        Cursor(UIElement* target, bool mode);
+
+        void setMode(bool mode);
 
         void changeTarget(UIElement* target);
 
@@ -20,6 +24,7 @@ class Cursor : public UIElement {
 
     private:
         UIElement* target;
+        bool mode; // 0: box, 1: line
 };
 
 #endif

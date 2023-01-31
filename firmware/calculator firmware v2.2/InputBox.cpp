@@ -6,10 +6,11 @@ InputBox::InputBox() : UIElement() {
     this -> maxChar = 0;
     this -> width = this -> targetWidth = 0;
     this -> height = this -> targetHeight = 0;
-    this -> cursor.setX(this -> x);
+    this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
+    this -> cursor.setMode(1);
 }
 
 InputBox::InputBox(int x, int y, int width, int height, int maxChar) : UIElement(x, y, width, height) {
@@ -18,14 +19,15 @@ InputBox::InputBox(int x, int y, int width, int height, int maxChar) : UIElement
     this -> maxChar = maxChar;
     this -> width = this -> targetWidth = width;
     this -> height = this -> targetHeight = height;
-    this -> cursor.setX(this -> x);
+    this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
+    this -> cursor.setMode(1);
 }
 
 void InputBox::init() {
-    
+    this -> cursor.setMode(1);
 }
 
 int InputBox::getStrPos() {
@@ -45,66 +47,63 @@ void InputBox::deactivate() {
 
 
 
-bool InputBox::moveCursorLeft() {
-    if (this -> cursorPos > 0) {
-        this -> cursorPos--;
-        return true;
-    }
-    return false;
+int InputBox::moveCursorLeft(int x) {
+    int tmp = min(x, this -> cursorPos);
+    this -> cursorPos -= tmp;
+    return tmp;
 }
 
-bool InputBox::moveCursorRight() {
-    if (this -> cursorPos < this -> maxChar && this -> cursorPos < int(this -> str.size())) {
-        this -> cursorPos++;
-        return true;
-    }
-    return false;
+int InputBox::moveCursorRight(int x) {
+    int tmp = min(x, min(this -> maxChar - this -> cursorPos, int(this -> str.size()) - x - this -> cursorPos + 1));
+    this -> cursorPos += tmp;
+    return tmp;
 }
 
-bool InputBox::moveStrLeft() {
-    if (this -> strPos > 0) {
-        this -> strPos--;
-        return true;
+void InputBox::moveStrLeft(int x) {
+    if (this -> strPos - x >= 0) {
+        this -> strPos -= x;
     }
-
-    return false;
 }
 
-bool InputBox::moveStrRight() {
-    if (this -> strPos < int(this -> str.size()) - this -> maxChar) {
-        this -> strPos++;
+void InputBox::moveStrRight(int x) {
+    if (this -> strPos <= int(this -> str.size()) - this -> maxChar - x) {
+        this -> strPos += x;
     }
-    return false;
 }
 
-void InputBox::scrollLeft() {
-    if (!moveCursorLeft()) {
-        moveStrLeft();
+void InputBox::scrollLeft(int x) {
+    int tmp = moveCursorLeft(x);
+    if (tmp == 0) {
+        moveStrLeft(x);
     }
     else {
-        this -> cursor.changeTarget(this -> cursor.getX() - 5, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        this -> cursor.changeTarget(this -> cursor.getX() - 5 * tmp, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        moveStrLeft(x - tmp);
     }
 }
 
-void InputBox::scrollRight() {
-    if (!moveCursorRight()) {
-        moveStrRight();
+void InputBox::scrollRight(int x) {
+    int tmp = moveCursorRight(x);
+    if (tmp == 0) {
+        moveStrRight(x);
     }
     else {
-        this -> cursor.changeTarget(this -> cursor.getX() + 5, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        this -> cursor.changeTarget(this -> cursor.getX() + 5 * tmp, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        moveStrRight(x - tmp);
     }
 }
 
 void InputBox::insertStr(std::string insertStr) {
     this -> str.insert(this -> getStrPos(), insertStr);
     Serial.printf("sttr size: %d\n", this -> str.size());
-    scrollRight();
+    scrollRight(insertStr.size());
 }
 
 void InputBox::deleteStr() {
-    this -> str.erase(this -> getStrPos(), 1);
+    if (this -> str.size() == 0) return;
+    this -> str.erase(this -> getStrPos() - 1, 1);
     Serial.printf("sttr size: %d\n", this -> str.size());
-    scrollLeft();
+    scrollLeft(1);
 }
 
 std::string InputBox::getStr() {
@@ -119,7 +118,7 @@ void InputBox::clearStr() {
     this -> str = "";
     this -> strPos = 0;
     this -> cursorPos = 0;
-    this -> cursor.setX(this -> x);
+    this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
@@ -133,28 +132,29 @@ std::string InputBox::enter() {
 }
 
 void InputBox::draw() {
-    u8g2.drawStr(this -> x, this -> y, (this -> str.substr(this -> strPos, min(this -> maxChar, int(this -> str.size()) - this -> strPos))).c_str());
+    u8g2.drawStr(this -> x + 1, this -> y, (this -> str.substr(this -> strPos, min(this -> maxChar, int(this -> str.size()) - this -> strPos))).c_str());
     u8g2.drawRFrame(this -> x, this -> y - 6, this -> width, this -> height, 1);
 }
 
 
 
 void InputBox::update() {
-    this -> cursor.draw();
+    Serial.printf("this cursor: %d, str: %d\n", this -> cursorPos, this -> strPos);
     //Serial.printf("cursorPos: %d, strPos: %d/n", this -> cursorPos, this -> strPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
     draw();
+    this -> cursor.draw();
     std::string str = calcLayout.updateString();
     if (currentElement == this) {
     this -> parentElement -> draw();
     }
     if (str == "LEFT") {
         //Serial.printf("UP\n");
-        scrollLeft();
+        scrollLeft(1);
     }
     else if (str == "RIGHT") {
         //Serial.printf("down\n");
-        scrollRight();
+        scrollRight(1);
     }
     else if (str == "ENTER") {
         //enter();

@@ -10,6 +10,7 @@
 #include <vector>
 #include <queue>
 #include <stack>
+#include <sstream>
 #include <list>
 
 #ifdef U8X8_HAVE_HW_SPI
@@ -80,5 +81,6 @@ bool cmpLongDouble(long double a, long double b);
 int getPrecedenceToken(Token token);
 Token convertToEnum(std::string s);
 std::string convertToString(Token t);
+std::string numToStr(long double x);
 
 #endif

@@ -24,17 +24,17 @@ class InputBox : public UIElement {
         void insertStr(std::string insertStr);
         void deleteStr();
 
-        bool moveCursorLeft();
-        bool moveCursorRight();
+        int moveCursorLeft(int x);
+        int moveCursorRight(int x);
 
-        bool moveStrLeft();
-        bool moveStrRight();
+        void moveStrLeft(int x);
+        void moveStrRight(int x);
 
         int getStrPos();
 
-        void scrollLeft();
+        void scrollLeft(int x);
 
-        void scrollRight();
+        void scrollRight(int x);
         std::string enter();
 
         void draw();
