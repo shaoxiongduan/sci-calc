@@ -25,6 +25,7 @@ class ExpressionBlock : public UIElement {
         Text inputText;
         Text ans;
         Expression expression;
+        std::string rawRes;
 };
 
 #endif

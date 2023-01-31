@@ -38,10 +38,20 @@ const int MAXANI = 100;
 const long double EPSILON = 1e-8;
 const int MAXNODES = 1000;
 
-const uint8_t KEY_LAYER_SWITCH = 0xFC;
-const uint8_t KEY_EXP = 0xFD;
-const uint8_t KEY_LN = 0xFE;
-const uint8_t KEY_TRIG = 0xFF;
+const uint16_t KEY_LAYER_SWITCH = 0xFC;
+const uint16_t KEY_EXP = 0xFD;
+const uint16_t KEY_LN = 0xFE;
+const uint16_t KEY_SIN = 0xFF;
+const uint16_t KEY_COS = 0x100;
+const uint16_t KEY_TAN = 0x101;
+const uint16_t KEY_SEC = 0x102;
+const uint16_t KEY_CSC = 0x103;
+const uint16_t KEY_COT = 0x104;
+const uint16_t KEY_ASIN = 0x105;
+const uint16_t KEY_ACOS = 0x106;
+const uint16_t KEY_ATAN = 0x107;
+const uint16_t KEY_SQRT = 0x108;
+
 
 const byte ROWCNT = 5;
 const byte COLCNT = 6;
@@ -75,7 +85,7 @@ enum Token {
 
 extern std::string tokenStr[MAXOP];
 
-std::string getKeyString(uint8_t x);
+std::string getKeyString(uint16_t x);
 bool strIsOperator(std::string str);
 bool cmpLongDouble(long double a, long double b);
 int getPrecedenceToken(Token token);

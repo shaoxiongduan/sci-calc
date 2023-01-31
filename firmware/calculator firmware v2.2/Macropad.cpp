@@ -4,7 +4,7 @@ Macro::Macro() {
 
 }
 
-Macro::Macro(std::vector <uint8_t> keys) {
+Macro::Macro(std::vector <uint16_t> keys) {
     this -> keys = keys;
 }
 
@@ -21,7 +21,7 @@ void Macro::writeMacro() {
 
 std::string Macro::getMacroString() {
     std::string res;
-    for (uint8_t key : this -> keys) {
+    for (uint16_t key : this -> keys) {
         std::string cur = getKeyString(key);
         res += cur + "+";
     }

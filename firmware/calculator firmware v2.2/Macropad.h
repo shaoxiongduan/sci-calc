@@ -10,14 +10,14 @@ class Macro {
     public:
         Macro();
 
-        Macro(std::vector <uint8_t> keys);
+        Macro(std::vector <uint16_t> keys);
 
         void writeMacro();
 
         std::string getMacroString();
 
     private:
-        std::vector <uint8_t> keys;
+        std::vector <uint16_t> keys;
 };
 
 class Layout {

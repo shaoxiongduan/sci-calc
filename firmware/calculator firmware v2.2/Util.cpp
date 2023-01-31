@@ -6,7 +6,7 @@ U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2(U8G2_R2, SPI_CS, SPI_DC);
 
 
 bool sample = false;
-byte ROW_MISO[ROWCNT] = {32, 35, 34, 39, 36};
+byte ROW_MISO[ROWCNT] = {32, 35, 34, 39, 33};
 byte COL_MOSI[COLCNT] = {25, 26, 27, 14, 12, 13};
 
 char keys[ROWCNT][COLCNT] = {
@@ -64,7 +64,7 @@ void printKeys() {
 }
 */
 
-std::string getKeyString(uint8_t x) {
+std::string getKeyString(uint16_t x) {
     switch (x) {
         case KEY_LEFT_CTRL: return "L CTRL";
         case KEY_LEFT_SHIFT: return "L SHIFT";
@@ -118,7 +118,16 @@ std::string getKeyString(uint8_t x) {
         case KEY_LAYER_SWITCH: return "LAYER SWITCH";
         case KEY_EXP: return "exp";
         case KEY_LN: return "ln";
-        case KEY_TRIG: return "trig";
+        case KEY_SIN: return "sin";
+        case KEY_COS: return "cos";
+        case KEY_TAN: return "tan";
+        case KEY_ASIN: return "asin";
+        case KEY_ACOS: return "acos";
+        case KEY_ATAN: return "atan";
+        case KEY_SEC: return "sec";
+        case KEY_CSC: return "csc";
+        case KEY_COT: return "cot";
+        case KEY_SQRT: return "sqrt";
         default:
             std::string res(1, char(x));
         return res;

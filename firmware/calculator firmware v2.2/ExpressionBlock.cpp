@@ -3,7 +3,9 @@
 ExpressionBlock::ExpressionBlock(int x, int y, int width, int height, Expression expression) : UIElement(x, y, width, height) {
     this -> expression = expression;
     this -> inputText.setText(this -> expression.getExpressionString());
-    this -> ans.setText(numToStr(this -> expression.evaluateExpression()));
+    long double tmp = this -> expression.evaluateExpression();
+    this -> ans.setText(numToStr(tmp));
+    this -> rawRes = std::to_string(tmp);
 }
 
 void ExpressionBlock::activate() {
@@ -23,6 +25,6 @@ void ExpressionBlock::draw() {
 
 void ExpressionBlock::update() {
     draw();
-    clipboard = this -> ans.getStr();
+    clipboard = this -> rawRes;
     goBack();
 }

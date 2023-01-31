@@ -54,7 +54,7 @@ int InputBox::moveCursorLeft(int x) {
 }
 
 int InputBox::moveCursorRight(int x) {
-    int tmp = min(x, min(this -> maxChar - this -> cursorPos, int(this -> str.size()) - x - this -> cursorPos + 1));
+    int tmp = min(x, min(this -> maxChar - this -> cursorPos, int(this -> str.size()) - this -> cursorPos - this -> strPos + 1));
     this -> cursorPos += tmp;
     return tmp;
 }
@@ -100,7 +100,7 @@ void InputBox::insertStr(std::string insertStr) {
 }
 
 void InputBox::deleteStr() {
-    if (this -> str.size() == 0) return;
+    if (this -> cursorPos + this -> strPos == 0) return;
     this -> str.erase(this -> getStrPos() - 1, 1);
     Serial.printf("sttr size: %d\n", this -> str.size());
     scrollLeft(1);
