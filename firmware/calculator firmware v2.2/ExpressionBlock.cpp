@@ -9,7 +9,7 @@ ExpressionBlock::ExpressionBlock(int x, int y, int width, int height, Expression
 }
 
 void ExpressionBlock::activate() {
-    clipboard = this -> ans.getStr();
+    clipboard = this -> rawRes;
 }
 
 void ExpressionBlock::draw() {

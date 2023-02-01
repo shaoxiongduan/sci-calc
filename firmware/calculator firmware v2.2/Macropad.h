@@ -12,11 +12,14 @@ class Macro {
 
         Macro(std::vector <uint16_t> keys);
 
+        Macro(std::vector <uint16_t> keys, std::string name);
+
         void writeMacro();
 
         std::string getMacroString();
 
     private:
+        std::string name;
         std::vector <uint16_t> keys;
 };
 

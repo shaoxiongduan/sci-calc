@@ -147,7 +147,7 @@ std::pair <int, int> Keyboard::getChangedKey() {
 void Keyboard::printKeys() {
     for (int i = 0; i < ROWCNT; i++) {
         for (int j = 0; j < COLCNT; j++) {
-            //Serial.printf("Key[%d][%d]: isPressed: %d, statusTime: %lf\n", i, j, this -> keys[i][j].getIsPressed(), this -> keys[i][j].getstatusTime());
+            Serial.printf("Key[%d][%d]: isPressed: %d, statusTime: %lf\n", i, j, this -> keys[i][j].getIsPressed(), this -> keys[i][j].getStatusTime());
             std::string status;
             switch (this -> keys[i][j].getStatus()) {
                 case NOT_PRESSED:

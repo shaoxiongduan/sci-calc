@@ -47,7 +47,7 @@ void Calculator::update() {
     //Serial.println("update calc");
     //Serial.println("ehfouveheocvheo");
     std::string str = calcLayout.updateString();
-    if (str == "s") {
+    if (str == "TAB") {
         this -> mode = !(this -> mode);
         return;
     }
