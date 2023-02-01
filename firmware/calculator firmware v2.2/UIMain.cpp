@@ -4,6 +4,8 @@ std::string clipboard = "";
 
 Keyboard kb;
 
+ESP32Time rtc(8 * 3600);
+
 
 Macro layout1[5][6] = {
     {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_GUI, 'a'}, "CMD+A"), Macro({KEY_LEFT_GUI, 'r'}, "CMD+R")},
@@ -91,7 +93,7 @@ Menu menuMisc(0, 0, 256, 64, 5, {
 
 Calculator calcMain(0, 0, 220, 64, &calcMenu, &expressionInput);
 
-Menu menu(0, 0, 70, 64, 4, {
+Menu mainMenu(0, 0, 70, 64, 4, {
     new Text("Calculator"), 
     new Text("Macropad"), 
     new Text("Games"), 
@@ -111,5 +113,15 @@ Menu menu(0, 0, 70, 64, 4, {
 });
 
 
-UIElement* currentElement = &menu;
+UIElement* currentElement = &mainMenu;
 
+void displayTime() {
+    if (currentElement == &mainMenu) {
+        u8g2.setFont(u8g2_font_inb21_mf);
+        u8g2.drawStr(85, 25, rtc.getTime("%H:%M:%S").c_str());
+        u8g2.setFont(u8g2_font_profont12_mf);
+        u8g2.drawStr(85, 50, rtc.getTime("%A, %B %d %Y").c_str());
+        u8g2.setFont(u8g2_font_profont10_mf);
+    }
+    //struct tm timeinfo = rtc.getTimeStruct();
+}

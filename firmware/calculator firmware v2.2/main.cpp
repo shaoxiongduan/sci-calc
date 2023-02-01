@@ -12,6 +12,7 @@
 
 BleKeyboard bleKeyboard("SCI-CALC", "SHAP", 100);
 
+
 void init() {
     u8g2.begin();
     u8g2.setFontMode(0);
@@ -27,6 +28,7 @@ void init() {
 
 void setup() {
     init();
+    rtc.setTime(00, 00, 22, 1, 2, 2023);
     kb.init();
     bleKeyboard.begin();
     currentElement -> init();
@@ -42,6 +44,7 @@ void loop() {
     //macroPad.update();
     currentElement -> update();
     //Serial.println("hello");
+    displayTime();
     u8g2.sendBuffer();
     animateAll();
     //delay(100);

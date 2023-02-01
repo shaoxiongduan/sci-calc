@@ -12,9 +12,11 @@
 #include "Macropad.h"
 #include "MacropadUI.h"
 #include "Keyboard.h"
+#include "ESP32Time.h"
 
 extern std::string clipboard;
 extern Keyboard kb;
+extern ESP32Time rtc;
 
 extern Macro layout1[5][6];
 extern Macro layout2[5][6];
@@ -25,6 +27,8 @@ extern MacroPad calcLayout;
 extern MacropadUI macropadUI;
 
 extern Menu menu;
+
+void displayTime();
 
 
 #endif

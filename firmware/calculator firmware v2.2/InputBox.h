@@ -20,18 +20,18 @@ class InputBox : public UIElement {
         std::string getStr();
         void setStr(std::string str);
         void clearStr();
-        
+         
         void insertStr(std::string insertStr);
         void deleteStr();
 
         int moveCursorLeft(int x);
-        int moveCursorRight(int x);
+        int moveCursorRight(int x) ;
 
         void moveStrLeft(int x);
         void moveStrRight(int x);
 
         int getStrPos();
-
+  
         void scrollLeft(int x);
 
         void scrollRight(int x);
