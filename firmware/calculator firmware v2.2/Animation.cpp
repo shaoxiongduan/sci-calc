@@ -64,6 +64,8 @@ Animation::Animation(UIElement* targetUI, AnimationType aniType, int endX, int e
     this -> endY = endY;
     this -> startWidth = targetUI -> getWidth();
     this -> startHeight = targetUI -> getHeight();
+    this -> targetUI -> setTargetX(endX);
+    this -> targetUI -> setTargetY(endY);
     this -> endWidth = endWidth;
     this -> endHeight = endHeight;
     this -> targetUI -> setTargetWidth(endWidth);

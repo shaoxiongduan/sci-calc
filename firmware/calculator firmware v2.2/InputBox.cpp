@@ -8,6 +8,8 @@ InputBox::InputBox() : UIElement() {
     this -> height = this -> targetHeight = 0;
     this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
+    this -> cursor.setTargetX(this -> x + 1);
+    this -> cursor.setTargetY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
     this -> cursor.setMode(1);
@@ -21,6 +23,8 @@ InputBox::InputBox(int x, int y, int width, int height, int maxChar) : UIElement
     this -> height = this -> targetHeight = height;
     this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
+    this -> cursor.setTargetX(this -> x + 1);
+    this -> cursor.setTargetY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
     this -> cursor.setMode(1);
@@ -77,7 +81,7 @@ void InputBox::scrollLeft(int x) {
         moveStrLeft(x);
     }
     else {
-        this -> cursor.changeTarget(this -> cursor.getX() - 5 * tmp, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        this -> cursor.changeTarget(this -> cursor.getTargetX() - 5 * tmp, this -> cursor.getTargetY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
         moveStrLeft(x - tmp);
     }
 }
@@ -88,7 +92,7 @@ void InputBox::scrollRight(int x) {
         moveStrRight(x);
     }
     else {
-        this -> cursor.changeTarget(this -> cursor.getX() + 5 * tmp, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+        this -> cursor.changeTarget(this -> cursor.getTargetX() + 5 * tmp, this -> cursor.getTargetY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
         moveStrRight(x - tmp);
     }
 }
@@ -120,9 +124,11 @@ void InputBox::clearStr() {
     this -> cursorPos = 0;
     this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
+    this -> cursor.setTargetX(this -> x + 1);
+    this -> cursor.setTargetY(this -> y);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
-    this -> cursor.changeTarget(this -> cursor.getX(), this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
+    this -> cursor.changeTarget(this -> cursor.getTargetX(), this -> cursor.getTargetY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
 }
 
 
@@ -139,7 +145,7 @@ void InputBox::draw() {
 
 
 void InputBox::update() {
-    Serial.printf("this cursor: %d, str: %d\n", this -> cursorPos, this -> strPos);
+    Serial.printf("this cursor: %d, %d\n", this -> cursor.getTargetX(), this -> cursor.getTargetY());
     //Serial.printf("cursorPos: %d, strPos: %d/n", this -> cursorPos, this -> strPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
     draw();
@@ -166,7 +172,7 @@ void InputBox::update() {
         Serial.println("deleting str");
         deleteStr();
     }
-    else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH"))) {
+    else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH" && str != "MODE SWITCH"))) {
         Serial.println("funciwdi");
         insertStr(calcLayout.updateString());
     }

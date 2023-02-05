@@ -44,6 +44,8 @@ class MacroPad {
 
         std::string updateString();
 
+        Layout getLayout();
+
         bool curIsHeld();
 
         void draw();

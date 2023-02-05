@@ -35,7 +35,7 @@ void Text::init() {
 
 
 void Text::draw() {
-    u8g2.drawStr(this -> x, this -> y, this -> text.c_str());
+    u8g2.drawStr(this -> x, this -> y, this -> text.substr(0, min(int(this -> text.size()), this -> width / 5)).c_str());
 }
 
 void Text::update() {

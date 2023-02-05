@@ -3,8 +3,10 @@
 ExpressionBlock::ExpressionBlock(int x, int y, int width, int height, Expression expression) : UIElement(x, y, width, height) {
     this -> expression = expression;
     this -> inputText.setText(this -> expression.getExpressionString());
+    this -> inputText.setWidth(120);
     long double tmp = this -> expression.evaluateExpression();
     this -> ans.setText(numToStr(tmp));
+    this -> ans.init();
     this -> rawRes = std::to_string(tmp);
 }
 

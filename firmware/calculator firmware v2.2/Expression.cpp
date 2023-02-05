@@ -338,15 +338,15 @@ long double Expression::evaluateExpressionPointer(Node* node) {
         case SQRT: return sqrtl(evaluateExpressionPointer(node -> getLeftChild()));
         case LN: return logl(evaluateExpressionPointer(node -> getLeftChild()));
         case EXP: return expl(evaluateExpressionPointer(node -> getLeftChild()));
-        case SIN: return sinl(evaluateExpressionPointer(node -> getLeftChild()));
-        case COS: return cosl(evaluateExpressionPointer(node -> getLeftChild()));
-        case TAN: return tanl(evaluateExpressionPointer(node -> getLeftChild()));
-        case SEC: return 1.0 / cosl(evaluateExpressionPointer(node -> getLeftChild()));
-        case CSC: return 1.0 / sinl(evaluateExpressionPointer(node -> getLeftChild()));
-        case COT: return 1.0 / tanl(evaluateExpressionPointer(node -> getLeftChild()));
-        case ASIN: return asinl(evaluateExpressionPointer(node -> getLeftChild()));
-        case ACOS: return acosl(evaluateExpressionPointer(node -> getLeftChild()));
-        case ATAN: return atanl(evaluateExpressionPointer(node -> getLeftChild()));
+        case SIN: return sinl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case COS: return cosl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case TAN: return tanl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case SEC: return 1.0 / cosl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case CSC: return 1.0 / sinl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case COT: return 1.0 / tanl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case ASIN: return asinl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case ACOS: return acosl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case ATAN: return atanl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
         default: return 0;
     }
 }

@@ -128,6 +128,7 @@ std::string getKeyString(uint16_t x) {
         case KEY_CSC: return "csc";
         case KEY_COT: return "cot";
         case KEY_SQRT: return "sqrt";
+        case KEY_MODE_SWITCH: return "MODE SWITCH";
         default:
             std::string res(1, char(x));
         return res;
@@ -212,6 +213,15 @@ std::string convertToString(Token t) {
 }
 
 std::string numToStr(long double x) {
+    float tmp = float(x);
+    std::ostringstream ss;
+    ss.precision(6);
+    ss << tmp;
+
+    return ss.str();
+}
+
+std::string numToStrRaw(long double x) {
     float tmp = float(x);
     std::ostringstream ss;
     ss.precision(6);

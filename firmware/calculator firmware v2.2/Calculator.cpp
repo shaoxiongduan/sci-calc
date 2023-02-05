@@ -30,6 +30,7 @@ void Calculator::enter() {
 }
 
 void Calculator::draw() {
+    
     if (this -> mode == 0) {
         //Serial.println("ehfouveheocvheo");
         this -> calcMenu -> draw();
@@ -40,7 +41,27 @@ void Calculator::draw() {
         this -> calcMenu -> update();
         this -> expressionInput -> draw();
     }
-    calcLayout.draw();
+    //calcLayout.draw();
+    u8g2.drawRFrame(223, 0, 33, 64, 2);
+    u8g2.drawStr(225, 12, ("Cur:" + calcLayout.getLayout().getName()).c_str());
+    //std::string str = calcLayout.updateString();
+    //Serial.println(str.c_str());
+    u8g2.setDrawColor(0);
+    if (kb.getKey(4, 0).getIsPressed()) {
+        u8g2.drawStr(225, 24, "SL");
+
+    }
+    if (kb.getKey(4, 5).getIsPressed()) {
+        u8g2.drawStr(237, 24, "TAB");
+
+    }
+    if (angleMode == 0) {
+        u8g2.drawStr(225, 36, "RAD");
+    }
+    else {
+        u8g2.drawStr(225, 36, "DEG");
+    }
+    u8g2.setDrawColor(1);
 }
 
 void Calculator::update() {
@@ -60,6 +81,9 @@ void Calculator::update() {
     else if (str == "ESC") {
         Serial.println("goback");
         goBack();
+    }
+    else if (str == "MODE SWITCH") {
+        angleMode = !angleMode;
     }
     draw();
 }

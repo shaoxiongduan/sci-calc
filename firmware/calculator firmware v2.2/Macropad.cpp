@@ -62,6 +62,10 @@ MacroPad::MacroPad(std::vector <Layout> layouts) {
     this -> nxtLayout = 1;
 }
 
+Layout MacroPad::getLayout() {
+    return this -> layouts[this -> curLayout];
+}
+
 bool MacroPad::curIsHeld() {
     if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == PRESSED) {
         return true;

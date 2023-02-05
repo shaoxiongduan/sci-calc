@@ -17,6 +17,7 @@
 extern std::string clipboard;
 extern Keyboard kb;
 extern ESP32Time rtc;
+extern bool angleMode;
 
 extern Macro layout1[5][6];
 extern Macro layout2[5][6];

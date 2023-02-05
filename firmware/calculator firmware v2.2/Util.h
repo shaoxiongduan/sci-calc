@@ -51,6 +51,7 @@ const uint16_t KEY_ASIN = 0x105;
 const uint16_t KEY_ACOS = 0x106;
 const uint16_t KEY_ATAN = 0x107;
 const uint16_t KEY_SQRT = 0x108;
+const uint16_t KEY_MODE_SWITCH = 0x109;
 
 
 const byte ROWCNT = 5;
@@ -83,6 +84,7 @@ enum Token {
     ADD, SUB, MUL, DIV, POW, SQRT, LN, EXP, SIN, COS, TAN, SEC, CSC, COT, ASIN, ACOS, ATAN, LPARA, RPARA, EQUALS, NEGATIVE, NUM, VAR
 };
 
+extern bool angleMode;
 extern std::string tokenStr[MAXOP];
 
 std::string getKeyString(uint16_t x);
@@ -92,5 +94,6 @@ int getPrecedenceToken(Token token);
 Token convertToEnum(std::string s);
 std::string convertToString(Token t);
 std::string numToStr(long double x);
+std::string numToStrRaw(long double x);
 
 #endif
