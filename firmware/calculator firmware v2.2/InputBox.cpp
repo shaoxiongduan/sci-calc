@@ -58,7 +58,7 @@ int InputBox::moveCursorLeft(int x) {
 }
 
 int InputBox::moveCursorRight(int x) {
-    int tmp = min(x, min(this -> maxChar - this -> cursorPos, int(this -> str.size()) - this -> cursorPos - this -> strPos + 1));
+    int tmp = min(x, min(this -> maxChar - this -> cursorPos, int(this -> str.size()) - this -> cursorPos - this -> strPos));
     this -> cursorPos += tmp;
     return tmp;
 }

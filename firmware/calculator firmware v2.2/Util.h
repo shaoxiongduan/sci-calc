@@ -13,6 +13,10 @@
 #include <sstream>
 #include <list>
 
+#include <Update.h>
+#include <FS.h>
+#include <SD.h>
+
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
 #endif
@@ -95,5 +99,7 @@ Token convertToEnum(std::string s);
 std::string convertToString(Token t);
 std::string numToStr(long double x);
 std::string numToStrRaw(long double x);
+void performUpdate(Stream &updateSource, size_t updateSize);
+void updateFromFS(fs::FS &fs, std::string);
 
 #endif

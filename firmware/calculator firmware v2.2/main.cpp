@@ -10,6 +10,8 @@
 #include "UIMain.h"
 
 
+
+
 BleKeyboard bleKeyboard("SCI-CALC", "SHAP", 100);
 
 
@@ -22,6 +24,7 @@ void init() {
     //u8g2.drawBox(30, 40, 10, 10);
     //Serial.print("hello00"); 
 }
+
 
 
 
