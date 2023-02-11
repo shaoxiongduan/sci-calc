@@ -94,10 +94,27 @@ Menu menuMisc(0, 0, 256, 64, 5, {
 
 Calculator calcMain(0, 0, 220, 64, &calcMenu, &expressionInput);
 
+
+Menu programMenu(0, 0, 256, 64, 5, {
+    &inputBox,
+    new Text("test1"),
+    new Text("Chess"),
+    new Text("Spacetrash"),
+    new Text("Snake")
+},
+{
+    &inputBox, 
+    new BinLink("/test1.bin"),
+    new BinLink("/chess.bin"),
+    new BinLink("/spacetrash.bin"),
+    new BinLink("/snake.bin")
+});
+
+
 Menu mainMenu(0, 0, 70, 64, 4, {
     new Text("Calculator"), 
     new Text("Macropad"), 
-    new Text("Games"), 
+    new Text("Programs"), 
     new Text("Misc"), 
     new Text("Debug"), 
     new Text("Specs"), 
@@ -106,7 +123,7 @@ Menu mainMenu(0, 0, 70, 64, 4, {
 {
     &calcMain, 
     &macropadUI, 
-    nullptr, 
+    &programMenu, 
     &menuMisc, 
     nullptr, 
     &menuSpecs, 

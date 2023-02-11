@@ -13,6 +13,7 @@
 #include "MacropadUI.h"
 #include "Keyboard.h"
 #include "ESP32Time.h"
+#include "BinLink.h"
 
 extern std::string clipboard;
 extern Keyboard kb;

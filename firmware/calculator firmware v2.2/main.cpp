@@ -23,6 +23,23 @@ void init() {
     u8g2.setFontPosCenter();
     //u8g2.drawBox(30, 40, 10, 10);
     //Serial.print("hello00"); 
+    uint8_t cardType;
+   Serial.begin(115200);
+   //Serial.println("Welcome to the SD-Update example!");
+
+   // You can uncomment this and build again
+   // Serial.println("Update successfull");
+
+   //first init and check SD card
+   if (!SD.begin(4)) {
+      rebootEspWithReason("Card Mount Failed");
+   }
+
+   cardType = SD.cardType();
+
+   if (cardType == CARD_NONE) {
+      rebootEspWithReason("No SD_MMC card attached");
+   }
 }
 
 

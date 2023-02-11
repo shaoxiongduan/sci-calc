@@ -101,5 +101,6 @@ std::string numToStr(long double x);
 std::string numToStrRaw(long double x);
 void performUpdate(Stream &updateSource, size_t updateSize);
 void updateFromFS(fs::FS &fs, std::string);
+void rebootEspWithReason(std::string reason);
 
 #endif

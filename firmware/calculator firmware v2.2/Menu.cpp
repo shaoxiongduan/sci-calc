@@ -162,7 +162,7 @@ void Menu::enter() {
 }
 
 void Menu::draw() {
-    
+    u8g2.setClipWindow(this -> x, this -> y, this -> width, this -> height);
     u8g2.drawRFrame(this -> x, this -> y, this -> width, this -> height, 3);
     for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize, int(this -> subElements.size())); i++, cnt++) {
         //Serial.print("Hello");
@@ -170,6 +170,7 @@ void Menu::draw() {
         subElements[i] -> draw();
     }
     drawScrollBar();
+    u8g2.setClipWindow(0, 0, 256, 64);
 }
 
 
