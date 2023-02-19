@@ -1,8 +1,8 @@
-# SCI-CALC
+# sci-calc
 
 ## Overview
 
-The SCI_CALC(I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
+The sci-calc(I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
 
 ## Specs
 - Powered by an ESP32 WROOM32 E [datasheet](www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf)
@@ -44,8 +44,8 @@ https://user-images.githubusercontent.com/46639847/219937053-a5f0e39d-01d1-4069-
 
 ### Programs
 
-It is possible to upload your own code to the SCI-CALC by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code(see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
-It's pretty easy to port code over to the SCI-CALC, just copy the Util.h, Util.cpp, Keyboard.h, Keyboard.cpp files over to your project and change the input checking functions.
+It is possible to upload your own code to the sci-calc by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code(see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
+It's pretty easy to port code over to the sci-calc, just copy the Util.h, Util.cpp, Keyboard.h, Keyboard.cpp files over to your project and change the input checking functions.
 Currently I've ported littlerookchess, spacetrash, snake, and tetris to it.
 
 #### LittleRookChess
