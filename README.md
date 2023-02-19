@@ -20,15 +20,30 @@ The SCI_CALC(I know, really creative name) is a 4-in-1 device, packing a scienti
 - tab: also used in the calculator program, it's used to switch between the input box and the list of previous calculations
 ## UI
 ### Calculator
-layout(might change):
+A calculator with a history clipboard that can do basic arithmetic (add, subtract, multiply, divide, powers), as well as trigonmetric functions, natural logrithms and exponents. Equation solver and derivative calculator will come soon.
 
-![keyboard-layout](https://user-images.githubusercontent.com/46639847/219935671-401a025a-50ca-41fe-8419-fa750ff2e82f.png)
+####layout(might change):
 
+![keyboard-layout](https://user-images.githubusercontent.com/46639847/219936715-6f4ded29-5113-45ce-979c-dd3f59f1f1b0.png)
 
 when inputting expressions, switch layer is needed to move the cursor left or right, whereas in the history menu(and all of the other menus), holding switch layer is not necessary to use the arrow keys.
 when in the history menu, use the arrow keys to navigate up/down, and press enter to copy the selected expression's answer to the input box.
 #### video demo
 
+https://user-images.githubusercontent.com/46639847/219936733-cb611f87-4cae-4c7e-8eed-b2f6bcc909a7.mp4
 
-### Macropad:
-	
+### Macropad
+
+A bluetooth numpad that comes with 10 customizable macro keys, though all keys can be customized, only the 10 keys on the 2 rightmost rows can be displayed on the screen.
+Macros and layers are very easy to create in code(see firmware), and I'm planning to make it possible to change and edit the layout via a text file in the SD card.
+
+
+#### video demo
+
+https://user-images.githubusercontent.com/46639847/219937053-a5f0e39d-01d1-4069-9902-0d509ead685e.mp4
+
+### Programs
+
+It is possible to upload your own code to the SCI-CALC by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code(see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
+It's pretty easy to port code over to the SCI-CALC, just copy the Util.h, Util.cpp, Keyboard.h, Keyboard.cpp files over to your project and change the input checking functions.
+Currently I've ported littlerookchess, spacetrash, snake, and tetris to it.
