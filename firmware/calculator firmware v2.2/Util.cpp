@@ -2,12 +2,12 @@
 
 int lastNode = -1;
 std::string tokenStr[MAXOP] = {"+", "-", "*", "/", "^", "sqrt", "ln", "exp", "sin", "cos", "tan", "sec", "csc", "cot", "asin", "acos", "atan", "(", ")", "=", "-", "NUM", "VAR"};
-U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2(U8G2_R2, SPI_CS, SPI_DC);
+U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2(U8G2_R0, SPI_CS, SPI_DC);
 
 
 bool sample = false;
-byte ROW_MISO[ROWCNT] = {32, 35, 34, 39, 33};
-byte COL_MOSI[COLCNT] = {25, 26, 27, 14, 12, 13};
+byte ROW_MISO[ROWCNT] = {32, 35, 34, 39, 36};
+byte COL_MOSI[COLCNT] = {13, 12, 14, 27, 26, 25};
 
 char keys[ROWCNT][COLCNT] = {
     {'i', '/', '*', '-', 'a', 'b'},

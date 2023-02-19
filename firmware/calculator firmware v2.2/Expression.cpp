@@ -344,9 +344,9 @@ long double Expression::evaluateExpressionPointer(Node* node) {
         case SEC: return 1.0 / cosl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
         case CSC: return 1.0 / sinl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
         case COT: return 1.0 / tanl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
-        case ASIN: return asinl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
-        case ACOS: return acosl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
-        case ATAN: return atanl((angleMode ? 0.0174532925 : 1.0) * evaluateExpressionPointer(node -> getLeftChild()));
+        case ASIN: return (angleMode ? 57.2957795 : 1.0) * asinl(evaluateExpressionPointer(node -> getLeftChild()));
+        case ACOS: return (angleMode ? 57.2957795 : 1.0) * acosl(evaluateExpressionPointer(node -> getLeftChild()));
+        case ATAN: return (angleMode ? 57.2957795 : 1.0) * atanl(evaluateExpressionPointer(node -> getLeftChild()));
         default: return 0;
     }
 }

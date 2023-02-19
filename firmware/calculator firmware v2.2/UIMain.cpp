@@ -81,7 +81,7 @@ Menu menuSettings(0, 0, 256, 64, 5, {
     nullptr
 });
 
-Menu menuMisc(0, 0, 256, 64, 5, {
+Menu menuMisc(0, 0, 256, 64, 4, {
     &inputBox,
     new Text("THOCC."), 
     new Text("CLACK.")
@@ -95,19 +95,17 @@ Menu menuMisc(0, 0, 256, 64, 5, {
 Calculator calcMain(0, 0, 220, 64, &calcMenu, &expressionInput);
 
 
-Menu programMenu(0, 0, 256, 64, 5, {
-    &inputBox,
-    new Text("test1"),
+Menu programMenu(0, 0, 256, 64, 4, {
     new Text("Chess"),
     new Text("Spacetrash"),
-    new Text("Snake")
+    new Text("Snake"),
+    new Text("Tetris")
 },
 {
-    &inputBox, 
-    new BinLink("/test1.bin"),
     new BinLink("/chess.bin"),
     new BinLink("/spacetrash.bin"),
-    new BinLink("/snake.bin")
+    new BinLink("/snake.bin"),
+    new BinLink("/tetris.bin")
 });
 
 
