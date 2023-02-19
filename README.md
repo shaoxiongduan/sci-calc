@@ -2,7 +2,7 @@
 
 ## Overview
 
-The sci-calc(I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
+The sci-calc (I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
 
 ## Specs
 - Powered by an ESP32 WROOM32 E [datasheet](www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf)
@@ -10,7 +10,7 @@ The sci-calc(I know, really creative name) is a 4-in-1 device, packing a scienti
 - Screen: 256x64 monochrome oled (display driver: SSD1322)
 - Usb to serial chip: CH340C [driver download](learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all)
 - Battery: any lipo battery under 1000mah would be fine
-- SD card support(must be in FAT32 format)
+- SD card support (must be in FAT32 format)
 
 ## Function Keys
 - Switch layer key: switches between different layout configurations
@@ -22,7 +22,7 @@ The sci-calc(I know, really creative name) is a 4-in-1 device, packing a scienti
 ### Calculator
 A calculator with a history clipboard that can do basic arithmetic (add, subtract, multiply, divide, powers), as well as trigonmetric functions, natural logrithms and exponents. Equation solver and derivative calculator will come soon.
 
-#### layout(might change):
+#### layout (might change):
 
 ![keyboard-layout](https://user-images.githubusercontent.com/46639847/219936715-6f4ded29-5113-45ce-979c-dd3f59f1f1b0.png)
 
@@ -35,7 +35,7 @@ https://user-images.githubusercontent.com/46639847/219936733-cb611f87-4cae-4c7e-
 ### Macropad
 
 A bluetooth numpad that comes with 10 customizable macro keys, though all keys can be customized, only the 10 keys on the 2 rightmost rows can be displayed on the screen.
-Macros and layers are very easy to create in code(see firmware), and I'm planning to make it possible to change and edit the layout via a text file in the SD card.
+Macros and layers are very easy to create in code (see firmware), and I'm planning to make it possible to change and edit the layout via a text file in the SD card.
 
 
 #### video demo
@@ -44,7 +44,7 @@ https://user-images.githubusercontent.com/46639847/219937053-a5f0e39d-01d1-4069-
 
 ### Programs
 
-It is possible to upload your own code to the sci-calc by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code(see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
+It is possible to upload your own code to the sci-calc by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code (see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
 It's pretty easy to port code over to the sci-calc, just copy the Util.h, Util.cpp, Keyboard.h, Keyboard.cpp files over to your project and change the input checking functions.
 Currently I've ported littlerookchess, spacetrash, snake, and tetris to it.
 
