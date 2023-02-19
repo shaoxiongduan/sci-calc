@@ -5,7 +5,7 @@
 The SCI_CALC(I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
 
 ## Specs
-- Powered by an ESP32 WROOM32 E[datasheet](www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf)
+- Powered by an ESP32 WROOM32 E [datasheet](www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf)
 - Switches: kailh v1 choc switches
 - Screen: 256x64 monochrome oled (display driver: SSD1322)
 - Usb to serial chip: CH340C [driver download](learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all)
@@ -22,7 +22,7 @@ The SCI_CALC(I know, really creative name) is a 4-in-1 device, packing a scienti
 ### Calculator
 A calculator with a history clipboard that can do basic arithmetic (add, subtract, multiply, divide, powers), as well as trigonmetric functions, natural logrithms and exponents. Equation solver and derivative calculator will come soon.
 
-####layout(might change):
+#### layout(might change):
 
 ![keyboard-layout](https://user-images.githubusercontent.com/46639847/219936715-6f4ded29-5113-45ce-979c-dd3f59f1f1b0.png)
 
@@ -47,3 +47,20 @@ https://user-images.githubusercontent.com/46639847/219937053-a5f0e39d-01d1-4069-
 It is possible to upload your own code to the SCI-CALC by copying the .bin file that you compiled onto the SD card and creating a menu link to it in the main firmware code(see firmware), but this is kinda complicated and I'm trying to make it automatically create the link.
 It's pretty easy to port code over to the SCI-CALC, just copy the Util.h, Util.cpp, Keyboard.h, Keyboard.cpp files over to your project and change the input checking functions.
 Currently I've ported littlerookchess, spacetrash, snake, and tetris to it.
+
+#### LittleRookChess
+![image](https://user-images.githubusercontent.com/46639847/219938353-2eaa71d0-da5c-48c8-a9fe-db2489fa1074.png)
+
+https://github.com/olikraus/u8g2/blob/master/sys/arduino/u8g2_page_buffer/LittleRookChess/LittleRookChess.ino
+#### Spacetrash
+![image](https://user-images.githubusercontent.com/46639847/219938377-4b7b2d2a-34c5-4b80-8309-64dda9d56ff3.png)
+
+https://github.com/olikraus/u8g2/blob/master/sys/arduino/u8g2_page_buffer/SpaceTrash/SpaceTrash.ino
+#### Snake
+![image](https://user-images.githubusercontent.com/46639847/219938397-9109618b-9a15-4677-80f2-4d8203b3e311.png)
+
+https://github.com/norbertg1/Snake-game
+#### Tetris
+![image](https://user-images.githubusercontent.com/46639847/219938416-7db0a753-4cb1-4768-a68c-06e84444e2fa.png)
+
+https://github.com/Zimoslaw/TetriZimoslaw
