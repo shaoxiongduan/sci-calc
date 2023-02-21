@@ -23,6 +23,13 @@ void Calculator::insertExpression() {
 }
 
 void Calculator::enter() {
+    if (!syntaxChecker.checkSyntax(this -> expressionInput -> getStr())) {
+        u8g2.setDrawColor(0);
+        u8g2.drawStr(225, 48, "INVALID");
+        u8g2.drawStr(225, 60, "SYNTAX!");
+        u8g2.setDrawColor(1);
+        return;
+    }
     UIElement* ptr = new ExpressionBlock(0, 0, 206, 12, Expression(this -> expressionInput -> getStr()));
     this -> calcMenu -> insertElement(ptr, ptr);
     this -> expressionInput -> clearStr();

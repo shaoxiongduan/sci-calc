@@ -29,6 +29,10 @@ class Expression {
 
         std::vector <Node> parseString(std::string str);
 
+        bool checkSyntax(std::vector <Node> nodes);
+
+        bool checkSyntax(std::string str);
+
         std::queue <Node> shuntingYard(std::vector <Node> nodes);
 
         Node* buildTree(std::queue <Node> rpn);
@@ -52,5 +56,7 @@ class Expression {
     private:
         Node* root;
 };
+
+extern Expression syntaxChecker;
 
 #endif

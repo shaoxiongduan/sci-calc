@@ -12,8 +12,8 @@ Expression::Expression(Node* root) {
 
 Expression::Expression(std::string str) {
     this -> root = buildTree(shuntingYard(parseString(str)));
-    
 }
+
 
 Expression::Expression(std::vector <Node> nodes) {
     this -> root = buildTree(shuntingYard(nodes));
@@ -93,6 +93,62 @@ std::vector <Node> Expression::parseString(std::string str) {
     //printNodeVector(nodes);
     //std::cout << std::endl;
     return nodes;
+}
+
+bool Expression::checkSyntax(std::vector <Node> nodes) {
+    //check paras
+    int paracnt = 0;
+    bool prevIsUnary = false;
+    bool prevIsBinary = false;
+    for (int i = 0; i < nodes.size(); i++) {
+        if (nodes[i].getToken() == NUM || nodes[i].getToken() == VAR) {
+            continue;
+        }
+        if (nodes[i].getToken() == LPARA) {
+            paracnt++;
+        }
+        else if (nodes[i].getToken() == RPARA) {
+            paracnt--;
+        }
+        
+        else if (nodes[i].getToken() == ADD || nodes[i].getToken() == SUB || nodes[i].getToken() == MUL || nodes[i].getToken() == DIV) {
+            if (i == 0 || i == nodes.size() - 1) {
+                Serial.println("out of bounds");
+                return false;
+            }
+            if ((nodes[i - 1].getToken() == ADD || nodes[i - 1].getToken() == SUB || nodes[i - 1].getToken() == MUL || nodes[i - 1].getToken() == DIV) || 
+                (nodes[i + 1].getToken() == ADD || nodes[i + 1].getToken() == SUB || nodes[i + 1].getToken() == MUL || nodes[i + 1].getToken() == DIV)) {
+                Serial.println("in binary");
+                return false;
+            }
+        }
+
+        else {
+            if (i == nodes.size() - 1) {
+                Serial.printf("out of bounds unary");
+                return false;
+            }
+            if (nodes[i + 1].getToken() != LPARA) {
+                Serial.println("in unary");
+                return false;
+            }
+        }
+
+        if (paracnt < 0) {
+            Serial.println("para <0");
+            return false;
+        }
+    }
+    
+    if (paracnt != 0) {
+        Serial.println("para mismatch");
+        return false;
+    }
+    return true;
+}
+
+bool Expression::checkSyntax(std::string str) {
+    return checkSyntax(parseString(str));
 }
 
 std::queue <Node> Expression::shuntingYard(std::vector <Node> nodes) {
@@ -387,3 +443,5 @@ Expression Expression::derivative() {
 }
 
 
+
+Expression syntaxChecker;
