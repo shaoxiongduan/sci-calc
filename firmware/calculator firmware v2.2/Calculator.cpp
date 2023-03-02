@@ -75,7 +75,7 @@ void Calculator::update() {
     //Serial.println("update calc");
     //Serial.println("ehfouveheocvheo");
     std::string str = calcLayout.updateString();
-    if (str == "TAB") {
+    if (str == "TAB" && this -> calcMenu -> getSize() > 0) {
         this -> mode = !(this -> mode);
         return;
     }

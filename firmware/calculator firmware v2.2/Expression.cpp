@@ -111,7 +111,7 @@ bool Expression::checkSyntax(std::vector <Node> nodes) {
             paracnt--;
         }
         
-        else if (nodes[i].getToken() == ADD || nodes[i].getToken() == SUB || nodes[i].getToken() == MUL || nodes[i].getToken() == DIV) {
+        else if (nodes[i].getToken() == ADD || nodes[i].getToken() == SUB || nodes[i].getToken() == MUL || nodes[i].getToken() == DIV || nodes[i].getToken() == POW) {
             if (i == 0 || i == nodes.size() - 1) {
                 Serial.println("out of bounds");
                 return false;
