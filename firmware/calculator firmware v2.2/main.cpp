@@ -40,6 +40,7 @@ void init() {
    if (cardType == CARD_NONE) {
       rebootEspWithReason("No SD_MMC card attached");
    }
+   pinMode(36, INPUT);
 }
 
 
@@ -63,6 +64,7 @@ void loop() {
     //kb.printKeys();
     //macroPad.update();
     currentElement -> update();
+    u8g2.drawStr(205, 12, ("bat:" + numToStr(analogRead(36) / 4095.0 * 2 * 3.3).substr(0, 4) + "V.").c_str());
     //Serial.println("hello");
     displayTime();
     u8g2.sendBuffer();

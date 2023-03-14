@@ -6,7 +6,7 @@ U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2(U8G2_R0, SPI_CS, SPI_DC);
 
 
 bool sample = false;
-byte ROW_MISO[ROWCNT] = {32, 35, 34, 39, 36};
+byte ROW_MISO[ROWCNT] = {33, 32, 35, 34, 39};
 byte COL_MOSI[COLCNT] = {13, 12, 14, 27, 26, 25};
 
 char keys[ROWCNT][COLCNT] = {

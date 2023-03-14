@@ -17,7 +17,7 @@ Macro::Macro(std::vector <uint16_t> keys, std::string name) {
 void Macro::writeMacro() {
     if (bleKeyboard.isConnected()) {
         
-        for (uint8_t key : this -> keys) {
+        for (uint16_t key : this -> keys) {
             Serial.println(key);
             bleKeyboard.press(key);
         }

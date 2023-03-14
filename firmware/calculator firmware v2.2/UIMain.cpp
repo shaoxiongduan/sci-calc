@@ -13,7 +13,7 @@ Macro layout1[5][6] = {
     {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
     {Macro({'4'}),              Macro({'5'}), Macro({'6'}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
     {Macro({'1'}),              Macro({'2'}), Macro({'3'}), Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'h'}, "HIDE"),  Macro({KEY_LEFT_GUI, 'n'}, "NEW")},
-    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({'8'}),                        Macro({'8'})}
+    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({KEY_AUTOCLICK}),                        Macro({'8'})}
 };
 
 Macro layout2[5][6] = {
@@ -108,11 +108,15 @@ Menu programMenu(0, 0, 256, 64, 4, {
     new BinLink("/tetris.bin")
 });
 
+Menu stopwatchMenu(0, 0, 110, 64, 4);
+
+StopwatchUI stopwatchUI(0, 0, 256, 64, &stopwatchMenu);
 
 Menu mainMenu(0, 0, 70, 64, 4, {
     new Text("Calculator"), 
     new Text("Macropad"), 
     new Text("Programs"), 
+    new Text("Stopwatch"),
     new Text("Misc"), 
     new Text("Debug"), 
     new Text("Specs"), 
@@ -122,6 +126,7 @@ Menu mainMenu(0, 0, 70, 64, 4, {
     &calcMain, 
     &macropadUI, 
     &programMenu, 
+    &stopwatchUI,
     &menuMisc, 
     nullptr, 
     &menuSpecs, 
@@ -134,9 +139,9 @@ UIElement* currentElement = &mainMenu;
 void displayTime() {
     if (currentElement == &mainMenu) {
         u8g2.setFont(u8g2_font_inb21_mf);
-        u8g2.drawStr(85, 25, rtc.getTime("%H:%M:%S").c_str());
+        u8g2.drawStr(85, 35, rtc.getTime("%H:%M:%S").c_str());
         u8g2.setFont(u8g2_font_profont12_mf);
-        u8g2.drawStr(85, 50, rtc.getTime("%A, %B %d %Y").c_str());
+        u8g2.drawStr(85, 55, rtc.getTime("%A, %B %d %Y").c_str());
         u8g2.setFont(u8g2_font_profont10_mf);
     }
     //struct tm timeinfo = rtc.getTimeStruct();

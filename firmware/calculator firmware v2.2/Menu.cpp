@@ -70,6 +70,7 @@ void Menu::deactivate() {
 
 
 void Menu::insertElement(UIElement* targetElement, UIElement* linkElement) {
+    
     targetElement -> setX(this -> targetX + 5);
     targetElement -> setY(70);
     insertAnimation(new Animation(targetElement, SMOOTH, targetElement -> getX(), min(this -> menuSize, int(this -> subElements.size())) * 12 + 12, 100));
@@ -115,6 +116,7 @@ bool Menu::moveMenuUp() {
 }
 
 bool Menu::moveMenuDown() {
+    Serial.println("fgasrgf");
     if (this -> menuPos < int(this -> subElements.size()) - this -> menuSize) {
         for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize + 1, int(this -> subElements.size())); i++, cnt++) {
             insertAnimation(new Animation(subElements[i], SMOOTH, subElements[i] -> getX(), (cnt - 1) * 12 + 12, 100));
@@ -154,6 +156,25 @@ void Menu::drawScrollBar() {
     //insertAnimation(new Animation(&(this -> scrollBar), SMOOTH, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 100));
 }
 
+void Menu::clear() {
+    this -> menuSize = menuSize;
+    this -> menuPos = 0;
+    this -> cursorPos = 0;
+    this -> scrollBar.setX(this -> x + this -> width - 6);
+    if (this -> getSize() == 0) {
+        this -> scrollBar.setY(this -> y + 5);
+        this -> scrollBar.setHeight(0);
+        this -> cursor.setX(this -> x);
+        this -> cursor.setY(this -> y + 12);
+    }
+    else {
+        this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
+        this -> scrollBar.setHeight(((this -> height - 10) / this -> getSize()));
+    }
+    this -> subElements.clear();
+    this -> linkElements.clear();
+}
+
 void Menu::enter() {
     if (this -> linkElements[this -> menuPos + this -> cursorPos] != nullptr) {
         this -> linkElements[this -> menuPos + this -> cursorPos] -> init();
@@ -178,19 +199,21 @@ void Menu::draw() {
 void Menu::update() {
     //Serial.printf("cursorPos: %d, menuPos: %d/n", this -> cursorPos, this -> menuPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
-    if (kb.getRisingEdgeKey() == std::make_pair(1, 1)) {
-        //Serial.printf("UP\n");
-        scrollUp();
-    }
-    if (kb.getRisingEdgeKey() == std::make_pair(3, 1)) {
-        //Serial.printf("down\n");
-        scrollDown();
-    }
-    if (kb.getRisingEdgeKey() == std::make_pair(3, 3)) {
-        this -> enter();
+    if (this -> getSize() > 0) {
+        if (kb.getRisingEdgeKey() == std::make_pair(1, 1)) {
+            //Serial.printf("UP\n");
+            scrollUp();
+        }
+        if (kb.getRisingEdgeKey() == std::make_pair(3, 1)) {
+            //Serial.printf("down\n");
+            scrollDown();
+        }
+        if (kb.getRisingEdgeKey() == std::make_pair(3, 3)) {
+            enter();
+        }
     }
     if (kb.getRisingEdgeKey() == std::make_pair(0, 0)) {
-        this -> goBack();
+        goBack();
     }
     draw();
     this -> cursor.draw();

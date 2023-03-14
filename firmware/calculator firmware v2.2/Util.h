@@ -56,8 +56,7 @@ const uint16_t KEY_ACOS = 0x106;
 const uint16_t KEY_ATAN = 0x107;
 const uint16_t KEY_SQRT = 0x108;
 const uint16_t KEY_MODE_SWITCH = 0x109;
-
-
+const uint16_t KEY_AUTOCLICK = 0x10A;
 const byte ROWCNT = 5;
 const byte COLCNT = 6;
 extern byte ROW_MISO[ROWCNT];
