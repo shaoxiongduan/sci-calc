@@ -110,7 +110,9 @@ bool Expression::checkSyntax(std::vector <Node> nodes) {
         else if (nodes[i].getToken() == RPARA) {
             paracnt--;
         }
-        
+        else if (nodes[i].getToken() == NEGATIVE) {
+            continue;
+        }
         else if (nodes[i].getToken() == ADD || nodes[i].getToken() == SUB || nodes[i].getToken() == MUL || nodes[i].getToken() == DIV || nodes[i].getToken() == POW) {
             if (i == 0 || i == nodes.size() - 1) {
                 Serial.println("out of bounds");
@@ -130,7 +132,7 @@ bool Expression::checkSyntax(std::vector <Node> nodes) {
             }
             if (nodes[i + 1].getToken() != LPARA) {
                 Serial.println("in unary");
-                return false;
+                //return false;
             }
         }
 
