@@ -21,7 +21,7 @@ void Macro::writeMacro() {
             Serial.println(key);
             bleKeyboard.press(key);
         }
-        bleKeyboard.releaseAll();
+        //bleKeyboard.releaseAll();
     }
 }
 
@@ -126,6 +126,9 @@ void MacroPad::update() {
                 }
             }
             else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) {
+                    this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
+            }
+            else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == FALLING_EDGE) {
                     this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
             }
         }

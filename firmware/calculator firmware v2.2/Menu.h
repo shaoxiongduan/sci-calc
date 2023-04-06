@@ -34,7 +34,7 @@ class Menu : public UIElement {
 
         void drawScrollBar();
 
-        void clear();
+        void clear(); 
 
         void enter();
 

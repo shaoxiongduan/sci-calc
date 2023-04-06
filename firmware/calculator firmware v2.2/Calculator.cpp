@@ -1,5 +1,8 @@
 #include "Calculator.h"
 
+int curtimesyntax = 0;
+bool state = false;
+
 Calculator::Calculator(int x, int y, int width, int height, Menu* calcMenu, InputBox* expressionInput) : UIElement(x, y, width, height) {
     this -> calcMenu = calcMenu;
     this -> expressionInput = expressionInput;
@@ -24,13 +27,20 @@ void Calculator::insertExpression() {
 
 void Calculator::enter() {
     if (!syntaxChecker.checkSyntax(this -> expressionInput -> getStr())) {
+        state = true;
+        curtimesyntax = millis();
+    }
+    if (state) {
+        if (millis() - curtimesyntax > 1000) {
+            state = false;
+        }
         u8g2.setDrawColor(0);
-        u8g2.drawStr(225, 48, "INVALID");
-        u8g2.drawStr(225, 60, "SYNTAX!");
+        u8g2.drawStr(215, 48, "INVALID");
+        u8g2.drawStr(215, 60, "SYNTAX!");
         u8g2.setDrawColor(1);
         return;
     }
-    UIElement* ptr = new ExpressionBlock(0, 0, 206, 12, Expression(this -> expressionInput -> getStr()));
+    UIElement* ptr = new ExpressionBlock(0, 0, 196, 12, Expression(this -> expressionInput -> getStr()));
     this -> calcMenu -> insertElement(ptr, ptr);
     this -> expressionInput -> clearStr();
     this -> calcMenu -> scrollDown();
@@ -49,24 +59,24 @@ void Calculator::draw() {
         this -> expressionInput -> draw();
     }
     //calcLayout.draw();
-    u8g2.drawRFrame(223, 0, 33, 64, 2);
-    u8g2.drawStr(225, 12, ("Cur:" + calcLayout.getLayout().getName()).c_str());
+   
+    u8g2.drawStr(215, 24, ("Cur:" + calcLayout.getLayout().getName()).c_str());
     std::string str = calcLayout.updateString();
     //Serial.println(str.c_str());
     u8g2.setDrawColor(0);
     if (kb.getKey(4, 0).getIsPressed()) {
-        u8g2.drawStr(225, 24, "SL");
+        u8g2.drawStr(215, 36, "SL");
 
     }
     if (kb.getKey(4, 5).getIsPressed()) {
-        u8g2.drawStr(237, 24, "TAB");
+        u8g2.drawStr(227, 36, "TAB");
 
     }
     if (angleMode == 0) {
-        u8g2.drawStr(225, 36, "RAD");
+        u8g2.drawStr(215, 48, "RAD");
     }
     else {
-        u8g2.drawStr(225, 36, "DEG");
+        u8g2.drawStr(215, 48, "DEG");
     }
     u8g2.setDrawColor(1);
 }

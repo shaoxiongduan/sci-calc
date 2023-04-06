@@ -8,6 +8,7 @@
 #include "Keyboard.h"
 #include "Macropad.h"
 #include "UIMain.h"
+#include "Sidebar.h"
 
 
 
@@ -21,6 +22,7 @@ void init() {
     Serial.begin(115200);
     u8g2.setFont(u8g2_font_profont10_mf);
     u8g2.setFontPosCenter();
+    u8g2.enableUTF8Print();
     //u8g2.drawBox(30, 40, 10, 10);
     //Serial.print("hello00"); 
     uint8_t cardType;
@@ -61,10 +63,10 @@ void loop() {
     //Serial.flush();
     u8g2.clearBuffer();
     kb.update();
+    drawSidebar();
     //kb.printKeys();
     //macroPad.update();
     currentElement -> update();
-    u8g2.drawStr(205, 12, ("bat:" + numToStr(analogRead(36) / 4095.0 * 2 * 3.3).substr(0, 4) + "V.").c_str());
     //Serial.println("hello");
     displayTime();
     u8g2.sendBuffer();

@@ -15,6 +15,7 @@
 #include "ESP32Time.h"
 #include "BinLink.h"
 #include "StopwatchUI.h"
+#include "ChineseText.h"
 
 extern std::string clipboard;
 extern Keyboard kb;
