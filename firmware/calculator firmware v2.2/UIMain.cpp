@@ -62,6 +62,9 @@ Macro layoutgame[5][6] = {
 InputBox inputBox(0, 0, 100, 12, 15);
 Menu calcMenu(0, 0, 210, 48, 3);
 InputBox expressionInput(0, 57, 210, 12, 42);
+Checkbox checkbox1("test");
+Slider slider1("Testval", 0, 100);
+
 
 MacroPad calcLayout({
     Layout("1", layout3),
@@ -80,13 +83,13 @@ Menu menuSpecs(0, 0, 210, 64, 5, {
 });
 
 Menu menuSettings(0, 0, 210, 64, 5, {
-    new Text("Nothing"), 
-    new Text("To see"), 
+    &checkbox1, 
+    &slider1, 
     new Text("here.")
 },
 {
-    nullptr,
-    nullptr,
+    &checkbox1,
+    &slider1,
     nullptr
 });
 

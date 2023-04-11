@@ -20,6 +20,7 @@ Animation::Animation(UIElement* targetUI, AnimationType aniType, int startX, int
 */
 
 Animation::Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int totalTime) {
+    this -> type = false;
     this -> targetUI = targetUI;
     this -> aniType = aniType;
     this -> startX = targetUI -> getX();
@@ -56,6 +57,7 @@ Animation::Animation(UIElement* targetUI, AnimationType aniType, int startX, int
 */
 
 Animation::Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int endWidth, int endHeight, int totalTime) {
+    this -> type = false;
     this -> targetUI = targetUI;
     this -> aniType = aniType;
     this -> startX = targetUI -> getX();
@@ -70,6 +72,17 @@ Animation::Animation(UIElement* targetUI, AnimationType aniType, int endX, int e
     this -> endHeight = endHeight;
     this -> targetUI -> setTargetWidth(endWidth);
     this -> targetUI -> setTargetHeight(endHeight);
+    this -> totalTime = totalTime;
+    this -> isFinished = false;
+    this -> isStarted = false;
+}
+
+Animation::Animation(int* targetVal, AnimationType aniType, int endVal, int totalTime) {
+    this -> type = true;
+    this -> targetVal = targetVal;
+    this -> aniType = aniType;
+    this -> startVal = *(targetVal);
+    this -> endVal = endVal;
     this -> totalTime = totalTime;
     this -> isFinished = false;
     this -> isStarted = false;
@@ -103,56 +116,98 @@ void Animation::updateTime() {
 }
 
 void Animation::animateSmooth() {
-    if (getCurDuration() > 10 && !this -> isFinished) {
-        int curX = this -> targetUI -> getX();
-        int curY = this -> targetUI -> getY();
+    Serial.println("in animation");
+    if (this -> type == 0) {
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curX = this -> targetUI -> getX();
+            int curY = this -> targetUI -> getY();
 
-        float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
 
-        int nxtX = (this -> startX + int(tmp * (this -> endX - this -> startX)));
-        int nxtY = (this -> startY + int(tmp * (this -> endY - this -> startY)));
-        int nxtWidth = (this -> startWidth + int(tmp * (this -> endWidth - this -> startWidth)));
-        int nxtHeight = (this -> startHeight + int(tmp * (this -> endHeight - this -> startHeight)));
-        
-        
-        Serial.printf("nxtX, nxtY, nxtWidth, nxtHeight: %d, %d, %d, %d\n", nxtX, nxtY, nxtWidth, nxtHeight);
+            int nxtX = (this -> startX + int(tmp * (this -> endX - this -> startX)));
+            int nxtY = (this -> startY + int(tmp * (this -> endY - this -> startY)));
+            int nxtWidth = (this -> startWidth + int(tmp * (this -> endWidth - this -> startWidth)));
+            int nxtHeight = (this -> startHeight + int(tmp * (this -> endHeight - this -> startHeight)));
+            
+            
+            Serial.printf("nxtX, nxtY, nxtWidth, nxtHeight: %d, %d, %d, %d\n", nxtX, nxtY, nxtWidth, nxtHeight);
 
-        this -> targetUI -> setX(nxtX);
-        this -> targetUI -> setY(nxtY);
-        this -> targetUI -> setWidth(nxtWidth);
-        this -> targetUI -> setHeight(nxtHeight);
-        
-        updateTime();
+            this -> targetUI -> setX(nxtX);
+            this -> targetUI -> setY(nxtY);
+            this -> targetUI -> setWidth(nxtWidth);
+            this -> targetUI -> setHeight(nxtHeight);
+            
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            this -> targetUI -> setX(this -> endX);
+            this -> targetUI -> setY(this -> endY);
+            this -> targetUI -> setWidth(endWidth);
+            this -> targetUI -> setHeight(endHeight);
+            this -> isFinished = true;
+        }
     }
-    if (millis() - this -> startTime >= totalTime) {
-        this -> targetUI -> setX(this -> endX);
-        this -> targetUI -> setY(this -> endY);
-        this -> targetUI -> setWidth(endWidth);
-        this -> targetUI -> setHeight(endHeight);
-        this -> isFinished = true;
+    else if (this -> type == 1) {
+        Serial.println("in int animation");
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curVal = *(this -> targetVal);
+
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+
+            int nxtVal = (this -> startVal + int(tmp * (this -> endVal - this -> startVal)));
+            *(this -> targetVal) = nxtVal;
+            Serial.println(*(this -> targetVal));
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            *(this -> targetVal) = this -> endVal;
+            this -> isFinished = true;
+        }
     }
 }
 
 void Animation::animateIndent() {
-    if (getCurDuration() > 10 && !this -> isFinished) {
-        int curX = this -> targetUI -> getX();
-        int curY = this -> targetUI -> getY();
+    if (this -> type == 0) {
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curX = this -> targetUI -> getX();
+            int curY = this -> targetUI -> getY();
 
-        int nxtX = (this -> startX + (millis() - this -> startTime) * (this -> endX - this -> startX) / totalTime);
-        int nxtY = (this -> startY + (millis() - this -> startTime) * (this -> endY - this -> startY) / totalTime);
-        Serial.printf("nxtX, nxtY: %d, %d\n", nxtX, nxtY);
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
 
-        this -> targetUI -> setX(nxtX);
-        this -> targetUI -> setY(nxtY);
-        
-        updateTime();
+            int nxtX = (this -> startX + int(tmp * (this -> endX - this -> startX)));
+            int nxtY = (this -> startY + int(tmp * (this -> endY - this -> startY)));
+            int nxtWidth = (this -> startWidth + int(tmp * (this -> endWidth - this -> startWidth)));
+            int nxtHeight = (this -> startHeight + int(tmp * (this -> endHeight - this -> startHeight)));
+            
+            this -> targetUI -> setX(nxtX);
+            this -> targetUI -> setY(nxtY);
+            this -> targetUI -> setWidth(nxtWidth);
+            this -> targetUI -> setHeight(nxtHeight);
+            
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            this -> targetUI -> setX(this -> endX);
+            this -> targetUI -> setY(this -> endY);
+            this -> targetUI -> setWidth(endWidth);
+            this -> targetUI -> setHeight(endHeight);
+            this -> isFinished = true;
+        }
     }
-    if (millis() - this -> startTime >= totalTime) {
-        this -> targetUI -> setX(this -> endX);
-        this -> targetUI -> setY(this -> endY);
-        this -> targetUI -> setWidth(endWidth);
-        this -> targetUI -> setHeight(endHeight);
-        this -> isFinished = true;
+    else if (this -> type == 1) {
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curVal = *(this -> targetVal);
+
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+
+            int nxtVal = (this -> startVal + int(tmp * (this -> endVal - this -> startVal)));
+            *(this -> targetVal) = nxtVal;
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            *(this -> targetVal) = this -> endVal;
+            this -> isFinished = true;
+        }
     }
 }
 

@@ -16,6 +16,8 @@
 #include "BinLink.h"
 #include "StopwatchUI.h"
 #include "ChineseText.h"
+#include "Checkbox.h"
+#include "Slider.h"
 
 extern std::string clipboard;
 extern Keyboard kb;

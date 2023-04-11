@@ -14,6 +14,7 @@ class Animation {
         
         Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int endWidth, int endHeight, int totalTime);
         
+        Animation(int* targetVal, AnimationType aniType, int endVal, int totalTime);
 
         void init();
 
@@ -34,6 +35,9 @@ class Animation {
         void animate();
 
     protected:
+        bool type; // 0 is animation for a whole object, 1 is animation for a single variable
+        int* targetVal;
+        int startVal, endVal;
         UIElement* targetUI;
         int startX, startY, endX, endY;
         int startWidth, startHeight, endWidth, endHeight;
