@@ -5,10 +5,14 @@ Menu::Menu() : UIElement() {
     this -> cursorPos = 0;
 }
 
-Menu::Menu(int x, int y, int width, int height, int menuSize) : UIElement(x, y, width, height) {
+Menu::Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize) : UIElement(restX, restY, width, height) {
     this -> menuSize = menuSize;
     this -> menuPos = 0;
     this -> cursorPos = 0;
+    this -> restX = restX;
+    this -> restY = restY;
+    this -> activeX = activeX;
+    this -> activeY = activeY;
     this -> scrollBar.setX(this -> x + this -> width - 6);
     if (this -> getSize() == 0) {
         this -> scrollBar.setY(this -> y + 5);
@@ -22,11 +26,15 @@ Menu::Menu(int x, int y, int width, int height, int menuSize) : UIElement(x, y, 
     }
 }
 
-Menu::Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements) : UIElement(x, y, width, height, subElements) {
+Menu::Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements) : UIElement(restX, restY, width, height, subElements) {
     this -> menuSize = menuSize;
     this -> menuPos = 0;
     this -> cursorPos = 0;
     this -> linkElements = linkElements;
+    this -> restX = restX;
+    this -> restY = restY;
+    this -> activeX = activeX;
+    this -> activeY = activeY;
     this -> scrollBar.setX(this -> x + this -> width - 6);
     this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
     this -> scrollBar.setHeight(((this -> height - 10) / this -> getSize()));
@@ -34,38 +42,45 @@ Menu::Menu(int x, int y, int width, int height, int menuSize, std::vector <UIEle
 
 void Menu::init() {
     //insertAnimation(new Animation(this, SMOOTH, 0, 0, 500));
-    this -> cursor.setX(this -> x);
-    this -> cursor.setY(this -> y + 12);
+    //this -> cursor.setX(this -> x);
+    //this -> cursor.setY(this -> y + 12);
     for (int i = this -> menuPos, cnt = 0; cnt < int(this -> subElements.size()); i++, cnt++) {
         subElements[i] -> setX(this -> x);
         subElements[i] -> setY(cnt * 12 + 12);
         this -> subElements[i] -> init();
-        //insertAnimation(new Animation(subElements[i], SMOOTH, subElements[i] -> getX(), cnt * 12 + 12, 500));
+        //insertAnimation(new Animation(subElements[i], INDENT, subElements[i] -> getX(), cnt * 12 + 12, 500));
     }
-
-    for (int i = this -> menuPos, cnt = 0; cnt < int(this -> subElements.size()); i++, cnt++) {
-        //subElements[i] -> setX(this -> targetX + 5);
-        insertAnimation(new Animation(subElements[i], SMOOTH, this -> targetX + 5, cnt * 12 + 12, 500));
+    Serial.print("still not dead!");
+    for (int cnt = 0; cnt < int(this -> subElements.size()); cnt++) {
+        insertAnimation(new Animation(subElements[cnt], BOUNCE, this -> getTargetX() + 5, (cnt - this -> menuPos) * 12 + 12, 100));
     }
-
+    Serial.print("stillllll not dead!");
     for (int i = 0; i < this -> linkElements.size(); i++) {
         if (this -> linkElements[i] != nullptr) {
             this -> linkElements[i] -> setParent(this);
         }
     }
-    this -> cursor.changeTarget(subElements[0], 500);
+    Serial.println("srttilfwelkafllfl not deadddddd!");
     //insertAnimation(new Animation(&(this -> scrollBar), SMOOTH, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 500));
 }
 
 void Menu::activate() {
+    insertAnimation(new Animation(this, INDENT, this -> activeX, this -> activeY, 500));
+    if (getSize() == 0) return;
+
     currentElement = this;
+    for (int cnt = 0; cnt < int(this -> subElements.size()); cnt++) {
+        insertAnimation(new Animation(subElements[cnt], BOUNCE, this -> getTargetX() + 5, (cnt - this -> menuPos) * 12 + 12, 100));
+    }
+    this -> cursor.changeTarget(subElements[this -> cursorPos + this -> menuPos], 500);
     Serial.printf("hello!!!\n");
-    //insertAnimation(new Animation(this, SMOOTH, 0, 0, 500));
+    
     Serial.printf("hello again\n");
+
 }
 
 void Menu::deactivate() {
-    //insertAnimation(new Animation(this, SMOOTH, 0, -100, 500));
+
 }
 
 
@@ -73,7 +88,7 @@ void Menu::insertElement(UIElement* targetElement, UIElement* linkElement) {
     
     targetElement -> setX(this -> targetX + 5);
     targetElement -> setY(70);
-    insertAnimation(new Animation(targetElement, SMOOTH, targetElement -> getX(), min(this -> menuSize, int(this -> subElements.size())) * 12 + 12, 100));
+    insertAnimation(new Animation(targetElement, BOUNCE, targetElement -> getX(), min(this -> menuSize, int(this -> subElements.size())) * 12 + 12, 100));
         
     this -> subElements.push_back(targetElement);
     this -> linkElements.push_back(linkElement);
@@ -107,7 +122,7 @@ bool Menu::moveMenuUp() {
     if (this -> menuPos > 0) {
         this -> menuPos--;
         for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize + 1, int(this -> subElements.size())); i++, cnt++) {
-            insertAnimation(new Animation(subElements[i], SMOOTH, subElements[i] -> getX(), cnt * 12 + 12, 100));
+            insertAnimation(new Animation(subElements[i], BOUNCE, subElements[i] -> getX(), cnt * 12 + 12, 100));
         }
         return true;
     }
@@ -119,7 +134,7 @@ bool Menu::moveMenuDown() {
     Serial.println("fgasrgf");
     if (this -> menuPos < int(this -> subElements.size()) - this -> menuSize) {
         for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize + 1, int(this -> subElements.size())); i++, cnt++) {
-            insertAnimation(new Animation(subElements[i], SMOOTH, subElements[i] -> getX(), (cnt - 1) * 12 + 12, 100));
+            insertAnimation(new Animation(subElements[i], BOUNCE, subElements[i] -> getX(), (cnt - 1) * 12 + 12, 100));
         }
         this -> menuPos++;
     }
@@ -132,7 +147,7 @@ void Menu::scrollUp() {
     }
     this -> cursor.changeTarget(subElements[this -> menuPos + this -> cursorPos]);
     //moveCursorUp();
-    insertAnimation(new Animation(&(this -> scrollBar), SMOOTH, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 100));
+    insertAnimation(new Animation(&(this -> scrollBar), LINEAR, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 100));
 }
 
 void Menu::scrollDown() {
@@ -141,7 +156,7 @@ void Menu::scrollDown() {
     }
     this -> cursor.changeTarget(subElements[this -> menuPos + this -> cursorPos]);    
     //moveCursorDown();
-    insertAnimation(new Animation(&(this -> scrollBar), SMOOTH, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 100));
+    insertAnimation(new Animation(&(this -> scrollBar), LINEAR, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 100));
 }
 
 int Menu::getMenuPos() {
@@ -176,15 +191,18 @@ void Menu::clear() {
 }
 
 void Menu::enter() {
-    if (this -> linkElements[this -> menuPos + this -> cursorPos] != nullptr) {
+    if (this -> linkElements[this -> menuPos + this -> cursorPos] != nullptr && this -> linkElements[this -> menuPos + this -> cursorPos] != this) {
+        this -> deactivate();
         this -> linkElements[this -> menuPos + this -> cursorPos] -> init();
         this -> linkElements[this -> menuPos + this -> cursorPos] -> activate();
     }
 }
 
 void Menu::draw() {
-    u8g2.setClipWindow(this -> x, this -> y, this -> width, this -> height);
-    u8g2.drawRFrame(this -> x, this -> y, this -> width, this -> height, 3);
+    //u8g2.setClipWindow(this -> x, this -> y, this -> width, this -> height);
+    int drawX = max(0, this -> x);
+    int drawY = max(0, this -> y);
+    u8g2.drawRFrame(drawX, drawY, this -> width + (this -> x - drawX), this -> height + (this -> y - drawY), 3);
     for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize, int(this -> subElements.size())); i++, cnt++) {
         //Serial.print("Hello");
         //subElements[i] -> setY(cnt * (this -> height / this -> menuSize) + (this -> height / this -> menuSize) / 2);
@@ -212,7 +230,8 @@ void Menu::update() {
             enter();
         }
     }
-    if (kb.getRisingEdgeKey() == std::make_pair(0, 0)) {
+    if (kb.getRisingEdgeKey() == std::make_pair(0, 0) && this -> parentElement != this && this -> parentElement != nullptr) {
+        insertAnimation(new Animation(this, LINEAR, this -> restX, this -> restY, 1000));
         goBack();
     }
     draw();

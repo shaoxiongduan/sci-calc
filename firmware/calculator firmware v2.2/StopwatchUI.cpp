@@ -6,7 +6,7 @@ StopwatchUI::StopwatchUI(int x, int y, int width, int height, Menu* lapMenu) : U
 }
 
 void StopwatchUI::init() {
-
+    this -> lapMenu -> init();
 }
 
 void StopwatchUI::activate() {

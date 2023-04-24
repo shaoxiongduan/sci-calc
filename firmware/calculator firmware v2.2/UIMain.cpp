@@ -60,7 +60,7 @@ Macro layoutgame[5][6] = {
 };
 
 InputBox inputBox(0, 0, 100, 12, 15);
-Menu calcMenu(0, 0, 210, 48, 3);
+Menu calcMenu(0, -70, 0, 0, 210, 48, 3);
 InputBox expressionInput(0, 57, 210, 12, 42);
 Checkbox checkbox1("test");
 Slider slider1("Testval", 0, 100);
@@ -71,7 +71,7 @@ MacroPad calcLayout({
     Layout("2", layoutgame)
 });
 
-Menu menuSpecs(0, 0, 210, 64, 5, {
+Menu menuSpecs(0, -70, 0, 0, 210, 64, 5, {
     new Text("Powered by an ESP32 WROOM-32E"), 
     new Text("Kailh choc switches"), 
     new Text("Designed by SHAO")
@@ -82,7 +82,7 @@ Menu menuSpecs(0, 0, 210, 64, 5, {
     nullptr
 });
 
-Menu menuSettings(0, 0, 210, 64, 5, {
+Menu menuSettings(0, -70, 0, 0, 210, 64, 5, {
     &checkbox1, 
     &slider1, 
     new Text("here.")
@@ -93,7 +93,7 @@ Menu menuSettings(0, 0, 210, 64, 5, {
     nullptr
 });
 
-Menu menuMisc(0, 0, 210, 64, 4, {
+Menu menuMisc(0, -70, 0, 0, 210, 64, 4, {
     &inputBox,
     new Text("THOCC."), 
     new Text("CLACK.")
@@ -107,7 +107,7 @@ Menu menuMisc(0, 0, 210, 64, 4, {
 Calculator calcMain(0, 0, 210, 64, &calcMenu, &expressionInput);
 
 
-Menu programMenu(0, 0, 210, 64, 4, {
+Menu programMenu(0, -70, 0, 0, 210, 64, 4, {
     new Text("Chess"),
     new Text("Spacetrash"),
     new Text("Snake"),
@@ -127,7 +127,7 @@ Menu programMenu(0, 0, 210, 64, 4, {
     
 });
 
-Menu stopwatchMenu(0, 0, 110, 64, 4);
+Menu stopwatchMenu(0, -70, 0, 0, 110, 64, 4);
 
 StopwatchUI stopwatchUI(0, 0, 210, 64, &stopwatchMenu);
 
@@ -135,7 +135,7 @@ ChineseText ch1(1);
 ChineseText ch2(2);
 ChineseText ch3(3);
 
-Menu mainMenu(0, 0, 70, 64, 4, {
+Menu mainMenu(-100, 0, 0, 0, 70, 64, 4, {
     new Text("Calculator"), 
     new Text("Macropad"), 
     new Text("Programs"), 

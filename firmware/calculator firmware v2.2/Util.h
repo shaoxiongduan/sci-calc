@@ -12,6 +12,7 @@
 #include <stack>
 #include <sstream>
 #include <list>
+#include <map>
 
 #include <Update.h>
 #include <FS.h>
@@ -74,8 +75,14 @@ enum Element {
 };
 
 enum AnimationType {
-    SMOOTH, INDENT
+    LINEAR, INDENT, BOUNCE
 };
+
+extern AnimationType menuScroll;
+extern AnimationType menuEntry;
+extern AnimationType cursorScroll;
+extern AnimationType sliderMove;
+
 //void printKeys();
 
 extern BleKeyboard bleKeyboard;

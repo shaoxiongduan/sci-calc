@@ -9,11 +9,11 @@ class Menu : public UIElement {
     public:
         Menu();
 
-        Menu(int x, int y, int width, int height, int menuSize);
+        Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize);
+        Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
         
 
-        Menu(int x, int y, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
-        
+
         void init();
         void activate();
         void deactivate();
@@ -48,6 +48,7 @@ class Menu : public UIElement {
 
     private:
         int cursorPos, menuPos;
+        int restX, restY, activeX, activeY;
         int menuSize;
         Cursor cursor;
         Box scrollBar;

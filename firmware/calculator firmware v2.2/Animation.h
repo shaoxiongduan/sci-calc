@@ -18,6 +18,9 @@ class Animation {
 
         void init();
 
+        UIElement* getTargetElement();
+        int* getTargetVal();
+
         int getCurDuration();
 
         int getTotDuration();
@@ -28,9 +31,12 @@ class Animation {
 
         bool getIsFinished();
 
-        void animateSmooth();
+
+        void animateLinear();
 
         void animateIndent();
+
+        void animateBounce();
 
         void animate();
 

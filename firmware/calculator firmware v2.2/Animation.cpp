@@ -94,6 +94,14 @@ void Animation::init() {
     this -> isStarted = true;
 }
 
+UIElement* Animation::getTargetElement() {
+    return this -> targetUI;
+}
+
+int* Animation::getTargetVal() {
+    return this -> targetVal;
+}
+
 int Animation::getCurDuration() {
     int curTime = millis();
     return curTime - this -> prevTime;
@@ -115,7 +123,7 @@ void Animation::updateTime() {
     this -> prevTime = millis();
 }
 
-void Animation::animateSmooth() {
+void Animation::animateLinear() { //Linear animation
     Serial.println("in animation");
     if (this -> type == 0) {
         if (getCurDuration() > 10 && !this -> isFinished) {
@@ -123,11 +131,12 @@ void Animation::animateSmooth() {
             int curY = this -> targetUI -> getY();
 
             float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            float easingVal = tmp;
 
-            int nxtX = (this -> startX + int(tmp * (this -> endX - this -> startX)));
-            int nxtY = (this -> startY + int(tmp * (this -> endY - this -> startY)));
-            int nxtWidth = (this -> startWidth + int(tmp * (this -> endWidth - this -> startWidth)));
-            int nxtHeight = (this -> startHeight + int(tmp * (this -> endHeight - this -> startHeight)));
+            int nxtX = (this -> startX + int(easingVal * (this -> endX - this -> startX)));
+            int nxtY = (this -> startY + int(easingVal * (this -> endY - this -> startY)));
+            int nxtWidth = (this -> startWidth + int(easingVal * (this -> endWidth - this -> startWidth)));
+            int nxtHeight = (this -> startHeight + int(easingVal * (this -> endHeight - this -> startHeight)));
             
             
             Serial.printf("nxtX, nxtY, nxtWidth, nxtHeight: %d, %d, %d, %d\n", nxtX, nxtY, nxtWidth, nxtHeight);
@@ -153,8 +162,9 @@ void Animation::animateSmooth() {
             int curVal = *(this -> targetVal);
 
             float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            float easingVal = tmp;
 
-            int nxtVal = (this -> startVal + int(tmp * (this -> endVal - this -> startVal)));
+            int nxtVal = (this -> startVal + int(easingVal * (this -> endVal - this -> startVal)));
             *(this -> targetVal) = nxtVal;
             Serial.println(*(this -> targetVal));
             updateTime();
@@ -167,17 +177,19 @@ void Animation::animateSmooth() {
 }
 
 void Animation::animateIndent() {
-    if (this -> type == 0) {
+if (this -> type == 0) {
         if (getCurDuration() > 10 && !this -> isFinished) {
             int curX = this -> targetUI -> getX();
             int curY = this -> targetUI -> getY();
 
             float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            
+            float easingVal = 1 - pow(2, -10 * tmp);
 
-            int nxtX = (this -> startX + int(tmp * (this -> endX - this -> startX)));
-            int nxtY = (this -> startY + int(tmp * (this -> endY - this -> startY)));
-            int nxtWidth = (this -> startWidth + int(tmp * (this -> endWidth - this -> startWidth)));
-            int nxtHeight = (this -> startHeight + int(tmp * (this -> endHeight - this -> startHeight)));
+            int nxtX = (this -> startX + int(easingVal * (this -> endX - this -> startX)));
+            int nxtY = (this -> startY + int(easingVal * (this -> endY - this -> startY)));
+            int nxtWidth = (this -> startWidth + int(easingVal * (this -> endWidth - this -> startWidth)));
+            int nxtHeight = (this -> startHeight + int(easingVal * (this -> endHeight - this -> startHeight)));
             
             this -> targetUI -> setX(nxtX);
             this -> targetUI -> setY(nxtY);
@@ -199,8 +211,59 @@ void Animation::animateIndent() {
             int curVal = *(this -> targetVal);
 
             float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            float easingVal = 1 - pow(2, -10 * tmp);
+            Serial.printf("tmp: %f, easingval: %f\n", tmp, easingVal);
+            
+            int nxtVal = (this -> startVal + int(easingVal * (this -> endVal - this -> startVal)));
+            *(this -> targetVal) = nxtVal;
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            *(this -> targetVal) = this -> endVal;
+            this -> isFinished = true;
+        }
+    }
+}
 
-            int nxtVal = (this -> startVal + int(tmp * (this -> endVal - this -> startVal)));
+void Animation::animateBounce() { // a bouncy easing curve
+    if (this -> type == 0) {
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curX = this -> targetUI -> getX();
+            int curY = this -> targetUI -> getY();
+
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            
+            float easingVal = pow(2, -10 * tmp) * sin((tmp * 10 - 0.75) * (2 * 3.14 / 3)) + 1;
+
+            int nxtX = (this -> startX + int(easingVal * (this -> endX - this -> startX)));
+            int nxtY = (this -> startY + int(easingVal * (this -> endY - this -> startY)));
+            int nxtWidth = (this -> startWidth + int(easingVal * (this -> endWidth - this -> startWidth)));
+            int nxtHeight = (this -> startHeight + int(easingVal * (this -> endHeight - this -> startHeight)));
+            
+            this -> targetUI -> setX(nxtX);
+            this -> targetUI -> setY(nxtY);
+            this -> targetUI -> setWidth(nxtWidth);
+            this -> targetUI -> setHeight(nxtHeight);
+            
+            updateTime();
+        }
+        if (millis() - this -> startTime >= totalTime) {
+            this -> targetUI -> setX(this -> endX);
+            this -> targetUI -> setY(this -> endY);
+            this -> targetUI -> setWidth(endWidth);
+            this -> targetUI -> setHeight(endHeight);
+            this -> isFinished = true;
+        }
+    }
+    else if (this -> type == 1) {
+        if (getCurDuration() > 10 && !this -> isFinished) {
+            int curVal = *(this -> targetVal);
+
+            float tmp = float(int(millis()) - this -> startTime) / float(totalTime);
+            float easingVal = pow(2, -10 * tmp) * sin((tmp * 10 - 0.75) * (2 * 3.14 / 3)) + 1;
+            Serial.printf("tmp: %f, easingval: %f\n", tmp, easingVal);
+            
+            int nxtVal = (this -> startVal + int(easingVal * (this -> endVal - this -> startVal)));
             *(this -> targetVal) = nxtVal;
             updateTime();
         }
@@ -213,35 +276,58 @@ void Animation::animateIndent() {
 
 void Animation::animate() {
     switch (this -> aniType) {
-        case SMOOTH:
-            animateSmooth();
+        case LINEAR:
+            animateLinear();
             break;
         case INDENT:
             animateIndent();
             break;
+        case BOUNCE:
+            animateBounce();
         default:
             break;
     }
 }
 
-std::list <Animation*> animations;
+std::map <UIElement*, Animation*> animationsUI;
+std::map <int*, Animation*> animationsInt;
 
 void insertAnimation(Animation* animation) {
-    animations.push_back(animation);
+    if (animation -> getTargetElement() != nullptr) {
+        animationsUI[animation -> getTargetElement()] = animation;
+    }
+    else {
+        animationsInt[animation -> getTargetVal()] = animation;
+    }
+    
 }
 
 void animateAll() {
-    for (auto animation = animations.begin(); animation != animations.end();) {
-        if (!((*animation) -> getIsFinished())) {
-            if (!((*animation) -> getIsStarted())) {
-                (*animation) -> init();
+    for (auto animation = animationsUI.begin(); animation != animationsUI.end();) {
+        if (!((animation -> second) -> getIsFinished())) {
+            if (!((animation -> second) -> getIsStarted())) {
+                animation -> second -> init();
             }
-            Serial.printf("Animating: will take %d seconds\n", (*animation) -> getTotDuration());
-            (*animation) -> animate();
+            Serial.printf("Animating: will take %d seconds\n", animation -> second -> getTotDuration());
+            animation -> second -> animate();
             ++animation;
         }
         else {
-            animation = animations.erase(animation);
+            animation = animationsUI.erase(animation);
+        }
+    }
+
+    for (auto animation = animationsInt.begin(); animation != animationsInt.end();) {
+        if (!((animation -> second) -> getIsFinished())) {
+            if (!((animation -> second) -> getIsStarted())) {
+                animation -> second -> init();
+            }
+            Serial.printf("Animating: will take %d seconds\n", animation -> second -> getTotDuration());
+            animation -> second -> animate();
+            ++animation;
+        }
+        else {
+            animation = animationsInt.erase(animation);
         }
     }
 }

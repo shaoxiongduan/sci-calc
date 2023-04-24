@@ -67,10 +67,6 @@ class UIElement {
 
         virtual void draw();
 
-        virtual bool drawCondition();
-
-        virtual bool moveCondition();
-
         virtual void goBack();
 
         virtual void update();

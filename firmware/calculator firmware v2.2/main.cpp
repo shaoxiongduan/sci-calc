@@ -56,6 +56,7 @@ void setup() {
     bleKeyboard.begin();
     currentElement -> init();
     u8g2.clearBuffer();
+    currentElement -> activate();
     //pinMode()
 }
 

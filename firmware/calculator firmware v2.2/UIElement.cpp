@@ -129,20 +129,13 @@ void UIElement::draw() {
 
 }
 
-bool UIElement::drawCondition() {
-
-}
-
-bool UIElement::moveCondition() {
-
-}
 
 void UIElement::goBack() {
     Serial.printf("deactivating\n");
     this -> deactivate();
     Serial.printf("deactivated!\n");
     if (this -> parentElement != nullptr) {
-        
+        //this -> parentElement -> init();
         this -> parentElement -> activate();
     }
     Serial.printf("activated parent!\n");

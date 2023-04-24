@@ -34,7 +34,7 @@ void Checkbox::activate() {
 
 void Checkbox::changeState() {
     this -> state = !(this -> state);
-    insertAnimation(new Animation(&(this -> checkboxAni), SMOOTH, (this -> state ? 6 : 0), 100));
+    insertAnimation(new Animation(&(this -> checkboxAni), LINEAR, (this -> state ? 6 : 0), 100));
     if (this -> linkBool == nullptr) return;
     *(this -> linkBool) = (this -> state);
 }
@@ -42,7 +42,7 @@ void Checkbox::changeState() {
 void Checkbox::draw() {
     u8g2.drawStr(this -> x, this -> y, (this -> name.substr(0, min(int(this -> name.size()), this -> width / 5))).c_str());
     u8g2.drawFrame(this -> x + this -> width + 5, this -> y - 6, 10, 10);
-    u8g2.drawBox(this -> x + this -> width + 5 + (10 - this -> checkboxAni) / 2, this -> y + (10 - this -> checkboxAni) / 2 - 6, this -> checkboxAni, this -> checkboxAni);
+    u8g2.drawBox(this -> x + this -> width + 5 + (9 - this -> checkboxAni) / 2 + 1, this -> y + (9 - this -> checkboxAni) / 2 - 6 + 1, this -> checkboxAni, this -> checkboxAni);
 }
 
 void Checkbox::update() {

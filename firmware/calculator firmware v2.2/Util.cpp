@@ -17,6 +17,11 @@ char keys[ROWCNT][COLCNT] = {
     {'0', '.', 'f', 'd', 'i', 'j'}
 };
 
+AnimationType menuScroll = BOUNCE;
+AnimationType cursorScroll = LINEAR;
+AnimationType menuEntry = BOUNCE;
+AnimationType sliderMove = BOUNCE;
+
 //BleKeyboard bleKeyboard("SCI-CALC", "SHAP", 100);
 
 

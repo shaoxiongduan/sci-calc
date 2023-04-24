@@ -9,7 +9,8 @@ Calculator::Calculator(int x, int y, int width, int height, Menu* calcMenu, Inpu
     this -> mode = 0;
 }
 void Calculator::init() {
-
+    this -> calcMenu -> init();
+    this -> calcMenu -> activate();
 }
 
 void Calculator::activate() {

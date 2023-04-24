@@ -12,7 +12,7 @@ ProgressBar::ProgressBar(int x, int y, int totalLen, int curLen) : UIElement(x, 
 
 void ProgressBar::setLen(int curLen) {
     Serial.println("testtt");
-    insertAnimation(new Animation(&(this -> curLen), SMOOTH, curLen, 100));
+    insertAnimation(new Animation(&(this -> curLen), BOUNCE, curLen, 1000));
 }
 
 int ProgressBar::getTotalLen() {
