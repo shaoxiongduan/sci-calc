@@ -20,6 +20,13 @@ class UIElement {
 
         UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements);
 
+        UIElement(int x, int y, bool drawParent);
+
+        UIElement(int x, int y, int width, int height, bool drawParent);
+
+        UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements, bool drawParents);
+
+
         virtual void init();
 
         virtual void activate();
@@ -76,6 +83,7 @@ class UIElement {
         int width, height, targetWidth, targetHeight;
         std::vector <UIElement*> subElements;
         UIElement* parentElement;
+        bool drawParent;
 };
 
 extern UIElement* currentElement;

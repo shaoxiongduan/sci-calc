@@ -29,9 +29,15 @@ void Cursor::changeTarget(UIElement* target, int time) {
     insertAnimation(new Animation(this, INDENT, this -> target -> getTargetX(), this -> target -> getTargetY(), this -> target -> getTargetWidth(), this -> target -> getTargetHeight(), time));
 }
 
+void Cursor::changeTarget(UIElement* target, int time, int delayTime) {
+    this -> target = target;
+    insertAnimation(new Animation(this, INDENT, this -> target -> getTargetX(), this -> target -> getTargetY(), this -> target -> getTargetWidth(), this -> target -> getTargetHeight(), time, delayTime));
+}
+
 void Cursor::changeTarget(int x, int y, int width, int height, int time) {
     insertAnimation(new Animation(this, INDENT, x, y, width, height, time));
 }
+
 
 void Cursor::draw() {
     if (mode) {

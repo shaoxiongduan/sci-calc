@@ -6,6 +6,7 @@ UIElement::UIElement() {
     this -> width = this -> targetWidth = 0;
     this -> height = this -> targetHeight = 0;
     this -> parentElement = nullptr;
+    this -> drawParent = false;
 }
 
 UIElement::UIElement(int x, int y) {
@@ -14,6 +15,7 @@ UIElement::UIElement(int x, int y) {
     this -> width = this -> targetWidth = 0;
     this -> height = this -> targetHeight = 0;
     this -> parentElement = nullptr;
+    this -> drawParent = false;
 }
 
 UIElement::UIElement(int x, int y, int width, int height) {
@@ -22,6 +24,7 @@ UIElement::UIElement(int x, int y, int width, int height) {
     this -> width = this -> targetWidth = width;
     this -> height = this -> targetHeight = height;
     this -> parentElement = nullptr;
+    this -> drawParent = false;
 }
 
 UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements) {
@@ -31,6 +34,35 @@ UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement
     this -> height = this -> targetHeight = height;
     this -> subElements = subElements;
     this -> parentElement = nullptr;
+    this -> drawParent = false;
+}
+
+UIElement::UIElement(int x, int y, bool drawParent) {
+    this -> x = this -> targetX = x;
+    this -> y = this -> targetY = y;
+    this -> width = this -> targetWidth = 0;
+    this -> height = this -> targetHeight = 0;
+    this -> parentElement = nullptr;
+    this -> drawParent = drawParent;
+}
+
+UIElement::UIElement(int x, int y, int width, int height, bool drawParent) {
+    this -> x = this -> targetX = x;
+    this -> y = this -> targetY = y;
+    this -> width = this -> targetWidth = width;
+    this -> height = this -> targetHeight = height;
+    this -> parentElement = nullptr;
+    this -> drawParent = drawParent;
+}
+
+UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements, bool drawParent) {
+    this -> x = this -> targetX = x;
+    this -> y = this -> targetY = y;
+    this -> width = this -> targetWidth = width;
+    this -> height = this -> targetHeight = height;
+    this -> subElements = subElements;
+    this -> parentElement = nullptr;
+    this -> drawParent = drawParent;
 }
 
 void UIElement::init() {
@@ -130,7 +162,7 @@ void UIElement::draw() {
 }
 
 
-void UIElement::goBack() {
+void UIElement:: goBack() {
     Serial.printf("deactivating\n");
     this -> deactivate();
     Serial.printf("deactivated!\n");

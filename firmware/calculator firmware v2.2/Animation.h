@@ -6,17 +6,19 @@
 
 class Animation {
     public:
-        //Animation(UIElement* targetUI, AnimationType aniType, int startX, int startY, int endX, int endY, int totalTime);
-        
-        Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int totalTime);
 
-        //Animation(UIElement* targetUI, AnimationType aniType, int startX, int startY, int endX, int endY, int startWidth, int startHeight, int endWidth, int endHeight, int totalTime);
-        
+        Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int totalTime);
         Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int endWidth, int endHeight, int totalTime);
-        
         Animation(int* targetVal, AnimationType aniType, int endVal, int totalTime);
 
+        Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int totalTime, int delayTime);
+        Animation(UIElement* targetUI, AnimationType aniType, int endX, int endY, int endWidth, int endHeight, int totalTime, int delayTime);
+        Animation(int* targetVal, AnimationType aniType, int endVal, int totalTime, int delayTime);
+
+
         void init();
+
+        void initAni();
 
         UIElement* getTargetElement();
         int* getTargetVal();
@@ -29,12 +31,17 @@ class Animation {
         
         bool getIsStarted();
 
+        bool getIsAnimating();
+
+        bool checkTime();
+
         bool getIsFinished();
 
 
         void animateLinear();
 
         void animateIndent();
+        void animateIndentInv();
 
         void animateBounce();
 
@@ -50,13 +57,21 @@ class Animation {
         AnimationType aniType;
         int prevTime;
         int startTime;
+        int createTime;
         int totalTime;
-        bool isStarted, isFinished;
+        int delayTime;
+        bool isStarted, isFinished, isAnimating;
 };
 
-extern std::list <Animation*> animations;
+extern std::map <UIElement*, Animation*> animationsUI;
+extern std::map <int*, Animation*> animationsInt;
+extern std::list <UIElement*> tmpAnimationUI;
+
 
 void insertAnimation(Animation* animation);
+void insertTmpAnimationPointer(int* tmpInt);
+void insertTmpAnimationPointer(UIElement* tmpUI);
 void animateAll();
+void updateTmp();
 
 #endif

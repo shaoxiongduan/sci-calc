@@ -62,16 +62,19 @@ void setup() {
 
 void loop() { 
     //Serial.flush();
+    animateAll();
     u8g2.clearBuffer();
     kb.update();
     drawSidebar();
     //kb.printKeys();
     //macroPad.update();
     currentElement -> update();
+    updateTmp();
     //Serial.println("hello");
-    displayTime();
+    //displayTime();
     u8g2.sendBuffer();
-    animateAll();
+    
+    
     //delay(100);
     //u8g2.drawBox(30, 40, 10, 10);
 }

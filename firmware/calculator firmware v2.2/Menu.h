@@ -12,11 +12,15 @@ class Menu : public UIElement {
         Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize);
         Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
         
+    
 
 
         void init();
         void activate();
         void deactivate();
+
+        void aniIn();
+        void aniOut();
 
         void insertElement(UIElement* targetElement, UIElement* linkElement);
 

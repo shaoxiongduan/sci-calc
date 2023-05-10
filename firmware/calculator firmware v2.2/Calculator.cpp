@@ -18,6 +18,7 @@ void Calculator::activate() {
     Serial.printf("hello!!!\n");
     //insertAnimation(new Animation(this, SMOOTH, 0, 0, 500));
     Serial.printf("hello again\n");
+    insertAnimation(new Animation(this -> expressionInput, INDENT, 0, 57, 500));
 }
 
 void Calculator::insertExpression() {
@@ -100,6 +101,18 @@ void Calculator::update() {
     }
     else if (str == "ESC") {
         Serial.println("goback");
+        this -> calcMenu -> aniOut();
+        insertAnimation(new Animation(this -> expressionInput, INDENTINV, 0, 64, 500));
+        insertTmpAnimationPointer(this -> expressionInput);
+        Serial.println("goback2");
+        while (!tmpAnimationUI.empty()) {
+            u8g2.clearBuffer();
+            currentElement -> draw();
+            updateTmp();
+            u8g2.sendBuffer();
+            animateAll();
+        }
+        
         goBack();
     }
     else if (str == "MODE SWITCH") {

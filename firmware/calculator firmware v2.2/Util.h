@@ -39,6 +39,8 @@ extern bool sample;
 const int MAXOP = 25;
 const int MAXANI = 100;
 const long double EPSILON = 1e-8;
+const int WIDTH = 256;
+const int HEIGHT = 64;
 const int MAXNODES = 1000;
 
 const uint16_t KEY_LAYER_SWITCH = 0xFC;
@@ -75,7 +77,7 @@ enum Element {
 };
 
 enum AnimationType {
-    LINEAR, INDENT, BOUNCE
+    LINEAR, INDENT, INDENTINV, BOUNCE
 };
 
 extern AnimationType menuScroll;

@@ -16,7 +16,7 @@ class Cursor : public UIElement {
         void changeTarget(UIElement* target);
 
         void changeTarget(UIElement* target, int time);
-
+        void changeTarget(UIElement* target, int time, int delayTime);
         void changeTarget(int x, int y, int width, int height, int time);
 
 

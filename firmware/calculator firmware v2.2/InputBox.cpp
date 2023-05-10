@@ -32,6 +32,7 @@ InputBox::InputBox(int x, int y, int width, int height, int maxChar) : UIElement
 
 void InputBox::init() {
     this -> cursor.setMode(1);
+    this -> cursor.changeTarget(this -> targetX + 1, this -> cursor.getY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 500);
 }
 
 int InputBox::getStrPos() {
@@ -124,8 +125,8 @@ void InputBox::clearStr() {
     this -> cursorPos = 0;
     this -> cursor.setX(this -> x + 1);
     this -> cursor.setY(this -> y);
-    this -> cursor.setTargetX(this -> x + 1);
-    this -> cursor.setTargetY(this -> y);
+    this -> cursor.setTargetX(this -> targetX + 1);
+    this -> cursor.setTargetY(this -> targetY);
     this -> cursor.setWidth(5);
     this -> cursor.setHeight(12);
     this -> cursor.changeTarget(this -> cursor.getTargetX(), this -> cursor.getTargetY(), this -> cursor.getWidth(), this -> cursor.getHeight(), 100);
@@ -145,7 +146,7 @@ void InputBox::draw() {
 
 
 void InputBox::update() {
-    Serial.printf("this cursor: %d, %d\n", this -> cursor.getTargetX(), this -> cursor.getTargetY());
+    //Serial.printf("this cursor: %d, %d\n", this -> cursor.getTargetX(), this -> cursor.getTargetY());
     //Serial.printf("cursorPos: %d, strPos: %d/n", this -> cursorPos, this -> strPos);
     //Serial.printf("key: [%d][%d]\n", kb.getRisingEdgeKey().first, kb.getRisingEdgeKey().second);
     draw();
