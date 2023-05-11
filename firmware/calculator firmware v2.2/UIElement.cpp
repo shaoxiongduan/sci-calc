@@ -7,6 +7,7 @@ UIElement::UIElement() {
     this -> height = this -> targetHeight = 0;
     this -> parentElement = nullptr;
     this -> drawParent = false;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y) {
@@ -16,6 +17,7 @@ UIElement::UIElement(int x, int y) {
     this -> height = this -> targetHeight = 0;
     this -> parentElement = nullptr;
     this -> drawParent = false;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y, int width, int height) {
@@ -25,6 +27,7 @@ UIElement::UIElement(int x, int y, int width, int height) {
     this -> height = this -> targetHeight = height;
     this -> parentElement = nullptr;
     this -> drawParent = false;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements) {
@@ -35,6 +38,7 @@ UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement
     this -> subElements = subElements;
     this -> parentElement = nullptr;
     this -> drawParent = false;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y, bool drawParent) {
@@ -44,6 +48,7 @@ UIElement::UIElement(int x, int y, bool drawParent) {
     this -> height = this -> targetHeight = 0;
     this -> parentElement = nullptr;
     this -> drawParent = drawParent;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y, int width, int height, bool drawParent) {
@@ -53,6 +58,7 @@ UIElement::UIElement(int x, int y, int width, int height, bool drawParent) {
     this -> height = this -> targetHeight = height;
     this -> parentElement = nullptr;
     this -> drawParent = drawParent;
+    this -> doTransition = true;
 }
 
 UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement*> subElements, bool drawParent) {
@@ -63,6 +69,7 @@ UIElement::UIElement(int x, int y, int width, int height, std::vector <UIElement
     this -> subElements = subElements;
     this -> parentElement = nullptr;
     this -> drawParent = drawParent;
+    this -> doTransition = true;
 }
 
 void UIElement::init() {
@@ -111,6 +118,14 @@ int UIElement::getWidth() {
 
 int UIElement::getHeight() {
     return this -> height;
+}
+
+bool UIElement::getDrawParent() {
+    return this -> drawParent;
+}
+
+bool UIElement::isTransition() {
+    return this -> doTransition;
 }
 
 int UIElement::getTargetWidth() {

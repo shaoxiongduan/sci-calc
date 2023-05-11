@@ -50,6 +50,10 @@ class UIElement {
 
         int getHeight();
 
+        bool getDrawParent();
+
+        bool isTransition();
+
         int getTargetWidth();
 
         int getTargetHeight();
@@ -83,7 +87,7 @@ class UIElement {
         int width, height, targetWidth, targetHeight;
         std::vector <UIElement*> subElements;
         UIElement* parentElement;
-        bool drawParent;
+        bool drawParent, doTransition;
 };
 
 extern UIElement* currentElement;

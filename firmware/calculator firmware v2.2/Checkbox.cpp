@@ -5,6 +5,7 @@ Checkbox::Checkbox(std::string name) {
     this -> state = false;
     this -> linkBool = nullptr;
     this -> checkboxAni = 0;
+    this -> doTransition = false;
 }
 
 Checkbox::Checkbox(std::string name, bool* linkBool) {
@@ -12,6 +13,7 @@ Checkbox::Checkbox(std::string name, bool* linkBool) {
     this -> state = false;
     this -> linkBool = linkBool;
     this -> checkboxAni = 0;
+    this -> doTransition = false;
 }
 
 Checkbox::Checkbox(std::string name, int x, int y, bool* linkBool) {
@@ -21,6 +23,7 @@ Checkbox::Checkbox(std::string name, int x, int y, bool* linkBool) {
     this -> state = false;
     this -> linkBool = linkBool;
     this -> checkboxAni = 0;
+    this -> doTransition = false;
 }
 
 void Checkbox::init() {

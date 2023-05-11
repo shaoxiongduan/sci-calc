@@ -7,6 +7,7 @@ StopwatchUI::StopwatchUI(int x, int y, int width, int height, Menu* lapMenu) : U
 
 void StopwatchUI::init() {
     this -> lapMenu -> init();
+    this -> lapMenu -> activate();
 }
 
 void StopwatchUI::activate() {
@@ -60,6 +61,15 @@ void StopwatchUI::update() {
         }
     }
     if (kb.getRisingEdgeKey() == std::make_pair(0, 0)) {
+        this -> lapMenu -> aniOut();
+        Serial.println("goback2");
+        while (!tmpAnimationUI.empty()) {
+            u8g2.clearBuffer();
+            currentElement -> draw();
+            updateTmp();
+            u8g2.sendBuffer();
+            animateAll();
+        }
         goBack();
     }
 }
