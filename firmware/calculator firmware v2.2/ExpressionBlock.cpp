@@ -8,6 +8,7 @@ ExpressionBlock::ExpressionBlock(int x, int y, int width, int height, Expression
     this -> ans.setText(numToStr(tmp));
     this -> ans.init();
     this -> rawRes = std::to_string(tmp);
+    this -> doTransition = false;
 }
 
 void ExpressionBlock::activate() {

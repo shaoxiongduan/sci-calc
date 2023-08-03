@@ -21,7 +21,7 @@ void Macro::writeMacro() {
             Serial.println(key);
             bleKeyboard.press(key);
         }
-        //bleKeyboard.releaseAll();
+        bleKeyboard.releaseAll();
     }
 }
 
@@ -84,27 +84,29 @@ void MacroPad::update() {
                 //Serial.printf("%d, %d\n", i, j);
                 if (kb.getKey(j, i).getIsPressed()) {
                     u8g2.setDrawColor(0);
-                    u8g2.drawStr((i - 4) * 36, j * 12 + 12, this -> layouts[this -> curLayout].getMacro(j, i).getMacroString().c_str());
+                    u8g2.setFontMode(0);
+                    u8g2.drawStr((i - 4) * 36 + 4, j * 12 + 10, this -> layouts[this -> curLayout].getMacro(j, i).getMacroString().c_str());
                     u8g2.setDrawColor(1);
+                    u8g2.setFontMode(1);
                 }
                 else {
-                    u8g2.drawStr((i - 4) * 36, j * 12 + 12, this -> layouts[this -> curLayout].getMacro(j, i).getMacroString().c_str());
+                    u8g2.drawStr((i - 4) * 36 + 4, j * 12 + 10, this -> layouts[this -> curLayout].getMacro(j, i).getMacroString().c_str());
                 }
             }
         }
-        u8g2.drawLine(70, 8, 70, 64);
+        u8g2.drawLine(70, 4, 70, 60);
         if (!bleKeyboard.isConnected()) {
-            u8g2.drawStr(80, 12, "Bluetooth: not connected.");
+            u8g2.drawStr(77, 9, "Bluetooth: not connected.");
             return;
         }
-        u8g2.drawStr(80, 12, "Bluetooth: connected!");
-        u8g2.drawStr(80, 24, ("Current Layer: " + this -> layouts[this -> curLayout].getName()).c_str());
+        u8g2.drawStr(77, 9, "Bluetooth: connected!");
+        u8g2.drawStr(77, 21, ("Current Layer: " + this -> layouts[this -> curLayout].getName()).c_str());
 
         if (!(curPos.first == -1 || curPos.second == -1)) {
             this -> curPressed = std::make_pair(curPos.first, curPos.second);
             
-            u8g2.drawStr(80, 36, "Key");
-            u8g2.drawStr(100, 36, (this -> layouts[this -> curLayout].getName() + "pressed.").c_str());
+            u8g2.drawStr(77, 33, "Key");
+            u8g2.drawStr(97, 33, (this -> layouts[this -> curLayout].getName() + "pressed.").c_str());
             //Serial.printf("Key [%d][%d] from layout %s pressed.\n", curPressed.first, curPressed.second, this -> layouts[this -> curLayout].getName().c_str());
             if (this -> layouts[this -> curLayout].getMacro(this -> curPressed.first, this -> curPressed.second).getMacroString() == "LAYER SWITCH") {
                 if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt() == 1) {
@@ -126,22 +128,22 @@ void MacroPad::update() {
                 }
             }
             else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == RISING_EDGE) {
-                    this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
+                this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
             }
             else if (kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatus() == FALLING_EDGE) {
-                    this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
+                //this -> layouts[this -> curLayout].getMacro(curPressed.first, curPressed.second).writeMacro();
             }
         }
         if (curPos.first == -1 && curPos.second == -1) {
             if (this -> curIsHeld()) {
-                u8g2.drawStr(80, 36, "Key");
-                u8g2.drawStr(100, 36, ("[" + std::to_string(this -> curPressed.first) + "]" + "[" + std::to_string(this -> curPressed.second) + "]: " + this -> layouts[this -> curLayout].getMacro(this -> curPressed.first, this -> curPressed.second).getMacroString() + " held for " + std::to_string(int(kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatusTime())) + "ms.").c_str());
-                u8g2.drawStr(100, 48, ("Click cnt: " + std::to_string(kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt()) + ".").c_str());
-                
+                u8g2.drawStr(77, 33, "Key");
+                u8g2.drawStr(97, 33, ("[" + std::to_string(this -> curPressed.first) + "]" + "[" + std::to_string(this -> curPressed.second) + "]: " + this -> layouts[this -> curLayout].getMacro(this -> curPressed.first, this -> curPressed.second).getMacroString() + " pressed").c_str());
+                u8g2.drawStr(162, 45, ("Clicks: " + std::to_string(kb.getKey(this -> curPressed.first, this -> curPressed.second).getClickCnt()) + ".").c_str());
+                u8g2.drawStr(77, 45, ("held for: " + std::to_string(int(kb.getKey(this -> curPressed.first, this -> curPressed.second).getStatusTime())) + "ms.").c_str());
                 Serial.printf("Key [%d][%d] from layout %s held.\n", curPressed.first, curPressed.second, this -> layouts[this -> curLayout].getName().c_str());
             }
             else {
-                u8g2.drawStr(80, 36, "No keys pressed.");
+                u8g2.drawStr(77, 33, "No keys pressed.");
             }
             //Serial.println("No key pressed.");
         }
@@ -192,13 +194,13 @@ std::string MacroPad::updateString() {
 }
 
 void MacroPad::draw() {
-    u8g2.drawRFrame(223, 0, 33, 64, 2);
-    u8g2.drawStr(225, 12, ("Cur:" + this -> layouts[this -> curLayout].getName()).c_str());
+    u8g2.drawRFrame(223, 0, 33, 64, 3);
+    u8g2.drawStr(225, 9, ("Cur:" + this -> layouts[this -> curLayout].getName()).c_str());
     std::string str = updateString();
     //Serial.println(str.c_str());
     if (kb.getKey(4, 0).getIsPressed()) {
         u8g2.setDrawColor(0);
-        u8g2.drawStr(225, 24, "SL");
+        u8g2.drawStr(225, 21, "SL");
         u8g2.setDrawColor(1);
     }
 

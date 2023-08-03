@@ -16,12 +16,14 @@
 BleKeyboard bleKeyboard("SCI-CALC", "SHAP", 100);
 
 
+
 void init() {
     u8g2.begin();
     u8g2.setFontMode(0);
     Serial.begin(115200);
     u8g2.setFont(u8g2_font_profont10_mf);
     u8g2.setFontPosCenter();
+    u8g2.setFontMode(1);
     u8g2.enableUTF8Print();
     //u8g2.drawBox(30, 40, 10, 10);
     //Serial.print("hello00"); 
@@ -43,6 +45,8 @@ void init() {
       rebootEspWithReason("No SD_MMC card attached");
    }
    pinMode(36, INPUT);
+
+   initFromFile();
 }
 
 

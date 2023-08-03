@@ -141,6 +141,7 @@ std::string InputBox::enter() {
 void InputBox::draw() {
     u8g2.drawStr(this -> x + 1, this -> y, (this -> str.substr(this -> strPos, min(this -> maxChar, int(this -> str.size()) - this -> strPos))).c_str());
     u8g2.drawRFrame(this -> x, this -> y - 6, this -> width, this -> height, 1);
+    this -> cursor.setY(this -> y);
 }
 
 

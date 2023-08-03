@@ -12,7 +12,7 @@ void StopwatchUI::init() {
 
 void StopwatchUI::activate() {
     currentElement = this;
-    init();
+    //init();
 }
 
 void StopwatchUI::draw() {

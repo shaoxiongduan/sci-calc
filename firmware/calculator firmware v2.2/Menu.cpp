@@ -153,7 +153,7 @@ bool Menu::moveMenuUp() {
 }
 
 bool Menu::moveMenuDown() {
-    Serial.println("fgasrgf");
+    //Serial.println("fgasrgf");
     if (this -> menuPos < int(this -> subElements.size()) - this -> menuSize) {
         for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize + 1, int(this -> subElements.size())); i++, cnt++) {
             insertAnimation(new Animation(subElements[i], BOUNCE, subElements[i] -> getX(), (cnt - 1) * 12 + 12, 100));
@@ -217,8 +217,11 @@ void Menu::enter() {
         
         if (this -> linkElements[this -> menuPos + this -> cursorPos] -> isTransition()) {
             aniOut();
+            
             while (!tmpAnimationUI.empty()) {
-                u8g2.clearBuffer();
+                u8g2.setDrawColor(0);
+                u8g2.drawBox(0, 0, 210, 64);
+                u8g2.setDrawColor(1);
                 Serial.println("fdidfiongernooie");
                 //kb.update();
                 //drawSidebar();
@@ -246,7 +249,6 @@ void Menu::draw() {
     //u8g2.setClipWindow(this -> x, this -> y, this -> width, this -> height);
     int drawX = constrain(this -> x, 0, WIDTH);
     int drawY = constrain(this -> y, 0, HEIGHT);
-    Serial.println(this -> y);
     u8g2.drawRFrame(drawX, drawY, constrain(this -> width + (this -> x - drawX), 0, WIDTH), constrain(this -> height + (this -> y - drawY), 0, HEIGHT), 3);
     for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize, int(this -> subElements.size())); i++, cnt++) {
         //Serial.print("Hello");
@@ -280,8 +282,11 @@ void Menu::update() {
 
         while (!tmpAnimationUI.empty()) {
             this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
-            u8g2.clearBuffer();
+            u8g2.setDrawColor(0);
+            u8g2.drawBox(0, 0, 210, 64);
+            u8g2.setDrawColor(1);
             currentElement -> draw();
+            drawSidebar();
             updateTmp();
             u8g2.sendBuffer();
             animateAll();

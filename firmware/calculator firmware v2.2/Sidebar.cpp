@@ -9,5 +9,5 @@ void drawSidebar() {
         batterylevel = numToStr(analogRead(36) / 4095.0 * 2 * 3.3).substr(0, 3);
         curtime = millis();
     }
-    u8g2.drawStr(215, 12, ("bat:" + batterylevel + "V").c_str());
+    u8g2.drawStr(215, 10, ("bat:" + batterylevel + "V").c_str());
 }

@@ -41,10 +41,17 @@ void Cursor::changeTarget(int x, int y, int width, int height, int time) {
 
 void Cursor::draw() {
     if (mode) {
-        u8g2.drawLine(this -> x - 1, this -> y - 1 - 6, this -> x - 1, this -> y - 1 - 6 + this -> height + 2);
+        u8g2.drawLine(this -> x - 1, this -> y - 6 + 1, this -> x - 1, this -> y - 6 + this -> height - 3);
     }
     else {
-        u8g2.drawRFrame(this -> x - 1, this -> y - 1 - 6, this -> width + 2, this -> height + 2, 2);
+        if (cursorMode == false) {
+            u8g2.drawRFrame(this -> x - 1, this -> y - 1 - 6, this -> width + 2, this -> height + 2, 2);
+        }
+        else {
+            u8g2.setDrawColor(2);
+            u8g2.drawRBox(this -> x - 1, this -> y - 1 - 6, this -> width + 2, this -> height + 2, 0);
+            u8g2.setDrawColor(1);
+        }
     }
 }
 

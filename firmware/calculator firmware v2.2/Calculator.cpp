@@ -33,14 +33,19 @@ void Calculator::enter() {
         curtimesyntax = millis();
     }
     if (state) {
-        if (millis() - curtimesyntax > 1000) {
+        if (millis() - curtimesyntax > 200) {
             state = false;
         }
-        u8g2.setDrawColor(0);
-        u8g2.drawStr(215, 48, "INVALID");
-        u8g2.drawStr(215, 60, "SYNTAX!");
-        u8g2.setDrawColor(1);
-        return;
+        else {
+            draw();
+            //u8g2.setDrawColor(0);
+            u8g2.drawRFrame(70, 17, 76, 12, 2);
+            u8g2.drawStr(73, 24, "INVALID SYNTAX");
+            u8g2.sendBuffer();
+            delay(400);
+            //u8g2.setDrawColor(1);
+            return;
+        }
     }
     UIElement* ptr = new ExpressionBlock(0, 0, 196, 12, Expression(this -> expressionInput -> getStr()));
     this -> calcMenu -> insertElement(ptr, ptr);
@@ -65,7 +70,7 @@ void Calculator::draw() {
     u8g2.drawStr(215, 24, ("Cur:" + calcLayout.getLayout().getName()).c_str());
     std::string str = calcLayout.updateString();
     //Serial.println(str.c_str());
-    u8g2.setDrawColor(0);
+    //u8g2.setDrawColor(0);
     if (kb.getKey(4, 0).getIsPressed()) {
         u8g2.drawStr(215, 36, "SL");
 
@@ -106,8 +111,11 @@ void Calculator::update() {
         insertTmpAnimationPointer(this -> expressionInput);
         Serial.println("goback2");
         while (!tmpAnimationUI.empty()) {
-            u8g2.clearBuffer();
+            u8g2.setDrawColor(0);
+            u8g2.drawBox(0, 0, 210, 64);
+            u8g2.setDrawColor(1);
             currentElement -> draw();
+            
             updateTmp();
             u8g2.sendBuffer();
             animateAll();

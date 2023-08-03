@@ -9,11 +9,11 @@ ESP32Time rtc(8 * 3600);
 
 
 Macro layout1[5][6] = {
-    {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_GUI, 'a'}, "CMD+A"), Macro({KEY_LEFT_GUI, 'r'}, "CMD+R")},
     {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
+    {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, 'c'}, "C_PATH"), Macro({KEY_LEFT_GUI, 'r'}, "CMD+R")},
     {Macro({'4'}),              Macro({'5'}), Macro({'6'}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
     {Macro({'1'}),              Macro({'2'}), Macro({'3'}), Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'h'}, "HIDE"),  Macro({KEY_LEFT_GUI, 'n'}, "NEW")},
-    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({KEY_AUTOCLICK}),                        Macro({'8'})}
+    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({KEY_F12}, "G_DEC"),                        Macro()}
 };
 
 Macro layout2[5][6] = {
@@ -21,21 +21,29 @@ Macro layout2[5][6] = {
     {Macro({'7'}),              Macro({KEY_UP_ARROW}),   Macro({'9'}),             Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
     {Macro({KEY_LEFT_ARROW}),   Macro({'5'}),            Macro({KEY_RIGHT_ARROW}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
     {Macro({'1'}),              Macro({KEY_DOWN_ARROW}), Macro({'3'}),             Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'h'}, "HIDE"),  Macro({KEY_LEFT_GUI, 'n'}, "NEW")},
-    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}),            Macro({'.'}),             Macro({KEY_BACKSPACE}), Macro({'8'}),                        Macro({'8'})}
+    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}),            Macro({'.'}),             Macro({KEY_BACKSPACE}), Macro(),                        Macro()}
 };
 
-Macro layout4[5][6] = {
-    {Macro({'q'}),          Macro({'w'}),            Macro({'e'}),             Macro({'r'}),           Macro({KEY_LEFT_GUI, 'a'}, "CMD+A"), Macro({KEY_LEFT_GUI, 'r'}, "CMD+R")},
-    {Macro({'a'}),              Macro({'s'}),   Macro({'d'}),             Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
+Macro photoshopLayer[5][6] = {
+    {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_GUI, 'a'}, "CMD+A"), Macro({KEY_LEFT_GUI, 'z'}, "UNDO")},
+    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
     {Macro({KEY_LEFT_ARROW}),   Macro({'5'}),            Macro({KEY_RIGHT_ARROW}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
-    {Macro({'1'}),              Macro({KEY_DOWN_ARROW}), Macro({'3'}),             Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'h'}, "HIDE"),  Macro({KEY_LEFT_GUI, 'n'}, "NEW")},
-    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}),            Macro({'.'}),             Macro({KEY_BACKSPACE}), Macro({'8'}),                        Macro({'8'})}
+    {Macro({'1'}),              Macro({KEY_DOWN_ARROW}), Macro({'3'}),             Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 't'}, "F_TRAN"),  Macro({KEY_LEFT_GUI, 'd'}, "DSEL")},
+    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}),            Macro({'.'}),             Macro({KEY_BACKSPACE}), Macro({'['}, "DEC_B"),                        Macro({']'}, "INC_B")}
+};
+Macro filmoraLayer[5][6] = {
+    {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),          Macro({KEY_LEFT_GUI, 'a'}, "CMD+A"), Macro({KEY_LEFT_GUI, 'z'}, "UNDO")},
+    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
+    {Macro({KEY_LEFT_ARROW}),   Macro({'5'}),            Macro({KEY_RIGHT_ARROW}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
+    {Macro({'1'}),              Macro({KEY_DOWN_ARROW}), Macro({'3'}),             Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'b'}, "SPLIT"),  Macro({KEY_LEFT_GUI, 'i'}, "IMPORT")},
+    {Macro({KEY_LAYER_SWITCH}), Macro({'0'}),            Macro({'.'}),             Macro({KEY_BACKSPACE}), Macro({KEY_LEFT_GUI, 'r'}, "SPEED"),                        Macro({'x'}, "SEL")}
 };
 
 MacroPad macroPad({ 
     Layout("standard", layout1),
     Layout("layout 2", layout2),
-    Layout("minecraft", layout4)
+    Layout("photoshop", photoshopLayer),
+    Layout("editing", filmoraLayer)
 });
 
 MacropadUI macropadUI(&macroPad);
@@ -61,9 +69,9 @@ Macro layoutgame[5][6] = {
 
 InputBox inputBox(0, 0, 100, 12, 15);
 Menu calcMenu(0, -70, 0, 0, 210, 48, 3);
-InputBox expressionInput(0, 57, 210, 12, 42);
-Checkbox checkbox1("test");
-Slider slider1("Testval", 0, 100);
+InputBox expressionInput(0, 64, 210, 12, 42);
+Checkbox checkbox1("soild fill cursor", &cursorMode);
+Slider slider1("Testval", 0, 100); 
 
 
 MacroPad calcLayout({

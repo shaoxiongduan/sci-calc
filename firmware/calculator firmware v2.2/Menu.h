@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "Cursor.h"
 #include "Box.h"
+#include "Sidebar.h"
 
 class Menu : public UIElement {
     public:

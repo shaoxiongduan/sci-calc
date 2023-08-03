@@ -95,6 +95,9 @@ enum Token {
     ADD, SUB, MUL, DIV, POW, SQRT, LN, EXP, SIN, COS, TAN, SEC, CSC, COT, ASIN, ACOS, ATAN, LPARA, RPARA, EQUALS, NEGATIVE, NUM, VAR
 };
 
+//settings
+extern bool cursorMode;
+
 extern bool angleMode;
 extern std::string tokenStr[MAXOP];
 
@@ -110,4 +113,6 @@ void performUpdate(Stream &updateSource, size_t updateSize);
 void updateFromFS(fs::FS &fs, std::string);
 void rebootEspWithReason(std::string reason);
 bool checkSyntax(std::string str);
+
+void initFromFile();
 #endif
