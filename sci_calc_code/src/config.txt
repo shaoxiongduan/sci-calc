@@ -1,0 +1,7 @@
+MACROPAD:
+    layout1:
+        ESC   / * -         CMD+A CMD+R
+        7     8 9 +
+        4     5 6 ^
+        1     2 3 ENTER
+        SHIFT 0 . BACKSPACE 8     8

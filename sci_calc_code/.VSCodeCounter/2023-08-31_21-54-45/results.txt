@@ -1,0 +1,83 @@
+Date : 2023-08-31 21:54:45
+Directory : /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1
+Total : 56 files,  3795 codes, 248 comments, 886 blanks, all 4929 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         55 |      3,782 |        239 |        884 |      4,905 |
+| Ini      |          1 |         13 |          9 |          2 |         24 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |         56 |      3,795 |        248 |        886 |      4,929 |
+| . (Files)                                                                                           |          1 |         13 |          9 |          2 |         24 |
+| src                                                                                                 |         55 |      3,782 |        239 |        884 |      4,905 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                            | language | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/platformio.ini          | Ini      |         13 |          9 |          2 |         24 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Animation.cpp       | C++      |        403 |         19 |         73 |        495 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Animation.h         | C++      |         52 |          0 |         25 |         77 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/BinLink.cpp         | C++      |         12 |          0 |          6 |         18 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/BinLink.h           | C++      |         14 |          0 |          7 |         21 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Box.cpp             | C++      |          7 |          0 |          3 |         10 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Box.h               | C++      |         10 |          0 |          6 |         16 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Calculator.cpp      | C++      |        107 |         10 |         13 |        130 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Calculator.h        | C++      |         24 |          1 |          8 |         33 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Checkbox.cpp        | C++      |         45 |          0 |          8 |         53 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Checkbox.h          | C++      |         20 |          0 |          7 |         27 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ChineseText.cpp     | C++      |        234 |          1 |         16 |        251 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ChineseText.h       | C++      |         16 |          0 |          6 |         22 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Cursor.cpp          | C++      |         46 |          0 |         12 |         58 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Cursor.h            | C++      |         19 |          0 |         11 |         30 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Expression.cpp      | C++      |        386 |         21 |         42 |        449 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Expression.h        | C++      |         34 |          0 |         28 |         62 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ExpressionBlock.cpp | C++      |         27 |          0 |          6 |         33 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ExpressionBlock.h   | C++      |         23 |          0 |          8 |         31 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Funstuff.cpp        | C++      |         32 |         42 |          6 |         80 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Funstuff.h          | C++      |         20 |          0 |          9 |         29 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/IOLogger.cpp        | C++      |          0 |          0 |          1 |          1 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/IOLogger.h          | C++      |         10 |          0 |          4 |         14 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/InputBox.cpp        | C++      |        151 |          8 |         27 |        186 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/InputBox.h          | C++      |         33 |          0 |         20 |         53 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Keyboard.cpp        | C++      |        154 |          6 |         22 |        182 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Keyboard.h          | C++      |         36 |          0 |         26 |         62 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ListSelector.cpp    | C++      |          8 |          0 |          3 |         11 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ListSelector.h      | C++      |         24 |          0 |          5 |         29 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Macropad.cpp        | C++      |        173 |         11 |         23 |        207 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Macropad.h          | C++      |         40 |          0 |         20 |         60 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/MacropadUI.cpp      | C++      |         19 |          1 |          5 |         25 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/MacropadUI.h        | C++      |         15 |          0 |          7 |         22 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Menu.cpp            | C++      |        238 |         25 |         38 |        301 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Menu.h              | C++      |         38 |          1 |         25 |         64 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Node.cpp            | C++      |        125 |         14 |         28 |        167 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Node.h              | C++      |         39 |          0 |         28 |         67 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ProgressBar.cpp     | C++      |         20 |          1 |          5 |         26 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/ProgressBar.h       | C++      |         13 |          1 |          6 |         20 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Sidebar.cpp         | C++      |         13 |          0 |          2 |         15 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Sidebar.h           | C++      |          5 |          0 |          3 |          8 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Slider.cpp          | C++      |         83 |          7 |         13 |        103 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Slider.h            | C++      |         27 |          0 |          6 |         33 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Stopwatch.cpp       | C++      |         49 |          0 |         14 |         63 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Stopwatch.h         | C++      |         21 |          1 |         14 |         36 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/StopwatchUI.cpp     | C++      |         64 |          2 |          9 |         75 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/StopwatchUI.h       | C++      |         18 |          0 |          8 |         26 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Text.cpp            | C++      |         31 |          0 |         12 |         43 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Text.h              | C++      |         18 |          0 |          6 |         24 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/UIElement.cpp       | C++      |        151 |          1 |         41 |        193 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/UIElement.h         | C++      |         54 |          0 |         41 |         95 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/UIMain.cpp          | C++      |        164 |          1 |         32 |        197 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/UIMain.h            | C++      |         34 |          0 |          7 |         41 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Util.cpp            | C++      |        243 |         46 |         39 |        328 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/Util.h              | C++      |         94 |          3 |         22 |        119 |
+| /Users/shao/Documents/PlatformIO/Projects/230113-120228-esp32doit-devkit-v1/src/main.cpp            | C++      |         46 |         16 |         22 |         84 |
+| Total                                                                                               |          |      3,795 |        248 |        886 |      4,929 |
++-----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
