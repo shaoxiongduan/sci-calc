@@ -121,8 +121,7 @@ Menu programMenu(0, -70, 0, 0, 210, 64, 4, {
     new Text("Snake"),
     new Text("Tetris"),
     new Text("Catacombs of the damned"),
-    new Text("Squario"),
-    new Text("Arduventure")
+    new Text("Squario")
 },
 {
     new BinLink("/chess.bin"),
@@ -130,8 +129,7 @@ Menu programMenu(0, -70, 0, 0, 210, 64, 4, {
     new BinLink("/snake.bin"),
     new BinLink("/tetris.bin"),
     new BinLink("/COTD.bin"),
-    new BinLink("/squario.bin"),
-    new BinLink("/arduventure.bin")
+    new BinLink("/squario.bin")
     
 });
 
