@@ -56,6 +56,7 @@ class Expression {
          
     private:
         Node* root;
+        bool isValidSyntax;
         bool isRPN; // RPN mode for the expression
 };
 

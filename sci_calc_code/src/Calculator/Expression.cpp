@@ -3,20 +3,24 @@
 Expression::Expression() {
     this -> root = nullptr;
     this -> isRPN = false;
+    this -> isValidSyntax = true;
 }
 
 Expression::Expression(Node* root, bool isRPN) {
     this -> root = root;
     this -> isRPN = isRPN;
+    this -> isValidSyntax = true;
 }
 
 Expression::Expression(Node* root) {
     this -> root = root;
     this -> isRPN = false;
+    this -> isValidSyntax = true;
 }
 
 Expression::Expression(std::string str, bool isRPN) {
     this -> isRPN = isRPN;
+    this -> isValidSyntax = true;
     if (this -> isRPN) {
         this -> root = buildTree(shuntingYard(parseStringRPN(str)));
     }
@@ -28,10 +32,12 @@ Expression::Expression(std::string str, bool isRPN) {
 Expression::Expression(std::string str) {
     this -> root = buildTree(shuntingYard(parseString(str)));
     this -> isRPN = false;
+    this -> isValidSyntax = true;
 }
 
 Expression::Expression(std::vector <Node> nodes, bool isRPN) {
     this -> isRPN = isRPN;
+    this -> isValidSyntax = true;
     if (this -> isRPN) {
         this -> root = buildTree(parseRPN(nodes));
     }
@@ -42,6 +48,7 @@ Expression::Expression(std::vector <Node> nodes, bool isRPN) {
 
 Expression::Expression(std::vector <Node> nodes) {
     this -> isRPN = false;
+    this -> isValidSyntax = true;
     if (this -> isRPN) {
         this -> root = buildTree(parseRPN(nodes));
     }
@@ -87,6 +94,7 @@ Expression Expression::operator ^(const Expression& rhs) const {
 std::vector <Node> Expression::parseString(std::string str) {
     std::vector <Node> nodes;
     int prev = 0;
+    bool syntaxFlag = true;
     for (int i = 0; i < str.size(); i++) {
         if (strIsOperator(str.substr(prev, i - prev + 1))) {
             if ((convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes.size() == 0) || (convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes[nodes.size() - 1].getToken() != NUM && nodes[nodes.size() - 1].getToken() != VAR && nodes[nodes.size() - 1].getToken() != RPARA)) {
@@ -118,6 +126,15 @@ std::vector <Node> Expression::parseString(std::string str) {
             nodes.push_back(Node(VAR, "x"));
             prev = i + 1;
         }
+        else {
+            syntaxFlag = false;
+        }
+    }
+    if (syntaxFlag) {
+        this -> isValidSyntax = true;
+    }
+    else {
+        this -> isValidSyntax = false;
     }
     //printNodeVector(nodes);
     //std::cout << std::endl;
@@ -165,11 +182,15 @@ std::vector <Node> Expression::parseStringRPN(std::string str) {
     }
     //printNodeVector(nodes);
     //std::cout << std::endl;
+    this -> isValidSyntax = true;
     return nodes;
 }
 
 bool Expression::checkSyntax(std::vector <Node> nodes) {
     //check paraens
+    if (!this -> isValidSyntax) {
+        return false;
+    }
     int paracnt = 0;
     bool prevIsUnary = false;
     bool prevIsBinary = false;
