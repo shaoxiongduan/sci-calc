@@ -9,6 +9,7 @@
 #include "./UIElements/InputBox.h"
 #include "./Calculator/ExpressionBlock.h"
 #include "./Calculator/Calculator.h"
+#include "./Calculator/CalculatorRPN.h"
 #include "./Utils/Macropad.h"
 #include "./Macropad/MacropadUI.h"
 #include "./Utils/Keyboard.h"
@@ -19,6 +20,7 @@
 #include "./UIElements/Checkbox.h"
 #include "./UIElements/Funstuff.h"
 #include "./UIElements/Slider.h"
+
 
 extern std::string clipboard;
 extern Keyboard kb;

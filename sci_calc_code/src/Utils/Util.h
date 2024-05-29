@@ -111,6 +111,7 @@ extern std::string tokenStr[MAXOP];
 // Various util functions
 std::string getKeyString(uint16_t x);
 bool strIsOperator(std::string str);
+bool strIsNum(std::string str);
 bool cmpLongDouble(long double a, long double b);
 int getPrecedenceToken(Token token);
 Token convertToEnum(std::string s);

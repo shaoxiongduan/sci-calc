@@ -113,7 +113,7 @@ Menu menuSettings(0, -70, 0, 0, 210, 64, 5, {
 
 
 Calculator calcMain(0, 0, 210, 64, &calcMenu, &expressionInput);
-
+CalculatorRPN calcRPN(0, 0, 210, 64);
 
 Menu programMenu(0, -70, 0, 0, 210, 64, 4, {
     new Text("Chess"),
@@ -139,7 +139,8 @@ StopwatchUI stopwatchUI(0, 0, 210, 64, &stopwatchMenu);
 
 
 Menu mainMenu(-100, 0, 0, 0, 70, 64, 4, {
-    new Text("Calculator"), 
+    new Text("Calculator"),
+    new Text("RPN Calc"),
     new Text("Macropad"), 
     new Text("Programs"), 
     new Text("Stopwatch"),
@@ -147,6 +148,7 @@ Menu mainMenu(-100, 0, 0, 0, 70, 64, 4, {
 },
 {
     &calcMain, 
+    &calcRPN,
     &macropadUI, 
     &programMenu, 
     &stopwatchUI,

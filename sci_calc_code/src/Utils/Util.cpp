@@ -110,6 +110,15 @@ bool strIsOperator(std::string str) {
     return false;
 }
 
+bool strIsNum(std::string str) {
+    for (char c : str) {
+        if (!('0' <= c && c <= '9' || c == '.')) {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool cmpLongDouble(long double a, long double b) {
     if (fabsl(a - b) <= EPSILON) return true;
     return false;
