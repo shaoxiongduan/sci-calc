@@ -1,5 +1,9 @@
 # sci-calc
 
+## Assembly Guide
+
+[link](https://youtu.be/RY_riS_9hHA?si=YKYpsfk6U_JUeETe)
+
 ## Overview
 
 The sci-calc (I know, really creative name) is a 4-in-1 device, packing a scientific calculator, a macropad/numpad, a handheld game console, and a development board all into one neat and sleek little device.
