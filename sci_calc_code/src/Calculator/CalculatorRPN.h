@@ -20,6 +20,8 @@ class CalculatorRPN : public UIElement {
         void addToNumStr(std::string str);
         long double parseNumStr();
 
+        void drawReg(int x, int y, std::string name, long double value);
+        void drawInfo(int x, int y, std::string keyStr, std::string funcStr);
         void enter();
 
         void draw();

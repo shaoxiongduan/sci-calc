@@ -60,11 +60,11 @@ bool EvaluatorRPN::evaluate(Token op) {
         case NUM: return false;
         case VAR: return false;
         case NEGATIVE: return false;
-        case ADD: this -> x += this -> y; return true;
-        case SUB: this -> x -= this -> y; return true;
-        case MUL: this -> x *= this -> y; return true;
-        case DIV: this -> x /= this -> y; return true;
-        case POW: this -> x = pow(this -> x, this -> y); return true;
+        case ADD: this -> x += this -> y; this -> y = 0; return true;
+        case SUB: this -> x -= this -> y; this -> y = 0; return true;
+        case MUL: this -> x *= this -> y; this -> y = 0; return true;
+        case DIV: this -> x /= this -> y; this -> y = 0; return true;
+        case POW: this -> x = pow(this -> x, this -> y); this -> y = 0; return true;
         case SQRT: this -> x = sqrtl(this -> x); return true;
         case LN: this -> x = logl(this -> x); return true;
         case EXP: this -> x = expl(this -> x); return true;
