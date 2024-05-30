@@ -11,7 +11,7 @@ class EvaluatorRPN {
 
         void rollDown();
         void rollUp();
-        void push(long double num);
+        void push();
         void pop();
         void swap();
         void clearX();

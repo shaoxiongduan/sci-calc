@@ -23,12 +23,12 @@ void EvaluatorRPN::rollUp() {
 }
 
 // Pushes an element into the stack, overriding the store register
-void EvaluatorRPN::push(long double num) {
+void EvaluatorRPN::push() {
     this -> store = this -> t;
     this -> t = this -> z;
     this -> z = this -> y;
     this -> y = this -> x;
-    this -> x = num;
+    this -> x = 0;
 }
 
 // Pops the stack and drops the value from the store register down

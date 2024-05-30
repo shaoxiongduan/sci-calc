@@ -50,10 +50,10 @@ void CalculatorRPN::draw() {
     drawReg(0, 28, "Y REG", this -> RPN.getY());
     drawReg(0, 42, "X REG", this -> RPN.getX());
 
-    drawInfo(135, 0, "TAB", "POP STACK");
-    drawInfo(135, 14, "RPN", "SWAP XY");
-    drawInfo(135, 28, "ENT", "PUSH STACK");
-    drawInfo(135, 42, "(SHFT)DEL", "C/AC");
+    drawInfo(134, 0, "TAB", "POP STACK");
+    drawInfo(134, 14, "RPN", "SWAP XY");
+    drawInfo(134, 28, "ENT", "PUSH STACK");
+    drawInfo(134, 42, "(SHFT)DEL", "C/AC");
     //u8g2.drawStr(37, 9 + 14 * 4, (this -> numstr).c_str());
     //calcLayout.draw();
     u8g2.drawLine(135, 2, 135, 64 - 9);
@@ -124,7 +124,7 @@ void CalculatorRPN::update() {
         Serial.println("number");
     }
     else if (str == "ENTER") {
-        this -> RPN.push(parseNumStr());
+        this -> RPN.push();
         this -> numstr = "";
         this -> isNegative = false;
         Serial.println("push");
@@ -133,10 +133,13 @@ void CalculatorRPN::update() {
         goBack();
     }
     else if (str == "BKSP") {
-        if (kb.getKey(3, 4).getIsPressed()) {
-
+        if (kb.getKey(4, 0).getIsPressed()) {
+            Serial.println("AC!!!!");
+            this -> RPN.clearAll();
         }
-        this -> RPN.clearX();
+        else {
+            this -> RPN.clearX();
+        }
         this -> numstr = "";
     }
     else if (str == "TAB") {
