@@ -275,6 +275,7 @@ void rebootEspWithReason(std::string reason) {
 }
 
 void initFromFile() {
+    return;
     if (!SD.begin(4)) {
         return;
     }

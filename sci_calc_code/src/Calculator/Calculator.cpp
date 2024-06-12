@@ -15,9 +15,6 @@ void Calculator::init() {
 
 void Calculator::activate() {
     currentElement = this;
-    Serial.printf("hello!!!\n");
-    //insertAnimation(new Animation(this, SMOOTH, 0, 0, 500));
-    Serial.printf("hello again\n");
     insertAnimation(new Animation(this -> expressionInput, INDENT, 0, 57, 500));
 }
 
@@ -38,12 +35,10 @@ void Calculator::enter() {
         }
         else {
             draw();
-            //u8g2.setDrawColor(0);
             u8g2.drawRFrame(70, 17, 76, 12, 2);
             u8g2.drawStr(73, 24, "INVALID SYNTAX");
             u8g2.sendBuffer();
             delay(400);
-            //u8g2.setDrawColor(1);
             return;
         }
     }
@@ -56,21 +51,16 @@ void Calculator::enter() {
 void Calculator::draw() {
     
     if (this -> mode == 0) {
-        //Serial.println("ehfouveheocvheo");
         this -> calcMenu -> draw();
-        //Serial.println("ehfouveheocvheo");
         this -> expressionInput -> update();
     }
     if (this -> mode == 1) {
         this -> calcMenu -> update();
         this -> expressionInput -> draw();
     }
-    //calcLayout.draw();
    
     u8g2.drawStr(215, 24, ("Cur:" + calcLayout.getLayout().getName()).c_str());
     std::string str = calcLayout.updateString();
-    //Serial.println(str.c_str());
-    //u8g2.setDrawColor(0);
     if (kb.getKey(4, 0).getIsPressed()) {
         u8g2.drawStr(215, 36, "SL");
 
@@ -89,8 +79,6 @@ void Calculator::draw() {
 }
 
 void Calculator::update() {
-    //Serial.println("update calc");
-    //Serial.println("ehfouveheocvheo");
     std::string str = calcLayout.updateString();
     if (str == "TAB") {
         if (this -> calcMenu -> getSize() > 0) {
@@ -105,17 +93,14 @@ void Calculator::update() {
         enter();
     }
     else if (str == "ESC") {
-        Serial.println("goback");
         this -> calcMenu -> aniOut();
         insertAnimation(new Animation(this -> expressionInput, INDENTINV, 0, 64, 500));
         insertTmpAnimationPointer(this -> expressionInput);
-        Serial.println("goback2");
         while (!tmpAnimationUI.empty()) {
             u8g2.setDrawColor(0);
             u8g2.drawBox(0, 0, 210, 64);
             u8g2.setDrawColor(1);
             currentElement -> draw();
-            
             updateTmp();
             u8g2.sendBuffer();
             animateAll();

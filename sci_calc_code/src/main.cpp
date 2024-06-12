@@ -41,7 +41,6 @@ void init() {
 
 void setup() {
     init();
-    //rtc.setTime(00, 00, 22, 1, 2, 2023);
     kb.init();
     bleKeyboard.begin();
     currentElement -> init();

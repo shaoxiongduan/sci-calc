@@ -93,10 +93,13 @@ Expression Expression::operator ^(const Expression& rhs) const {
 
 std::vector <Node> Expression::parseString(std::string str) {
     std::vector <Node> nodes;
+    Serial.println("Start parsing");
     int prev = 0;
     bool syntaxFlag = true;
     for (int i = 0; i < str.size(); i++) {
+        Serial.println(("Substring: " + str.substr(prev, i - prev + 1)).c_str());
         if (strIsOperator(str.substr(prev, i - prev + 1))) {
+            Serial.println(str.substr(prev, i - prev + 1).c_str());
             if ((convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes.size() == 0) || (convertToEnum(str.substr(prev, i - prev + 1)) == SUB && nodes[nodes.size() - 1].getToken() != NUM && nodes[nodes.size() - 1].getToken() != VAR && nodes[nodes.size() - 1].getToken() != RPARA)) {
                 nodes.push_back(Node(NEGATIVE, 0));
             }
@@ -105,7 +108,8 @@ std::vector <Node> Expression::parseString(std::string str) {
             }
             prev = i + 1;
         }
-        else if ('0' <= str[i] && str[i] <= '9') {
+        else if ('0' <= str[i] && str[i] <= '9' || str[i] == '.') {
+            Serial.println("number");
             long double res = 0;
             int j = i;
             bool pastDecimalPoint = false;
@@ -125,9 +129,6 @@ std::vector <Node> Expression::parseString(std::string str) {
         else if (str.substr(prev, i - prev + 1) == "x") {
             nodes.push_back(Node(VAR, "x"));
             prev = i + 1;
-        }
-        else {
-            syntaxFlag = false;
         }
     }
     if (syntaxFlag) {
@@ -240,6 +241,7 @@ bool Expression::checkSyntax(std::vector <Node> nodes) {
         Serial.println("para mismatch");
         return false;
     }
+    Serial.println("Syntax true 2");
     return true;
 }
 

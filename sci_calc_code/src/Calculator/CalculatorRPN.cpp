@@ -59,7 +59,6 @@ void CalculatorRPN::draw() {
     u8g2.drawLine(135, 2, 135, 64 - 9);
     u8g2.drawStr(215, 24, ("Cur:" + calcLayout.getLayout().getName()).c_str());
     std::string str = calcLayout.updateString();
-    //Serial.println(str.c_str());
     //u8g2.setDrawColor(0);
     if (kb.getKey(4, 0).getIsPressed()) {
         u8g2.drawStr(215, 36, "SL");
@@ -99,15 +98,11 @@ long double CalculatorRPN::parseNumStr() {
         if ('0' <= c && c <= '9') res = res * 10 + (c - '0');
     }
     res /= cnt;
-    if (this -> isNegative) {
-        //res = -res;
-    }
     return res;
 }
 
 void CalculatorRPN::update() {
     std::string str = calcLayout.updateString();
-    Serial.println(str.c_str());
     if (str == "") {
 
     }
@@ -115,26 +110,22 @@ void CalculatorRPN::update() {
         this -> RPN.evaluate(convertToEnum(str));
         this -> numstr = "";
         this -> isNegative = false;
-        Serial.println("operator");
     }
     else if (strIsNum(str)) {
         addToNumStr(str);
         this -> RPN.setX(parseNumStr());
         this -> isNegative = false;
-        Serial.println("number");
     }
     else if (str == "ENTER") {
         this -> RPN.push();
         this -> numstr = "";
         this -> isNegative = false;
-        Serial.println("push");
     }
     else if (str == "ESC") {
         goBack();
     }
     else if (str == "BKSP") {
         if (kb.getKey(4, 0).getIsPressed()) {
-            Serial.println("AC!!!!");
             this -> RPN.clearAll();
         }
         else {

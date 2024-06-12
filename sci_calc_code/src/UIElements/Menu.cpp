@@ -50,17 +50,14 @@ void Menu::init() {
         this -> subElements[i] -> init();
         //insertAnimation(new Animation(subElements[i], INDENT, subElements[i] -> getX(), cnt * 12 + 12, 500));
     }
-    Serial.print("still not dead!");
     for (int cnt = 0; cnt < int(this -> subElements.size()); cnt++) {
         insertAnimation(new Animation(subElements[cnt], INDENT, this -> targetX + 5, this -> targetY + (cnt - this -> menuPos) * 12 + 12, 100));
     }
-    Serial.print("stillllll not dead!");
     for (int i = 0; i < this -> linkElements.size(); i++) {
         if (this -> linkElements[i] != nullptr) {
             this -> linkElements[i] -> setParent(this);
         }
     }
-    Serial.println("srttilfwelkafllfl not deadddddd!");
     //insertAnimation(new Animation(&(this -> scrollBar), SMOOTH, this -> targetX + this -> width - 6, this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 500));
 }
 
@@ -69,9 +66,6 @@ void Menu::activate() {
 
     currentElement = this;
     aniIn();
-    Serial.printf("hello!!!\n");
-    
-    Serial.printf("hello again\n");
 
 }
 
@@ -80,7 +74,6 @@ void Menu::deactivate() {
 }
 
 void Menu::aniIn() {
-    Serial.println("anijoijiojonhohiiojoijooiohoughin");
     insertAnimation(new Animation(this, INDENT, this -> activeX, this -> activeY, 500));
     insertAnimation(new Animation(&(this -> scrollBar), INDENT, this -> targetX + this -> width - 6, this -> targetY + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)), 500));
     //insertAnimation(new Animation(this -> scrollBar, this -> targetX + this -> width - 6, ));
@@ -153,7 +146,6 @@ bool Menu::moveMenuUp() {
 }
 
 bool Menu::moveMenuDown() {
-    //Serial.println("fgasrgf");
     if (this -> menuPos < int(this -> subElements.size()) - this -> menuSize) {
         for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize + 1, int(this -> subElements.size())); i++, cnt++) {
             insertAnimation(new Animation(subElements[i], BOUNCE, subElements[i] -> getX(), (cnt - 1) * 12 + 12, 100));
@@ -222,26 +214,15 @@ void Menu::enter() {
                 u8g2.setDrawColor(0);
                 u8g2.drawBox(0, 0, 210, 64);
                 u8g2.setDrawColor(1);
-                Serial.println("fdidfiongernooie");
-                //kb.update();
-                //drawSidebar();
-                //kb.printKeys();
-                //macroPad.update();
                 currentElement -> draw();
                 updateTmp();
-                //Serial.println("hello");
-                //displayTime();
                 u8g2.sendBuffer();
                 animateAll();
             }
         }
-        Serial.println("enterrrrr");
         this -> deactivate();
-        Serial.println("enterrrrr");
         this -> linkElements[this -> menuPos + this -> cursorPos] -> init();
-        Serial.println("enterrrrr");
         this -> linkElements[this -> menuPos + this -> cursorPos] -> activate();
-        Serial.println("enterrrrr");
     }
 }
 
@@ -251,7 +232,6 @@ void Menu::draw() {
     int drawY = constrain(this -> y, 0, HEIGHT);
     u8g2.drawRFrame(drawX, drawY, constrain(this -> width + (this -> x - drawX), 0, WIDTH), constrain(this -> height + (this -> y - drawY), 0, HEIGHT), 3);
     for (int i = this -> menuPos, cnt = 0; cnt < min(this -> menuSize, int(this -> subElements.size())); i++, cnt++) {
-        //Serial.print("Hello");
         //subElements[i] -> setY(cnt * (this -> height / this -> menuSize) + (this -> height / this -> menuSize) / 2);
         subElements[i] -> draw();
     }
