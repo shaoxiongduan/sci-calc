@@ -118,12 +118,10 @@ UIElements
 Utils
 
 Files:
-
+```
 main.cpp/main.h
 Sidebar.cpp/Sidebar.h
 UIMain.cpp/UIMain.h
-
-
 ```
 
 Now we will go into each part:
