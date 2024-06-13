@@ -68,3 +68,109 @@ https://github.com/norbertg1/Snake-game
 ![image](https://user-images.githubusercontent.com/46639847/219938416-7db0a753-4cb1-4768-a68c-06e84444e2fa.png)
 
 https://github.com/Zimoslaw/TetriZimoslaw
+
+# Troubleshooting
+## Not turning on
+
+1. Check the power indicator lights: if it's off, then the battery is drained. Charge it.
+2. Some models have a protective sticker at the bottom of the microSD card that makes the connection unstable. Removing it will make connections a lot better.
+
+If the lights are on:
+1. The microSD card is loose. Gently push the card in until the screen lights up. Or if you want to be sure, connect the SCI-CALC to your computer via a data usb-c cable and open the serial monitor (baud rate 115200). 
+2. The OLED screen module is misaligned. Check the pogo pins on the left side. If misaligned, loosen the screws on the top plate holding the module down, and push the module to the left until the pogo pins are touching the pads
+
+# Updating Software
+
+To update the software for your sci-calc, follow these steps:
+1. Get the .bin file you want to update from the ```/bin``` folder.
+2. Copy that file over to the microSD card, replacing the old .bin file you want to update.
+3. Navigate to the settings menu and activate Update from SD.
+4. After it is done writing to ROM it should be properly updated!
+
+
+# Setting up the Dev Environment
+
+## Arduino IDE
+1. Install the Arduino IDE: https://www.arduino.cc/en/software
+2. Install the drivers for the CH340 chip: https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all
+3. Set up the Arduino IDE by following the steps for a regular ESP32 dev board: https://randomnerdtutorials.com/installing-esp32-arduino-ide-2-0/ (You don't have to do the test installation steps and the steps after)
+
+4. Now you can start programming the SCI-CALC! When uploading, use the ESP32 Dev Board option for the board type.
+
+# VSCode + PlatformIO
+
+1. Install VSCode: https://code.visualstudio.com/
+2. After installing VSCode, navigate to the extension tab on the left and install the PlatformIO extension: 
+3. Clone this Github repo and open the ```sci_calc_code``` folder in VSCode with PlatformIO.
+4. Navigate to the ```src``` folder to view and modify the source code. When done modifying, upload the code using the Upload button at the bottom.
+
+# Code Structure
+
+The source code for the sci-calc is structured as follows
+
+Folders:
+
+Animation
+Calculator
+Macropad
+Stopwatch
+UIElements
+Utils
+
+Files:
+
+main.cpp/main.h
+Sidebar.cpp/Sidebar.h
+UIMain.cpp/UIMain.h
+
+
+```
+
+Now we will go into each part:
+## Animation
+
+The animation engine for the SCI-CALC works like this:
+
+When you insert an animation, for instance this one:
+```c++
+insertAnimation(new Animation(subElements[i], BOUNCE, subElements[i] -> getX(), cnt * 12 + 12, 100));
+```
+
+The animation engine inserts the animation into the two pools depending on what you are animating (one for animating UIElements, one for animating variables)
+
+```cpp
+// An element might have multiple animations added to it at once, this mapping procedure makes sure that only the latest animation gets animated
+
+void insertAnimation(Animation* animation) {
+	if (animation -> getTargetElement() != nullptr) {
+		animationsUI[animation -> getTargetElement()] = animation;
+	}
+	else {
+		 nimationsInt[animation -> getTargetVal()] = animation;
+	}
+}
+```
+
+The animation scheduler then manages and updates the animations based on their duration and positions. This is done by calling their respective animation update functions based on their animation types.
+
+See the code for more stuff.
+
+## Calculator
+
+The calculator folder contains all the regular and RPN calculator codes.
+
+```Calculator.cpp/Calculator.h```: The UI Element for the scientific calculator. It wraps up the logic stuff to display the UI.
+
+```Expression.cpp/Expression.h```
+```Node.cpp/Node.h```
+: This is where the calculations happen. The Expression class handles the tokenizing, tree-building, and evaluating of the expressions. The calculation module first takes in the input string from the Calculator UI's input box, and then parses it into mathematical tokens. It then uses the shunting-yard algorithm to build an abstract syntax tree (AST), which is used to do the actual calculations.
+
+
+```ExpressionBlock.cpp/ExpressionBlock.h```
+This is the UIElement for displaying the expressions in the history menu.
+
+```CalculatorRPN.cpp/CalculatorRPN.h```
+```EvaluatorRPN.cpp/EvaluatorRPN.h```
+These classes are the UIElement components and the calculation part for the RPN calculator.
+
+The RPN calculator has 5 registers: x, y, z, t, and a store register which is hidden. It supports basic stack manipulation operations like swap (x, y), push, and pop. I mainly referenced the HP RPN calculators and http://www.alcula.com/calculators/rpn/ when coding this.
