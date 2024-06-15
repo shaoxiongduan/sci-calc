@@ -66,6 +66,8 @@ https://github.com/olikraus/u8g2/blob/master/sys/arduino/u8g2_page_buffer/SpaceT
 https://github.com/norbertg1/Snake-game
 #### Tetris
 ![image](https://user-images.githubusercontent.com/46639847/219938416-7db0a753-4cb1-4768-a68c-06e84444e2fa.png)
+Layout of Tetris:
+![tetris-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/0ceca725-5f8c-4282-be3c-df19f8a441d0)
 
 https://github.com/Zimoslaw/TetriZimoslaw
 
