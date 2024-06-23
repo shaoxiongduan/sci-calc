@@ -131,7 +131,7 @@ If you do not see the Update From SD option in the settings menu, follow these s
 4. once the game is loaded press esc to load the updated main.bin file back to the ESP32.
 5. After it is done writing to ROM it should be properly updated!
 
-For updating the main software, do these steps with the ```main.bin``` file. Or you can just replace everything in the SD-card with the contents in the ```.bin``` folder.
+For updating the main software, do these steps with the ```main.bin``` file. Or you can just replace everything in the SD-card with the contents in the ```/bin``` folder.
 
 # Setting up the Dev Environment
 
