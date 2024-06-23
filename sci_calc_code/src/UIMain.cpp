@@ -104,10 +104,14 @@ Menu menuSpecs(0, -70, 0, 0, 210, 64, 5, {
 });
 
 Menu menuSettings(0, -70, 0, 0, 210, 64, 5, {
-    &checkbox1
+    &checkbox1,
+    new Text("Update from SD"),
+    new Text(("Version: " + VERSION).c_str())
 },
 {
-    &checkbox1
+    &checkbox1,
+    new BinLink("/main.bin"),
+    nullptr
 });
 
 

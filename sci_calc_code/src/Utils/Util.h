@@ -34,6 +34,8 @@
 extern U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2;
 
 
+
+const std::string VERSION = "1.1";
 const int REFRESH_DURATION = 10; // The refresh rate of the the program (in milliseconds)
 const float DELTA_TIME = 100; // in milliseconds
 extern bool sample;
