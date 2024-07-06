@@ -154,14 +154,14 @@ For updating the main software, do these steps with the ```main.bin``` file. Or 
 The source code for the sci-calc is structured as follows
 
 Folders:
-
+```
 Animation
 Calculator
 Macropad
 Stopwatch
 UIElements
 Utils
-
+```
 Files:
 ```
 main.cpp/main.h
