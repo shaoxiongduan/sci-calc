@@ -9,8 +9,8 @@ ESP32Time rtc(8 * 3600);
 
 
 Macro layout1[5][6] = {
-    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
     {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, 'c'}, "C_PATH"), Macro({KEY_LEFT_GUI, 'r'}, "CMD+R")},
+    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'c'}, "COPY"),  Macro({KEY_LEFT_GUI, 'v'}, "PASTE")},
     {Macro({'4'}),              Macro({'5'}), Macro({'6'}), Macro({'^'}),           Macro({KEY_LEFT_GUI, 'x'}, "CUT"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
     {Macro({'1'}),              Macro({'2'}), Macro({'3'}), Macro({KEY_RETURN}),    Macro({KEY_LEFT_GUI, 'h'}, "HIDE"),  Macro({KEY_LEFT_GUI, 'n'}, "NEW")},
     {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({KEY_F12}, "G_DEC"),                        Macro()}
@@ -40,8 +40,8 @@ Macro filmoraLayer[5][6] = {
 };
 
 Macro obsidianLayer[5][6] = {
-    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'b'}, "BOLD"),  Macro({KEY_LEFT_GUI, 'h'}, "HIGHL")},
     {Macro({KEY_ESC}),          Macro({'/'}), Macro({'*'}), Macro({'-'}),           Macro({KEY_LEFT_GUI, 'i'}, "ITAL"), Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, 'l'}, "LINK")},
+    {Macro({'7'}),              Macro({'8'}), Macro({'9'}), Macro({'+'}),           Macro({KEY_LEFT_GUI, 'b'}, "BOLD"),  Macro({KEY_LEFT_GUI, 'h'}, "HIGHL")},
     {Macro({'4'}),              Macro({'5'}), Macro({'6'}), Macro({'^'}),           Macro({'-', ' ', '[', ' ', ']', ' '}, "CHECK"),   Macro({KEY_LEFT_GUI, 's'}, "SAVE")},
     {Macro({'1'}),              Macro({'2'}), Macro({'3'}), Macro({KEY_RETURN}),    Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, '1'}, "H1"),  Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, '2'}, "H2")},
     {Macro({KEY_LAYER_SWITCH}), Macro({'0'}), Macro({'.'}), Macro({KEY_BACKSPACE}), Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, '3'}, "H3"),                        Macro({KEY_LEFT_ALT, KEY_LEFT_GUI, '4'}, "H4")}
