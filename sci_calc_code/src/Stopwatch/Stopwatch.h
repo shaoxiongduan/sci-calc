@@ -29,7 +29,9 @@ class Stopwatch {
         int startTime;
         int curTimeElapsed;
         int timeBetweenIntervals;
+        int pausedTime;
         bool isTicking;
+        bool isPaused;
 };
 
 #endif

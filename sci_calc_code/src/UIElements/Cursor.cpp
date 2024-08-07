@@ -1,22 +1,29 @@
 #include "Cursor.h"
 
 Cursor::Cursor() : UIElement(0, 0, 10, 12) {
+    this -> isVisible = true;
     this -> target = nullptr;
     this -> mode = 0;
 }
 
 Cursor::Cursor(bool mode) : UIElement(0, 0, 10, 12) {
+    this -> isVisible = true;
     this -> target = nullptr;
     this -> mode = mode;
 }
 
 Cursor::Cursor(UIElement* target, bool mode) : UIElement(0, 0, 10, 12) {
+    this -> isVisible = true;
     this -> target = target;
     this -> mode = mode;
 }
 
 void Cursor::setMode(bool mode) {
     this -> mode = mode;
+}
+
+void Cursor::setVisible(bool isVisible) {
+    this -> isVisible = isVisible;
 }
 
 void Cursor::changeTarget(UIElement* target) {
@@ -40,6 +47,9 @@ void Cursor::changeTarget(int x, int y, int width, int height, int time) {
 
 
 void Cursor::draw() {
+    if (this -> target == nullptr || ! this -> isVisible) {
+        return; //Don't draw cursor
+    }
     if (mode) {
         u8g2.drawLine(this -> x - 1, this -> y - 6 + 1, this -> x - 1, this -> y - 6 + this -> height - 3);
     }
