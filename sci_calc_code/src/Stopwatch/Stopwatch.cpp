@@ -4,15 +4,25 @@ Stopwatch::Stopwatch() {
     this -> curTimeElapsed = 0;
     this -> startTime = 0;
     this -> timeBetweenIntervals = 0;
+    this -> pausedTime = 0;
+    this -> isPaused = false;
     this -> isTicking = false;
 }
 
 void Stopwatch::start() {
+    if (this -> isPaused) {
+        this -> startTime += millis() - this -> pausedTime;
+    } else {
+        this -> startTime = millis();
+    }
     this -> isTicking = true;
+    this -> isPaused = false;
 }
 
 void Stopwatch::pause() {
     this -> isTicking = false;
+    this -> isPaused = true;
+    this->pausedTime = millis();
 }
 
 int Stopwatch::lap() {
@@ -39,7 +49,9 @@ void Stopwatch::reset() {
     this -> startTime = millis();
     this -> curTimeElapsed = 0;
     this -> timeBetweenIntervals = 0;
+    this -> pausedTime = 0;
     this -> isTicking = false;
+    this -> isPaused = false;
 }
 
 bool Stopwatch::getIsTicking() {
@@ -53,7 +65,7 @@ void Stopwatch::update() {
         this -> curTimeElapsed += diff;
         this -> timeBetweenIntervals += diff;
     }
-    else {
+    else if(!this -> isPaused){
         this -> startTime = millis();
     }
 }
