@@ -55,7 +55,7 @@ void StopwatchUI::update() {
             //this -> lapMenu -> enter();
             UIElement* ptr = new Text(strres);
             ptr -> init();
-            this -> lapMenu -> insertElement(ptr, ptr);
+            this -> lapMenu -> insertElement(ptr, nullptr);
             this -> lapMenu -> scrollDown();
 
         }
