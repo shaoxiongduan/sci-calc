@@ -103,8 +103,9 @@ void Menu::insertElement(UIElement* targetElement, UIElement* linkElement) {
     
     targetElement -> setX(this -> targetX + 5);
     targetElement -> setY(70);
+    this ->cursor.setVisible(true);
     insertAnimation(new Animation(targetElement, INDENT, targetElement -> getX(), min(this -> menuSize, int(this -> subElements.size())) * 12 + 12, 100));
-        
+    
     this -> subElements.push_back(targetElement);
     this -> linkElements.push_back(linkElement);
     targetElement -> init();
@@ -195,10 +196,12 @@ void Menu::clear() {
         this -> scrollBar.setHeight(0);
         this -> cursor.setX(this -> x);
         this -> cursor.setY(this -> y + 12);
+        this -> cursor.setVisible(false);
     }
     else {
         this -> scrollBar.setY(this -> y + 5 + (float(getMenuPos()) / float(this -> getSize()) * (this -> height - 10)));
-        this -> scrollBar.setHeight(((this -> height - 10) / this -> getSize()));
+        this -> scrollBar.setHeight(0);
+        this -> cursor.setVisible(false);
     }
     this -> subElements.clear();
     this -> linkElements.clear();

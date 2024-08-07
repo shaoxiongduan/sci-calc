@@ -12,7 +12,7 @@ class Cursor : public UIElement {
         Cursor(UIElement* target, bool mode);
 
         void setMode(bool mode);
-
+        void setVisible(bool isVisible);
         void changeTarget(UIElement* target);
 
         void changeTarget(UIElement* target, int time);
@@ -25,6 +25,7 @@ class Cursor : public UIElement {
     private:
         UIElement* target;
         bool mode; // 0: box, 1: line
+        bool isVisible;
 };
 
 #endif
