@@ -29,6 +29,7 @@ Checkbox::Checkbox(std::string name, int x, int y, bool* linkBool) {
 void Checkbox::init() {
     this -> width = this -> targetWidth = u8g2.getStrWidth(this -> name.c_str());
     this -> height = this -> targetHeight = 10;
+    this -> checkboxAni = (this -> state ? 6 : 0);
 }
 
 void Checkbox::activate() {
