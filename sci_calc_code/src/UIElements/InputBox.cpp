@@ -174,7 +174,7 @@ void InputBox::update() {
         Serial.println("deleting str");
         deleteStr();
     }
-    else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH" && str != "MODE SWITCH"))) {
+    else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH" && str != "MODE SWITCH" && str != "RPN SWITCH"))) {
         Serial.println("funciwdi");
         insertStr(calcLayout.updateString());
     }

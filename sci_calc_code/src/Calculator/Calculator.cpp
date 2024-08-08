@@ -111,7 +111,7 @@ void Calculator::update() {
     else if (str == "MODE SWITCH") {
         angleMode = !angleMode;
     }
-    else if (str == "RPN") {
+    else if (str == "RPN SWITCH") {
         RPNMode = !RPNMode;
     }
     draw();
