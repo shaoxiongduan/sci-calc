@@ -1,8 +1,20 @@
 # sci-calc
+<a href="https://github.com/shaoxiongduan/sci-calc/">
+<img height=400 alt="Repo Banner - Awesome Repo Template" src="https://github.com/user-attachments/assets/1d2f0c47-30ca-4eb9-b335-ce44204528ab"></img></a>
 
-## Assembly Guide
 
-[link](https://youtu.be/RY_riS_9hHA?si=YKYpsfk6U_JUeETe)
+<p align="center">
+  <b>SCI-CALC: A Multifunctional Scientific Calculator</b>
+
+
+  <br>
+   <a href="https://github.com/MarketingPipeline/Awesome-Repo-Template">
+    <img title="Star on GitHub" src="https://img.shields.io/github/stars/shaoxiongduan/sci-calc.svg?style=social&label=Star">
+  </a>
+  <a href="https://github.com/MarketingPipeline/Awesome-Repo-Template/fork">
+    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/shaoxiongduan/sci-calc.svg?style=social&label=Fork">
+  </a>
+</p> 
 
 ## Overview
 
@@ -41,7 +53,6 @@ https://user-images.githubusercontent.com/46639847/219936733-cb611f87-4cae-4c7e-
 A bluetooth numpad that comes with 10 customizable macro keys, though all keys can be customized, only the 10 keys on the 2 rightmost rows can be displayed on the screen.
 Macros and layers are very easy to create in code (see firmware), and I'm planning to make it possible to change and edit the layout via a text file in the SD card.
 
-
 #### video demo
 
 https://user-images.githubusercontent.com/46639847/219937053-a5f0e39d-01d1-4069-9902-0d509ead685e.mp4
@@ -68,6 +79,12 @@ https://github.com/norbertg1/Snake-game
 ![image](https://user-images.githubusercontent.com/46639847/219938416-7db0a753-4cb1-4768-a68c-06e84444e2fa.png)
 
 https://github.com/Zimoslaw/TetriZimoslaw
+
+
+
+## Assembly Guide
+[link](https://youtu.be/RY_riS_9hHA?si=YKYpsfk6U_JUeETe)
+
 
 # Layouts
 
