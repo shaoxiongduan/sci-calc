@@ -9,12 +9,16 @@
 
   <br>
    <a href="https://github.com/MarketingPipeline/Awesome-Repo-Template">
-    <img title="Star on GitHub" src="https://img.shields.io/github/stars/shaoxiongduan/sci-calc.svg?style=social&label=Star">
+    <img title="Star on GitHub" src="https://img.shields.io/github/stars/shaoxiongduan/sci-calc.svg?style=for-the-badge&label=Star&color=999999">
   </a>
   <a href="https://github.com/MarketingPipeline/Awesome-Repo-Template/fork">
-    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/shaoxiongduan/sci-calc.svg?style=social&label=Fork">
+    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/shaoxiongduan/sci-calc.svg?style=for-the-badge&label=Fork&color=999999">
+	<img src = "https://img.shields.io/discord/1259252001003536645?style=for-the-badge&label=Discord&color=7289DA">
   </a>
 </p> 
+
+
+
 
 ## Overview
 
