@@ -3,6 +3,10 @@
 
 #include "../Animation/Animation.h"
 
+/*
+Text UIElement component.
+*/
+
 class Text : public UIElement {
     public:
         Text();

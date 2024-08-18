@@ -9,6 +9,13 @@ extern Keyboard kb;
 extern MacroPad calcLayout;
 extern std::string clipboard;
 
+
+/*
+The UIElement class serves as a base class for creating user interface elements for the sci-calc.
+It provides a flexible framework for managing UI components, including their positions, sizes, hierarchical relationships, and rendering behavior.
+The class includes functionality to handle transitions, sub-elements, and drawing behavior.
+*/
+
 class UIElement {
     public:
 

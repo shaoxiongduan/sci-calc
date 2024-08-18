@@ -4,6 +4,9 @@
 #include "../Animation/Animation.h"
 #include "ProgressBar.h"
 
+/*
+Slider UIElement component.
+*/
 
 class Slider : public UIElement {
     public:

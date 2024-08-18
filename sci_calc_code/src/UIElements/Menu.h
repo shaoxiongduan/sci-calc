@@ -6,15 +6,17 @@
 #include "Box.h"
 #include "Sidebar.h"
 
+/*
+The Menu class is a specialized user interface element that extends the UIElement class.
+The Menu class has two core components, the SubElements, which function as the displaying part for the subElements in the menu, and LinkElements, which are pointers linking to the element to be activated when activated (Duh!).
+*/
+
 class Menu : public UIElement {
     public:
         Menu();
 
         Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize);
         Menu(int restX, int restY, int activeX, int activeY, int width, int height, int menuSize, std::vector <UIElement*> subElements, std::vector <UIElement*> linkElements);
-        
-    
-
 
         void init();
         void activate();
