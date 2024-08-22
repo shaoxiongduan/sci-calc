@@ -10,7 +10,7 @@ Checkbox::Checkbox(std::string name) {
 
 Checkbox::Checkbox(std::string name, bool* linkBool) {
     this -> name = name;
-    this -> state = &linkBool;
+    this -> state = *linkBool;
     this -> linkBool = linkBool;
     this -> checkboxAni = 0;
     this -> doTransition = false;
@@ -20,7 +20,7 @@ Checkbox::Checkbox(std::string name, int x, int y, bool* linkBool) {
     this -> name = name;
     this -> x = x;
     this -> y = y;
-    this -> state = &linkBool;
+    this -> state = *linkBool;
     this -> linkBool = linkBool;
     this -> checkboxAni = 0;
     this -> doTransition = false;
