@@ -144,7 +144,10 @@ void InputBox::draw() {
     this -> cursor.setY(this -> y);
 }
 
-
+//For repeat deleting
+int delPressedTime;
+bool repeatDelete = false;
+int lastDeleteTime;
 
 void InputBox::update() {
     //Serial.printf("this cursor: %d, %d\n", this -> cursor.getTargetX(), this -> cursor.getTargetY());
@@ -177,6 +180,27 @@ void InputBox::update() {
     else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH" && str != "MODE SWITCH" && str != "RPN SWITCH"))) {
         Serial.println("funciwdi");
         insertStr(calcLayout.updateString());
+    }
+    if (kb.getRisingEdgeKey() == std::make_pair(4, 3))
+    {
+        delPressedTime = millis();
+    }
+    if (kb.getKey(4, 3).getIsPressed())
+    {
+        if (millis() - delPressedTime > 750)
+        {
+            repeatDelete = true;
+        }
+        else
+        {
+            repeatDelete = false;
+        }
+        if (repeatDelete && (millis() - lastDeleteTime > 100))
+        {
+            Serial.println("deleting str[Repeat]");
+            deleteStr();
+            lastDeleteTime = millis();
+        }
     }
     if (kb.getRisingEdgeKey() != std::make_pair(-1, -1)) {
 
