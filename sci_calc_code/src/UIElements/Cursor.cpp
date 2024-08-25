@@ -47,7 +47,7 @@ void Cursor::changeTarget(int x, int y, int width, int height, int time) {
 
 
 void Cursor::draw() {
-    if (this -> target == nullptr || ! this -> isVisible) {
+    if (! this -> isVisible) {
         return; //Don't draw cursor
     }
     if (mode) {
