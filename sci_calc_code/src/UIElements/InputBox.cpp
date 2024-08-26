@@ -144,10 +144,6 @@ void InputBox::draw() {
     this -> cursor.setY(this -> y);
 }
 
-//For repeat deleting
-int delPressedTime;
-bool repeatDelete = false;
-int lastDeleteTime;
 
 void InputBox::update() {
     //Serial.printf("this cursor: %d, %d\n", this -> cursor.getTargetX(), this -> cursor.getTargetY());
