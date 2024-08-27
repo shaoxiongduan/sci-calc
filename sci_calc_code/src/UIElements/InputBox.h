@@ -46,6 +46,9 @@ class InputBox : public UIElement {
         int cursorPos, strPos, maxChar;
         Cursor cursor;
         std::string str;
+        //For repeat deleting
+        int delPressedTime, lastDeleteTime;
+        bool repeatDelete = false;
         
 };
 
