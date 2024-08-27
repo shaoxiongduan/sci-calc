@@ -170,32 +170,30 @@ void InputBox::update() {
         goBack();
     }
     else if (str == "BKSP") {
-        Serial.println("deleting str");
         deleteStr();
     }
     else if ((kb.getRisingEdgeKey() != std::make_pair(-1, -1)) && ((str != "RIGHT" && str != "LEFT" && str != "UP" && str != "DOWN" && str != "LAYER SWITCH" && str != "MODE SWITCH" && str != "RPN SWITCH"))) {
-        Serial.println("funciwdi");
         insertStr(calcLayout.updateString());
     }
     if (kb.getRisingEdgeKey() == std::make_pair(4, 3))
     {
-        delPressedTime = millis();
+        this -> delPressedTime = millis();
     }
     if (kb.getKey(4, 3).getIsPressed())
     {
-        if (millis() - delPressedTime > 750)
+        if (millis() - this -> delPressedTime > 750)
         {
-            repeatDelete = true;
+            this -> repeatDelete = true;
         }
         else
         {
-            repeatDelete = false;
+            this -> repeatDelete = false;
         }
-        if (repeatDelete && (millis() - lastDeleteTime > 100))
+        if (this -> repeatDelete && (millis() - this -> lastDeleteTime > 100))
         {
             Serial.println("deleting str[Repeat]");
             deleteStr();
-            lastDeleteTime = millis();
+            this -> lastDeleteTime = millis();
         }
     }
     if (kb.getRisingEdgeKey() != std::make_pair(-1, -1)) {
