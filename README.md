@@ -92,83 +92,16 @@ https://github.com/Zimoslaw/TetriZimoslaw
 
 # Layouts
 
-## Games
-
-### Layout for Chess:
-
-![chess-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/9d19d974-8d25-4da9-8d7f-b4a2141a5090)
-
-
-### Layout for Spacetrash:
-![spacetrash-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/50851d95-2496-45ed-9129-2f148198e5c8)
-
-
-### Layout of COTD:
-![cotd-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/7e149da6-6c71-402f-a621-6d513af9648c)
-
-### Layout of Snake:
-
-![snake-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/48013a89-706d-405d-9e11-df125deea777)
-
-
-### Layout of Squario:
-
-![squario-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/86526f6b-1b7d-434d-a216-5f713a8d3a90)
-
-
-### Layout of Tetris:
-![tetris-sci-calc](https://github.com/shaoxiongduan/sci-calc/assets/46639847/0ceca725-5f8c-4282-be3c-df19f8a441d0)
-
+[Layouts](docs/layout.md)
 
 # Troubleshooting
-## Not turning on
-
-1. Check the power indicator lights: if it's off, then the battery is drained. Charge it.
-2. Some models have a protective sticker at the bottom of the microSD card that makes the connection unstable. Removing it will make connections a lot better.
-
-If the lights are on:
-1. The microSD card is loose. Gently push the card in until the screen lights up. Or if you want to be sure, connect the SCI-CALC to your computer via a data usb-c cable and open the serial monitor (baud rate 115200). 
-2. The OLED screen module is misaligned. Check the pogo pins on the left side. If misaligned, loosen the screws on the top plate holding the module down, and push the module to the left until the pogo pins are touching the pads
+[Troubleshooting](docs/troubleshooting.md)
 
 # Updating Software
-
-## How It Works
-
-The SCI-CALC can load external programs through a SD card.
-Each time you load a program, the SCI-CALC writes the contents of the corresponding ```.bin``` file to the ESP32's ROM. For instance, when you load up Chess, it overwrites the existing ```main.bin``` in the ROM to ```chess.bin```. When you press esc to go back, The ```main.bin``` from the SD-card is written back into the ROM. This allows us to update programs without having to use an IDE to upload. The idea is to update the ```.bin``` file of the program in the SD-card, and then load it to the ESP32.
-
-## Updating Software (New)
-To update the software for your sci-calc, follow these steps:
-1. Get the .bin file you want to update from the ```/bin``` folder.
-2. Copy that file over to the microSD card, replacing the old .bin file you want to update.
-3. Navigate to the settings menu and activate Update from SD.
-4. After it is done writing to ROM it should be properly updated!
-
-## Updating Software (Old)
-If you do not see the Update From SD option in the settings menu, follow these steps:
-1. Get the .bin file you want to update from the ```/bin``` folder from this repo.
-2. Copy that file over to the microSD card, replacing the old .bin file you want to update.
-3. Navigate to the programs menu and enter any one of them.
-4. once the game is loaded press esc to load the updated main.bin file back to the ESP32.
-5. After it is done writing to ROM it should be properly updated!
-
-For updating the main software, do these steps with the ```main.bin``` file. Or you can just replace everything in the SD-card with the contents in the ```/bin``` folder.
+[Updating Software](docs/updating_software.md)
 
 # Setting up the Dev Environment
-
-## Arduino IDE
-1. Install the Arduino IDE: https://www.arduino.cc/en/software
-2. Install the drivers for the CH340 chip: https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all
-3. Set up the Arduino IDE by following the steps for a regular ESP32 dev board: https://randomnerdtutorials.com/installing-esp32-arduino-ide-2-0/ (You don't have to do the test installation steps and the steps after)
-
-4. Now you can start programming the SCI-CALC! When uploading, use the ESP32 Dev Board option for the board type.
-
-# VSCode + PlatformIO
-
-1. Install VSCode: https://code.visualstudio.com/
-2. After installing VSCode, navigate to the extension tab on the left and install the PlatformIO extension: 
-3. Clone this Github repo and open the ```sci_calc_code``` folder in VSCode with PlatformIO.
-4. Navigate to the ```src``` folder to view and modify the source code. When done modifying, upload the code using the Upload button at the bottom.
+[Environment Setup](docs/environment_setup.md)
 
 # Code Structure
 
