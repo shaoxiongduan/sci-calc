@@ -50,7 +50,6 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("looping");
     animateAll();
     u8g2.clearBuffer();
     kb.update();
