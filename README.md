@@ -12,6 +12,7 @@
   <a href="https://github.com/shaoxiongduan/sci-calc/fork">
     <img title="Fork on GitHub" src="https://img.shields.io/github/forks/shaoxiongduan/sci-calc.svg?style=for-the-badge&label=Fork&color=999999">
   </a>
+  
   <a href = "https://discord.gg/ZbaYb36wnn">
 <img src = "https://img.shields.io/discord/1259252001003536645?style=for-the-badge&label=Discord&color=7289DA">
   </a>
