@@ -1,6 +1,6 @@
 # sci-calc
 <a href="https://github.com/shaoxiongduan/sci-calc/">
-<img height=400 alt="Repo Banner - Awesome Repo Template" src="https://github.com/user-attachments/assets/1d2f0c47-30ca-4eb9-b335-ce44204528ab"></img></a>
+<img height=400 alt="Repo Banner - Awesome Repo Template" src="https://github.com/user-attachments/assets/1d2f0c47-30ca-4eb9-b335-ce44204528ab"></a>
 
 
 <p align="center">
